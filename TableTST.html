@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web App</title>
+</head>
+<body>
+    <!-- Include other HTML elements or content -->
+    <div id="html-placeholder"></div>
+
+    <script>
+        // Your JavaScript code to fetch and update the HTML content
+        async function fetchHtml() {
+            const response = await fetch('/api/get_html');
+            const data = await response.json();
+            document.getElementById('html-placeholder').innerHTML = data.html;
+        }
+
+        // Fetch HTML initially
+        fetchHtml();
+
+        // Fetch HTML every 5 seconds
+        setInterval(fetchHtml, 5000);
+    </script>
+</body>
+</html>

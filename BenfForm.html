@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Beneficiary Application Form</title>
+    <style>
+         body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #98d8a6;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        header img {
+            height: 170px; 
+            margin-right: 10px;
+        
+        }
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"], input[type="tel"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="file"] {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Foundation Logo">
+        <h1> Beneficiary Information Form </h1>
+   </header>
+
+<form action="submit.php" method="post">
+    
+
+    <!-- Name -->
+    <label for="name"> Full Name:</label>
+    <input type="text" id="name" name="name" >
+
+    <label for="BirthDate">Birth Date:</label>
+    <input type="date" id="BirthDate" name="BirthDate" placeholder="DD/MM/YYYY">
+
+    <!-- Phone Number -->
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="tel" id="phoneNumber" name="phoneNumber" >
+
+    <!-- Address -->
+    <label for="address">Address:</label>
+    <input type="text" id="address" name="address" >
+
+    <!-- Picture Upload -->
+    <label for="picture">Picture:</label>
+    <input type="file" id="picture" name="picture">
+
+    <!-- Documents Upload -->
+    <label for="documents">Upload Documents:</label>
+    <input type="file" id="documents" name="documents">
+
+    <!-- Disability Type -->
+    <label for="disabilityType">Disability Type:</label>
+    <select id="disabilityType" name="disabilityType">
+        <option value="physical">Physical Disability</option>
+        <option value="mental">Mental Disability</option>
+        <option value="sensory">Sensory Disability</option>
+        <option value="other">Other</option>
+    </select>
+
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
+

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <style>
+        header {
+            background-color: #0074D9;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.2);
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color:  #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        header img {
+            height: 120px; /* Set the desired height for your logo */
+            margin-right: 5px;
+        }
+
+
+        .login-container {
+            background-color: #fff;
+            padding: 50px;
+            border-radius: 7px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin: 10px 0;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-group input[type="submit"] {
+            background-color: #0074D9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }∫
+        h2 {
+            text-decoration: underline;
+            text-align: center;
+        }
+
+        .form-group input[type="submit"]:hover {
+            background-color: #0056A8;
+        }
+    </style>
+</head>
+<body>
+    <img src="logo.png" alt="Foundation Logo"> 
+    
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="process-login.php" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select id="role" name="role">
+                    <option value="manager">Manager</option>
+                    <option value="employee">Employee</option>
+                    <option value="user">User</option>
+                    <option value="donor">Donor</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Log In">
+            </div>
+        </form>
+    </div>
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const message = document.getElementById('message');
+
+        loginForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Get the input values
+            const username = loginForm.username.value;
+            const password = loginForm.password.value;
+            const role = loginForm.role.value;
+
+            // Check if the username, password, and role are correct (simplified example)
+            if (username === 'user' && password === 'password' && role === 'user') {
+                message.textContent = 'User login successful. Redirecting...';
+                // Redirect user to the appropriate page
+            } else if (username === 'Manager' && password === 'managerpass' && role === 'Manager') {
+                message.textContent = 'Manager login successful. Redirecting...';
+                // Redirect Manager to the appropriate page
+            } else if (username === 'Employee' && password === 'Employeepass' && role === 'Employee') {
+                message.textContent = 'Employee login successful. Redirecting...';
+                // Redirect Employee to the appropriate page
+            } else if (username === 'Donor' && password === 'adminpass' && role === 'Donor') {
+                message.textContent = 'Donor login successful. Redirecting...';
+                // Redirect Donor to the appropriate page
+            } 
+            else {
+                message.textContent = 'Login failed. Please try again.';
+            }
+        });
+    </script>
+</body>
+</html>

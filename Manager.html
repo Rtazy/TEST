@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manager Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #98d8a6;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        header img {
+            height: 170px; /* Set the desired height for your logo */
+            margin-right: 10px;
+        
+        }
+        nav {
+            background-color: #333;
+            color: white;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        section {
+            margin: 20px;
+            text-align: left;
+        }
+
+        .button {
+            background-color: #0074D9;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            text-align: left;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        h2 {
+            text-decoration: underline;
+        }
+
+        .button:hover {
+            background-color: #0056A8;
+        }
+        .logout-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 5px 10px; /* Adjust the padding for size */
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px; /* Adjust the font size for a smaller button */
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: #111; /* Darken the button on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+         <img src="logo.png" alt="Foundation Logo">
+         <h1> My Dashboard </h1>
+    </header>
+
+    <section id="manage-users">
+        <h2>Manage Users:</h2>
+        <button class="button">View Users</button>
+        <button class="button">Edit Users</button>
+        <button class="button">Add Users</button>
+        <button class="button">Delete Users</button>
+    </section>
+    <section id="manage-employees">
+        <h2>Manage Employees:</h2>
+        <button class="button">View Employees</button>
+        <button class="button">Update Employees</button>
+        <button class="button">Add Employees</button>
+        <button class="button">Delete Employees</button>
+    </section>
+    <section id="manage-donors">
+        <h2>Manage Donors:</h2>
+        <button class="button">View Donors</button>
+        <button class="button">Update Donors</button>
+        <button class="button">Add Donors</button>
+        <button class="button">Delete Donors</button>
+    </section>
+    <section id="create-campaign">
+        <h2>Campaigns:</h2>
+        <button class="button">Create New Campaign</button>
+        <button class="button">Delete Campaign</button>
+    </section>
+    <section id="create-announcement">
+        <h2>Announcements:</h2>
+        <button class="button">Create New Announcement</button>
+        <button class="button">Delete Announcement</button>
+    </section>
+    <footer>
+        <p>&copy; 2023 Foundation</p>
+    </footer>
+    <a href="PublicPage.html" class="logout-button">Logout</a>
+</body>
+</html>
