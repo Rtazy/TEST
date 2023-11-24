@@ -1,21 +1,26 @@
 from flask import Flask, render_template, request, redirect, url_for
 import psycopg2 as pg
+from psycopg2 import sql
+from flask import jsonify
+import time
 #fetchmany
 #fetchone
 #fetchall these come afer "execute"
+#functions needed add: admin y, ben y, auth y, don y, ev,an y,donation y,forms yes|
 
 app= Flask(__name__)
-app.config['DB_USER']='postgres'
-app.config['DB_NAME']='Alnour'
-app.config['DB_HOST']='postgres'
+app.config['DB_USER']='rimetazi_AlNour'
+app.config['DB_NAME']='rimetazi_AlNour'
+app.config['DB_HOST']='sql.bsite.net\MSSQL2016'
 app.config['DB_PASSWORD']='1202'
 
 #insert Querries:VARBINARY(MAX) is the data type for imgs,pdfs .. .
 
+
 insert_auth="SELECT Authority_Name,Authority_id  FROM Authorities WHERE Authority_Name=%s OR Authority_id=%s"
 insert_use="INSERT INTO users(fname,lname,category,cin) VALUES (%s,%s,%s,%s)"
 insert_camp=""
-insert_ben=""
+insert_ben="INSERT INTO Beneficiaries (Full_Name, Birthdate, Birth_Place, Disability_Start_Date, Documents, Gender)VALUES (%s, %s, %s, %s,  , %(Gender)s)"
 insert_ann=""
 insert_Dform=""
 insert_Aform=""
@@ -26,7 +31,7 @@ insert_Mdonation=""
 del_auth=""
 del_use=""
 del_camp=""
-del_ben=""
+del_ben="DELETE FROM Beneficiaries WHERE Beneficiary_ID = %s"
 del_ann=""
 del_form=""
 del_NDonation=""
@@ -40,6 +45,11 @@ up_ann=""
 up_form=""
 up_NDonation=""
 up_Mdonation=""
+
+
+
+
+
 
 
 
@@ -60,19 +70,88 @@ def to_htmltable(lst):
 
 def display(querry):
 
-   res=connect_db.cursor().execute(querry).fetchall()
+   res=connect_db().cursor().execute(querry).fetchall()
    return to_htmltable(res)
 
 #send the code to AJAX?? 
+
+@app.route('/api/get_data')
+def get_data(querry):
+    # Your logic to generate or fetch updated data
+    display(querry)
+    updated_data = f"Updated data at {time.strftime('%H:%M:%S')}"
+    return jsonify({querry: updated_data})
+
+
+
+
+
+
+
 
 
 
 def connect_db():
    return pg.connect(host=app.config['DB_HOST'],dbname=app.config['DB_NAME'],user=app.config['DB_USER'],password=app.config['DB_PASSWORD'])
 
+
+########################################
+
+def insert_data(table_name, primary_key_column, maxvarbin_column, other_columns, primary_key_value, binary_data):
+   
+    cursor = connect_db().cursor()
+
+    # Create an INSERT query with dynamic columns
+    columns = [primary_key_column, maxvarbin_column] + other_columns
+    query = sql.SQL("INSERT INTO {} ({}) VALUES ({})").format(
+        sql.Identifier(table_name),
+        sql.SQL(', ').join(map(sql.Identifier, columns)),
+        sql.SQL(', ').join(sql.Placeholder() * len(columns))
+    )
+
+   # Execute the query with values
+    values = [primary_key_value, pg.Binary(binary_data)] + ['value' for _ in other_columns]
+    cursor.execute(query, values)
+
+    # Commit the transaction to persist changes
+    connect_db().commit()
+
+    # Close the cursor and connection when done
+    cursor.close()
+    connect_db().close()
+########################################
+########################################
+
+def Del_data(table_name, primary_key_column, primary_key_value):
+   
+    cursor = connect_db().cursor()
+
+    # Create an INSERT query with dynamic columns
+    
+    query = sql.SQL("DELETE FROM {} WHERE {}= %s").format(
+        sql.Identifier(table_name), sql.Identifier(primary_key_column))
+
+
+   # Execute the query with the primary key value
+    cursor.execute(query, (primary_key_value,))
+
+    # Commit the transaction to persist changes
+    connect_db().commit()
+
+    # Close the cursor and connection when done
+    cursor.close()
+    connect_db().close()
+########################################
+
+
+
+
+
+
+
+
 @app.route('/Hey',methods=['GET','POST'])
 def index():
-    
     return '''<form method="post" action="/submit"> <label for="user_in">Enter username</label> <input type="input" name="username" id="user_in"> <input type="submit" name="submit"> </form>'''
 @app.route('/Formulair',methods=['GET','POST'])
 def Send_Form():
@@ -100,13 +179,13 @@ def Send_Form():
          # email=request.form['email']
          # phone=request.form['phone']
          # cat=request.form['category']
-         # cursor=connect_db.cursor()
+         # cursor=connect_db().cursor()
          # cursor.execute("SELECT * FROM forms WHERE username=%s OR email=%s",username,email)
          # row=cursor.fetchone()
          # if row==None: 
           # cursor.execute("INSERT INTO users(username,pass,email,phone,category) (%s,%s,%s,%s,%s)",username,passw,email,phone,cat)
-          # connect_db.commit()
-          # connect_db.close()
+          # connect_db().commit()
+          # connect_db().close()
           # hey=""
           # return redirect(url_for('login'))
          # else:
@@ -119,18 +198,20 @@ def Send_Form():
 @app.route("/Formulair_D",methods=["GET","POST"])
 def fill_fD():
   if request.form["methods"]==['GET','POST']: 
-   cur=connect_db.cursor()
-   Donor_Name=request.form['dname']
-   Donor_address=request.form['daddres']
-   Donor_address=request.form['dname']
-   Donor_address=request.form['dname']
+   cur=connect_db().cursor()
+   Donor_Name=request.form['name']
+   Donor_bd=request.form['BirthDate']
+   Donor_Phonnum=request.form['phoneNumber']
+   Donor_address=request.form['address']
+   Donor_email=request.form['email']
+   Donor_docs=request.form['documents']
    cur.execute(insert_Dform, )
    return render_template('DonorForm.html')   
   
 @app.route("/Formulair_B",methods=["GET","POST"])
 def fill_fB():
   if request.form["methods"]==['GET','POST']: 
-   cur=connect_db.cursor()
+   cur=connect_db().cursor()
    B_name=request.form['name']
    B_bday=request.form['BirthDate']
    B_phone=request.form['phoneNumber']
@@ -145,29 +226,18 @@ def fill_fB():
 @app.route("/Formulair_A",methods=["GET","POST"])
 def fill_fA():
   if request.form["methods"]==['GET','POST']: 
-   cur=connect_db.cursor()
-   A_name=request.form['Aname']
-   A_address=request.form['bname']
-   A_address=request.form['bname']
-   A_address=request.form['Aname']
+   cur=connect_db().cursor()
+   A_name=request.form['name']
+   A_pnum=request.form['phoneNumber']
+   A_address=request.form['address']
+   A_email=request.form['email']
    cur.execute(insert_Aform, )
    return render_template('AuthorityContactForm.html')   
           
 #################################################################
 @app.route('/Home',methods=['POST','GET'])
-def login():
-    if request.form['methods']=='POST':
-        email=request.form['email']
-        passw=request.form['pass']
-        cursor=connect_db.cursor()
-        cursor.execute('SELECT* FROM users WHERE email=%s AND pass=%s', email,passw)
-        u=cursor.fetchone()
-        hey=""
-        if u:
+def Home():
 
-            redirect(url_for('profile_<username>'))
-        else:
-            hey="Vos information sont incorrectes, veuillez reessayer ou cree un compte"
     return render_template('PublicPage.html')
 
 
@@ -176,7 +246,7 @@ def login():
     if request.form['methods']=='POST':
         email=request.form['email']
         passw=request.form['pass']
-        cursor=connect_db.cursor()
+        cursor=connect_db().cursor()
         cursor.execute('SELECT* FROM users WHERE email=%s AND pass=%s', email,passw)
         u=cursor.fetchone()
         hey=""
@@ -197,13 +267,13 @@ def profile():
 #Function for adding a user  There should also be a function to add users from the forms 
 #three retractable tables will be displayed 
 @app.route('/nouveau_beneficiere',methods=['POST','GET'])
-def add_member():
+def add_ben():
     if request.form['methods']==['POST']:
      fname=request.form['fname']
      lname=request.form['lname']
      category=request.form['category']
      cin=request.form['cin']
-     cur=connect_db.cursor()
+     cur=connect_db().cursor()
      cur.execute("SELECT *FROM users WHERE %s=cin")
      u=cur.fetchone()
      hey=""
@@ -212,8 +282,8 @@ def add_member():
      else:
         cur.execute(insert_use,fname,lname,category,cin)
         hey="Ce membre a ete ajoute"
-     connect_db.commit()
-     connect_db.close()
+     connect_db().commit()
+     connect_db().close()
     return render_template('add_member.html',hey)
 # function for Adding an assosciation's contact
 @app.route("/Ajouter_Contact",methods=['GET','POST'])
@@ -223,22 +293,22 @@ def add_Authority():
       c_address=request.form['c_address']
       c_email=request.form['c_email']
       c_phoneN=request.form['c_phoneN']
-      cur=connect_db.cursor()
+      cur=connect_db().cursor()
       
       cur.execute("INSERT INTO Authority(c_name,c_address,c_email,c_phoneN) VALUES (%s,%s,%s,%s)",c_name,c_address,c_email,c_phoneN)
-      connect_db.commit()
-      connect_db.close()
+      connect_db().commit()
+      connect_db().close()
 
    return render_template("add_Auth.html") 
 @app.route("/Ajouter_Administrateur",methods=['GET','POST'])
 #the original admin must be connected  to do that
-def add_use():
+def add_admin():
    if request.form['methods']==['POST']:
       use_name=request.form['use_name']
       use_address=request.form['use_address']
       use_email=request.form['use_email']
       use_phoneN=request.form['use_phoneN']
-      cur=connect_db.cursor()
+      cur=connect_db().cursor()
       cur.execute(sel_us,)
       ath=cur.fetchone()
       hey=""
@@ -247,10 +317,10 @@ def add_use():
       else:
          hey="L'administrateur a ete ajoute avec succes"
          cur.execute(insert_use, )
-         connect_db.commit()
-         connect_db.close()
+         connect_db().commit()
+         connect_db().close()
 
-   return render_template("add_us.html",hey=hey) 
+   return render_template("add_us.html") 
 
 @app.route("/Ajouter_Annonce",methods=['GET','POST'])
 
@@ -258,13 +328,13 @@ def add_announcement():
    if request.form['methods']==['POST']:
       Ann_Title=request.form['Ann_name']
       Ann_Text=request.form['Ann_address']
-      cur=connect_db.cursor()
+      cur=connect_db().cursor()
       ath=cur.fetchone()
       cur.execute(insert_ann, )
-      connect_db.commit()
-      connect_db.close()
+      connect_db().commit()
+      connect_db().close()
 
-   return render_template("add_ann.html",hey=hey) 
+   return render_template("add_ann.html") 
 
 #add donor and add donation (Shouldn't we allow donors to sign up??)
 @app.route("/Ajouter_Doneur",methods=['GET','POST'])
@@ -276,7 +346,7 @@ def add_Don():
       Don_email=request.form['Don_email']
       Don_phoneN=request.form['Don_phoneN']
       Don_Docs=request.form['Don_docs']
-      cur=connect_db.cursor()
+      cur=connect_db().cursor()
       cur.execute( sel_don,)
       ath=cur.fetchone()
       hey=""
@@ -285,8 +355,8 @@ def add_Don():
       else:
          hey="L'administrateur a ete ajoute avec succes"
          cur.execute(insert_don, )
-         connect_db.commit()
-         connect_db.close()
+         connect_db().commit()
+         connect_db().close()
 
    return render_template("add_Don.html",hey=hey) 
   
@@ -296,10 +366,10 @@ def add_Don():
       Don_name=request.form['Don_name']
       Don_address=request.form['Don_address']
 
-      cur=connect_db.cursor()
+      cur=connect_db().cursor()
       cur.execute(insert_don, )
-      connect_db.commit()
-      connect_db.close()
+      connect_db().commit()
+      connect_db().close()
 
    return render_template("Donation_mon.html",hey=hey) 
 @app.route("/Ajouter_Donation_autre",methods=['GET','POST'])
@@ -308,11 +378,11 @@ def add_Don():
       Don_name=request.form['Don_name']
       Don_address=request.form['Don_address']
 
-      cur=connect_db.cursor()
+      cur=connect_db().cursor()
       
       cur.execute(insert_dona_o, )
-      connect_db.commit()
-      connect_db.close()
+      connect_db().commit()
+      connect_db().close()
 
    return render_template("Donation_oth.html") 
 
@@ -326,12 +396,13 @@ def add_Don():
 
 
 # function for Deleting a Beneficiary from the beneficiary table 
+# function for Deleting a Beneficiary from the beneficiary table 
 @app.route('/Retirer_Beneficiere',methods=['GET','POST'])
 def Del_ben():
    if request.form['methods']==['POST']:
       # first display the table of benfs and the user has to display their ids
       id=request.form['id']
-      cur=connect_db.cursor()
+      cur=connect_db().cursor()
       cur.execute(sel_ben,)
       res=cur.fetchone()
       al=""
@@ -340,27 +411,45 @@ def Del_ben():
       else :
         al="Le beneficiere a ete retire avec succes"
         cur.execute(del_ben,)
-        connect_db.commit()
-        connect_db.close()
+        connect_db().commit()
+        connect_db().close()
    return render_template("del_ben.html",al)
 
-# function for Deleting a Campaign from the Campaign table 
-@app.route('/Retirer_Campagne',methods=['GET','POST'])
-def Del_ben():
+@app.route('/Retirer_Admin',methods=['GET','POST'])
+def Del_Admin():
    if request.form['methods']==['POST']:
       # first display the table of benfs and the user has to display their ids
       id=request.form['id']
-      cur=connect_db.cursor()
+      cur=connect_db().cursor()
+      cur.execute(sel_admin,)
+      res=cur.fetchone()
+      al=""
+      if al == None:
+       al="L'admin que vous avez recherche n'existe pas"
+      else :
+        al="Le 'admin a ete retire avec succes"
+        cur.execute(Del_Admin,)
+        connect_db().commit()
+        connect_db().close()
+   return render_template("del_admin.html",al)
+
+# function for Deleting a Campaign from the Campaign table 
+@app.route('/Retirer_Campagne',methods=['GET','POST'])
+def Del_Comp():
+   if request.form['methods']==['POST']:
+      # first display the table of benfs and the user has to display their ids
+      id=request.form['id']
+      cur=connect_db().cursor()
       cur.execute(sel_cam,)
       res=cur.fetchone()
       al=""
       if al == None:
          al="La Campagne que vous avez recherche n'existe pas"
-       else :
+      else :
          al="La Campagne a ete retire avec succes"
          cur.execute(del_ben,)
-         connect_db.commit()
-         connect_db.close()
+         connect_db().commit()
+         connect_db().close()
    return render_template("del_cam.html",al)
 # trigger on off when a campaign is deleted an announcement is autaumatically created
 # deleting an announcement:
@@ -369,7 +458,7 @@ def Del_Ann():
    if request.form['methods']==['POST']:
       # first display the table of benfs and the user has to display their ids
       id=request.form['id']
-      cur=connect_db.cursor()
+      cur=connect_db().cursor()
       cur.execute(sel_ann,)
       res=cur.fetchone()
       al=""
@@ -378,8 +467,8 @@ def Del_Ann():
       else :
          al="L'annonce a ete retire avec succes"
          cur.execute(del_ann,)
-         connect_db.commit()
-         connect_db.close()
+         connect_db().commit()
+         connect_db().close()
    return render_template("del_ann.html",al)
 # function for Deleting a Beneficiary from beneficiary forms (add trigger) 
 
@@ -389,7 +478,7 @@ def Del_Ann():
 def Del_Authority():
    if request.form['methods']==['POST']:
       A_id=request.form['A_id']
-      cur=connect_db.cursor()
+      cur=connect_db().cursor()
       cur.execute("SELECT Authority_id  FROM Authorities WHERE Authority_id=%s",)
       con=cur.fetchone()
       alert=""
@@ -400,20 +489,20 @@ def Del_Authority():
        approves=True
        if approves:
           cur.execute("DELETE FROM Authorities WHERE Authority_id=%s",A_id)
-          connect_db.commit()
+          connect_db().commit()
       
-      connect_db.close()
+      connect_db().close()
 
    return render_template("del_Auth.html") 
 
 
 @app.route("/Retirer_Don",methods=['GET','POST'])
 #first display Donation list ..
-def Del_Authority():
+def Del_Don():
    if request.form['methods']==['POST']:
       Don_id=request.form['Don_id']
       Don_type=request.form['Don_type']
-      cur=connect_db.cursor()
+      cur=connect_db().cursor()
       if Don_type == 1:
        cur.execute()
        con=cur.fetchone()
@@ -422,7 +511,7 @@ def Del_Authority():
          alert="Le Don que vous avez selectionne n'existe pas"
        else:
          cur.execute(del_NDonation,A_id)
-         connect_db.close()
+         connect_db().close()
          alert="le don a ete suprime avec succes"
    elif Don_type == 2:
        cur.execute()
@@ -432,8 +521,8 @@ def Del_Authority():
          alert="Le Don que vous avez selectionne n'existe pas"
        else:
          cur.execute(del_MDonation,A_id)
-         connect_db.commit()
-         connect_db.close()
+         connect_db().commit()
+         connect_db().close()
          alert="le don a ete suprime avec succes"
 
 
@@ -442,7 +531,7 @@ def Del_Authority():
 
  #  E X T R A
     #auto post Ai after each scheduled event
-    #  
+    #  Data Analitics part
  
 
 if __name__=='__main__':
