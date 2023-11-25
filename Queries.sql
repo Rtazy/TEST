@@ -6,7 +6,7 @@ CREATE TABLE Beneficiaries (
     Birthdate DATE,
     Birth_Place VARCHAR(255),
     Disability_Start_Date DATE,
-    Documents VARCHAR(255),
+    Documents VARBINARY(MAX),
     Gender VARCHAR(10)
 );
 --Delete---
