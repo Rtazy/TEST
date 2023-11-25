@@ -8,7 +8,8 @@ CREATE TABLE Beneficiaries (
     Disability_category VARCHAR(50),
     Disability_Start_Date DATE,
     Documents VARBINARY(MAX),
-    Gender VARCHAR(10)
+    Gender VARCHAR(10),
+    Join_Date DATE
 );
 --Delete---
 DELETE FROM Beneficiaries WHERE Beneficiary_ID = Benf_entered_ID;
@@ -44,7 +45,8 @@ CREATE TABLE Donors (
     Join_Date DATE,
     Birthdate DATE,
     Address VARCHAR(255),
-    Docs VARCHAR(255)
+    Docs VARCHAR(255),
+    Gender  VARCHAR(255)
 );
 --Delete--
 DELETE FROM Donors WHERE Donor_ID = Donor_entered_ID;
@@ -75,7 +77,7 @@ CREATE TABLE Authorities (
     Address VARCHAR(255),
     Email VARCHAR(255),
     Phone_Number VARCHAR(15),
-    Fax_Number VARCHAR(15)
+    Join_Date DATE
 );
 --view--
 SELECT * FROM Authorities;
