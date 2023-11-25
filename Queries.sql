@@ -92,5 +92,5 @@ SET
     Phone_Number = %(Phone_Number)s,
     Fax_Number = %(Fax_Number)s,
 WHERE Authority_ID = %(Authority_ID)s;
-
+-- Needs to be added: Forms,Donations,announcement,campaign,event, users.--
 
