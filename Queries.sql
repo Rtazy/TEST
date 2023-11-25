@@ -5,6 +5,7 @@ CREATE TABLE Beneficiaries (
     Full_Name VARCHAR(255),
     Birthdate DATE,
     Birth_Place VARCHAR(255),
+    Disability_category VARCHAR(50),
     Disability_Start_Date DATE,
     Documents VARBINARY(MAX),
     Gender VARCHAR(10)
