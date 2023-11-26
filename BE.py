@@ -3,10 +3,11 @@ import psycopg2 as pg
 from psycopg2 import sql
 from flask import jsonify
 import time
+from datetime import datetime
 #fetchmany
 #fetchone
 #fetchall these come afer "execute"
-#functions needed add: admin y, ben y, auth y, don y, ev,an y,donation y,forms yes|
+#functions needed add: comp y ,admin yy, ben yy, auth yy, don yy, ev,an yy,donation yy,forms yes|
 
 app= Flask(__name__)
 app.config['DB_USER']='rimetazi_AlNour'
@@ -15,39 +16,6 @@ app.config['DB_HOST']='sql.bsite.net\MSSQL2016'
 app.config['DB_PASSWORD']='1202'
 
 #insert Querries:VARBINARY(MAX) is the data type for imgs,pdfs .. .
-
-
-insert_auth="SELECT Authority_Name,Authority_id  FROM Authorities WHERE Authority_Name=%s OR Authority_id=%s"
-insert_use="INSERT INTO users(fname,lname,category,cin) VALUES (%s,%s,%s,%s)"
-insert_camp=""
-insert_ben="INSERT INTO Beneficiaries (Full_Name, Birthdate, Birth_Place, Disability_Start_Date, Documents, Gender)VALUES (%s, %s, %s, %s,  , %(Gender)s)"
-insert_ann=""
-insert_Dform=""
-insert_Aform=""
-insert_Bform=""
-insert_NDonation=""
-insert_Mdonation=""
-
-del_auth=""
-del_use=""
-del_camp=""
-del_ben="DELETE FROM Beneficiaries WHERE Beneficiary_ID = %s"
-del_ann=""
-del_form=""
-del_NDonation=""
-del_MDonation=""
-
-up_auth=""
-up_use=""
-up_camp=""
-up_ben=""
-up_ann=""
-up_form=""
-up_NDonation=""
-up_Mdonation=""
-
-
-
 
 
 
@@ -85,40 +53,59 @@ def get_data(querry):
 
 
 
-
-
-
-
-
-
 def connect_db():
    return pg.connect(host=app.config['DB_HOST'],dbname=app.config['DB_NAME'],user=app.config['DB_USER'],password=app.config['DB_PASSWORD'])
 
 
-########################################
+########################################\\
 
-def insert_data(table_name, primary_key_column, maxvarbin_column, other_columns, primary_key_value, binary_data):
+def insert_data_mobin(table_name, columns, column_values):
+   cursor = connect_db().cursor()
+    
+            # Create an INSERT query with dynamic columns
    
-    cursor = connect_db().cursor()
+   query = sql.SQL("INSERT INTO {} ({}) VALUES ({})").format(
+                sql.Identifier(table_name),
+                sql.SQL(', ').join(map(sql.Identifier, columns)),
+                sql.SQL(', ').join(sql.Placeholder() * len(columns))
+            )
 
-    # Create an INSERT query with dynamic columns
-    columns = [primary_key_column, maxvarbin_column] + other_columns
-    query = sql.SQL("INSERT INTO {} ({}) VALUES ({})").format(
-        sql.Identifier(table_name),
-        sql.SQL(', ').join(map(sql.Identifier, columns)),
-        sql.SQL(', ').join(sql.Placeholder() * len(columns))
-    )
+            # Execute the query with values
+   cursor.execute(query, column_values)
 
-   # Execute the query with values
-    values = [primary_key_value, pg.Binary(binary_data)] + ['value' for _ in other_columns]
-    cursor.execute(query, values)
 
     # Commit the transaction to persist changes
-    connect_db().commit()
+   connect_db().commit()
 
     # Close the cursor and connection when done
-    cursor.close()
-    connect_db().close()
+   cursor.close()
+   connect_db().close()
+ 
+
+
+def insert_data(table_name, maxvarbin_column, other_columns, binary_data, other_column_values):
+    #####
+            cursor = connect_db().cursor()
+    
+            # Create an INSERT query with dynamic columns
+            columns = [maxvarbin_column] + other_columns
+            query = sql.SQL("INSERT INTO {} ({}) VALUES ({})").format(
+                sql.Identifier(table_name),
+                sql.SQL(', ').join(map(sql.Identifier, columns)),
+                sql.SQL(', ').join(sql.Placeholder() * len(columns))
+            )
+
+            # Execute the query with values
+            values = [pg.Binary(binary_data)] + other_column_values
+            cursor.execute(query, values)
+
+
+    # Commit the transaction to persist changes
+            connect_db().commit()
+
+    # Close the cursor and connection when done
+            cursor.close()
+            connect_db().close()
 ########################################
 ########################################
 
@@ -142,17 +129,49 @@ def Del_data(table_name, primary_key_column, primary_key_value):
     cursor.close()
     connect_db().close()
 ########################################
+########################################
+
+def Sel_data_one(table_name, primary_key_column, primary_key_value):
+   
+    cursor = connect_db().cursor()
+
+    # Create an INSERT query with dynamic columns
+    
+    query = sql.SQL("SELECT * FROM {} WHERE {}= %s").format(
+        sql.Identifier(table_name), sql.Identifier(primary_key_column))
+
+
+   # Execute the query with the primary key value
+    cursor.execute(query, (primary_key_value,))
+
+    ret= cursor.fetchone()
+    cursor.close()
+    connect_db().close()
+    return ret
+########################################
+def Sel_data_all(table_name, primary_key_column, primary_key_value):
+   
+    cursor = connect_db().cursor()
+
+    # Create an INSERT query with dynamic columns
+    
+    query = sql.SQL("SELECT * FROM {} WHERE {}= %s").format(
+        sql.Identifier(table_name), sql.Identifier(primary_key_column))
+
+
+   # Execute the query with the primary key value
+    cursor.execute(query, (primary_key_value,))
+
+    ret= cursor.fetchall()
+    cursor.close()
+    connect_db().close()
+    return ret
+########################################
 
 
 
 
 
-
-
-
-@app.route('/Hey',methods=['GET','POST'])
-def index():
-    return '''<form method="post" action="/submit"> <label for="user_in">Enter username</label> <input type="input" name="username" id="user_in"> <input type="submit" name="submit"> </form>'''
 @app.route('/Formulair',methods=['GET','POST'])
 def Send_Form():
     if request.form['methods']==['GET','POST']:
@@ -167,29 +186,6 @@ def Send_Form():
        elif cat is 3:
           redirect(url_for('Formulair_A'))
           
-
-       ##interactive?? js or I can use redirect
-
-
-
-
-    #  if request.method=='POST':
-    #    username=request.form['username']
-       #   passw=request.form['pass']
-         # email=request.form['email']
-         # phone=request.form['phone']
-         # cat=request.form['category']
-         # cursor=connect_db().cursor()
-         # cursor.execute("SELECT * FROM forms WHERE username=%s OR email=%s",username,email)
-         # row=cursor.fetchone()
-         # if row==None: 
-          # cursor.execute("INSERT INTO users(username,pass,email,phone,category) (%s,%s,%s,%s,%s)",username,passw,email,phone,cat)
-          # connect_db().commit()
-          # connect_db().close()
-          # hey=""
-          # return redirect(url_for('login'))
-         # else:
-          # hey="Les informations que vous venez rentre existent deja dans la base de donnees. Connecter vous ou change l'address E-mail ou le nom d'utilisateur"
         
     return render_template('Form.html')
 
@@ -269,35 +265,41 @@ def profile():
 @app.route('/nouveau_beneficiere',methods=['POST','GET'])
 def add_ben():
     if request.form['methods']==['POST']:
-     fname=request.form['fname']
-     lname=request.form['lname']
-     category=request.form['category']
-     cin=request.form['cin']
-     cur=connect_db().cursor()
-     cur.execute("SELECT *FROM users WHERE %s=cin")
-     u=cur.fetchone()
+  
+     Name=request.form['Name']
+     gender=request.form['gender']
+     Disability_Category=request.form['Disability_Category']
+     documents=request.files['documents']
+     joining_date=request.form['joining_date']
+     b_date=request.form['Birthdate']
+     b_place=request.form['Birth_Place']
+     Disability_sd=request.form['Disability_startdate']
+     Disability_sd_con=datetime.strptime(Disability_sd,'%Y-%m-%d').date()
+     bdate_conv=datetime.strptime(b_date,'%Y-%m-%d').date()
+     jdate_conv=datetime.strptime(joining_date,'%Y-%m-%d').date()
+     docs_bin= documents.read()
+     Cols=['Full_Name','Birthdate','Birth_Place','join_date','Disability_Start_Date','Gender','Disability_Category' ]
+    
      hey=""
      if u != None:
         hey="Ce membre exist deja."
      else:
-        cur.execute(insert_use,fname,lname,category,cin)
-        hey="Ce membre a ete ajoute"
-     connect_db().commit()
-     connect_db().close()
+         insert_data("Beneficiaries", " Documents" ,Cols, docs_bin,[Name, bdate_conv, b_place,jdate_conv,Disability_sd_con,gender,Disability_Category] )
+         hey="Ce membre a ete ajoute"
+   
     return render_template('add_member.html',hey)
 # function for Adding an assosciation's contact
 @app.route("/Ajouter_Contact",methods=['GET','POST'])
 def add_Authority():
    if request.form['methods']==['POST']:
-      c_name=request.form['c_name']
-      c_address=request.form['c_address']
-      c_email=request.form['c_email']
-      c_phoneN=request.form['c_phoneN']
-      cur=connect_db().cursor()
+      c_name=request.form['Name']
+      c_address=request.form[' Address']
+      c_email=request.form['Email ']
+      c_phoneN=request.form['Phone_Number']
+      Join_Date=request.form['Join_Date']
+      Join_Date_conv=datetime.strtime(Join_Date,"%Y-%m-%d")
+      insert_data_mobin('Authorities',['Name','Address','Email','Phone_Number','Join_Date'],vals,)
       
-      cur.execute("INSERT INTO Authority(c_name,c_address,c_email,c_phoneN) VALUES (%s,%s,%s,%s)",c_name,c_address,c_email,c_phoneN)
-      connect_db().commit()
-      connect_db().close()
 
    return render_template("add_Auth.html") 
 @app.route("/Ajouter_Administrateur",methods=['GET','POST'])
@@ -316,11 +318,25 @@ def add_admin():
          hey="L'administrateur que vous essayer d'ajouter existe deja "
       else:
          hey="L'administrateur a ete ajoute avec succes"
-         cur.execute(insert_use, )
-         connect_db().commit()
-         connect_db().close()
+         insert_data(, maxvarbin_column, other_columns, binary_data, other_column_values)
 
    return render_template("add_us.html") 
+
+@app.route("/Ajouter_Evenement",methods=['GET','POST'])
+
+def add_Event():
+   if request.form['methods']==['POST']:
+      Event_Title=request.form['Ann_name']
+      Event_Text=request.form['Ann_address']
+      Event_img= y
+      cur=connect_db().cursor()
+      ath=cur.fetchone()
+      cur.execute(insert_ann, )
+      connect_db().commit()
+      connect_db().close()
+
+   return render_template("add_event.html") 
+
 
 @app.route("/Ajouter_Annonce",methods=['GET','POST'])
 
@@ -341,22 +357,26 @@ def add_announcement():
 #the original admin must be connected  to do that
 def add_Don():
    if request.form['methods']==['POST']:
-      Don_name=request.form['Don_name']
-      Don_address=request.form['Don_address']
-      Don_email=request.form['Don_email']
-      Don_phoneN=request.form['Don_phoneN']
-      Don_Docs=request.form['Don_docs']
-      cur=connect_db().cursor()
-      cur.execute( sel_don,)
-      ath=cur.fetchone()
-      hey=""
-      if ath != None:
-         hey="L'administrateur que vous essayer d'ajouter existe deja "
-      else:
-         hey="L'administrateur a ete ajoute avec succes"
-         cur.execute(insert_don, )
-         connect_db().commit()
-         connect_db().close()
+     Name=request.form['Name']
+     Phone_Number=request.form['Phone_Number']
+     Email=request.form['Email']
+     gender=request.form['Gender']
+     Address=request.files['Address']
+     documents=request.files['Docs']
+     joining_date=request.form['joining_date']
+     b_date=request.form['Birthdate']
+     bdate_conv=datetime.strptime(b_date,'%Y-%m-%d').date()
+     jdate_conv=datetime.strptime(joining_date,'%Y-%m-%d').date()
+     docs_bin= documents.read()
+     Cols=['Full_Name','Phone_Number','Email','Birthdate','Address','join_date','Gender' ]
+    
+     hey=""
+     if u != None:
+        hey="Ce doneur exist deja."
+     else:
+        insert_data("Beneficiaries", " Docs" ,Cols, docs_bin,[Name,Phone_Number,Email, bdate_conv,Address,jdate_conv,gender] )
+        hey="Ce doneur a ete ajoute"
+      
 
    return render_template("add_Don.html",hey=hey) 
   
@@ -414,6 +434,19 @@ def Del_ben():
         connect_db().commit()
         connect_db().close()
    return render_template("del_ben.html",al)
+
+@app.route('/Retirer_Evenement',methods=['GET','POST'])
+def Del_event():
+   if request.form['methods']==['POST']:
+      # first display the table of benfs and the user has to display their ids
+      id=request.form['id']
+      cur=connect_db().cursor()
+      cur.execute(sel_ev,)
+      res=cur.fetchone()
+      cur.execute(del_event,)
+      connect_db().commit()
+      connect_db().close()
+   return render_template("del_event.html",al)
 
 @app.route('/Retirer_Admin',methods=['GET','POST'])
 def Del_Admin():
@@ -527,7 +560,49 @@ def Del_Don():
 
 
 
-   return render_template("del_Auth.html") 
+   return render_template("del_donation.html") 
+
+###########################################################
+
+@app.route("/Retirer_Formulaire",methods=['GET','POST'])
+
+def Del_Form():
+   if request.form['methods']==['POST']:
+      Form_id=request.form['Don_id']
+      Form_type=request.form['Don_type']
+      cur=connect_db().cursor()
+      if Form_type == 1:
+       
+       con=cur.fetchone()
+       alert=""
+       if con==None:
+         alert="Le Don que vous avez selectionne n'existe pas"
+       else:
+         cur.execute(del_NDonation,A_id)
+         connect_db().close()
+         alert="le don a ete suprime avec succes"
+   elif Form_type == 2:
+       cur.execute()
+       con=cur.fetchone()
+       alert=""
+   elif Form_type == 3:
+       cur.execute()
+       con=cur.fetchone()
+       alert=""
+       if con==None:
+         alert="Le Don que vous avez selectionne n'existe pas"
+       else:
+         cur.execute(del_MDonation,A_id)
+         connect_db().commit()
+         connect_db().close()
+         alert="le don a ete suprime avec succes"
+
+
+
+   return render_template("del_donation.html") 
+
+
+
 
  #  E X T R A
     #auto post Ai after each scheduled event
