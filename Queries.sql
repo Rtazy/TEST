@@ -45,7 +45,7 @@ CREATE TABLE Donors (
     Join_Date DATE,
     Birthdate DATE,
     Address VARCHAR(255),
-    Docs VARCHAR(255),
+    Docs VARBINARY(MAX),
     Gender  VARCHAR(255)
 );
 --Delete--
