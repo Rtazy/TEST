@@ -139,7 +139,8 @@ CREATE TABLE Admin (
     Admin_ID SERIAL PRIMARY KEY,
     Admin_Name VARCHAR(100),
     Admin_PhoneNumber VARCHAR(25),  -- Assuming a standard phone number format
-    Address TEXT,
+    Address VARCHAR(100),
+    Email TEXT,
     Login VARCHAR(50),
     Password VARCHAR(50),
     Date_created DATE DEFAULT GETDATE()
