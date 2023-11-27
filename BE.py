@@ -143,11 +143,14 @@ def Sel_data_one(table_name, primary_key_column, primary_key_value):
 
    # Execute the query with the primary key value
     cursor.execute(query, (primary_key_value,))
+    err=0
 
     ret= cursor.fetchone()
+    if ret != None:
+       err=1
     cursor.close()
     connect_db().close()
-    return ret
+    return err
 ########################################
 def Sel_data_all(table_name, primary_key_column, primary_key_value):
    
@@ -298,7 +301,8 @@ def add_Authority():
       c_phoneN=request.form['Phone_Number']
       Join_Date=request.form['Join_Date']
       Join_Date_conv=datetime.strtime(Join_Date,"%Y-%m-%d")
-      insert_data_mobin('Authorities',['Name','Address','Email','Phone_Number','Join_Date'],vals,)
+      vals=[c_name,c_address,c_email,c_phoneN,Join_Date_conv]
+      insert_data_mobin('Authorities',['Name','Address','Email','Phone_Number','Join_Date'],vals)
       
 
    return render_template("add_Auth.html") 
@@ -310,32 +314,29 @@ def add_admin():
       use_address=request.form['use_address']
       use_email=request.form['use_email']
       use_phoneN=request.form['use_phoneN']
-      cur=connect_db().cursor()
-      cur.execute(sel_us,)
-      ath=cur.fetchone()
-      hey=""
+
+       
+         hey=""
       if ath != None:
          hey="L'administrateur que vous essayer d'ajouter existe deja "
       else:
          hey="L'administrateur a ete ajoute avec succes"
-         insert_data(, maxvarbin_column, other_columns, binary_data, other_column_values)
+         insert_data_mobin(, maxvarbin_column, other_columns, binary_data, other_column_values)
 
    return render_template("add_us.html") 
 
-@app.route("/Ajouter_Evenement",methods=['GET','POST'])
+@app.route("/Ajouter_Campaingne",methods=['GET','POST'])
 
-def add_Event():
+def add_Campaingn():
    if request.form['methods']==['POST']:
-      Event_Title=request.form['Ann_name']
-      Event_Text=request.form['Ann_address']
-      Event_img= y
-      cur=connect_db().cursor()
-      ath=cur.fetchone()
-      cur.execute(insert_ann, )
-      connect_db().commit()
-      connect_db().close()
-
-   return render_template("add_event.html") 
+      C_Title=request.form['Title']
+      C_Text=request.form['Text']
+      C_img= request.files['Image']
+      C_startd=datetime.strtime(request.form['Start_date'],"%Y-%m-%d")
+      C_endd=datetime.strtime(request.form['Start_date'],"%Y-%m-%d")
+      C_img_conv=C_img.read()
+      insert_data("Campaign","Img",[ "Title","Text","start_date","End_date"],C_img_conv,[C_Title,C_Text,C_startd,C_endd])
+   return render_template("add_Camp.html") 
 
 
 @app.route("/Ajouter_Annonce",methods=['GET','POST'])
@@ -374,7 +375,7 @@ def add_Don():
      if u != None:
         hey="Ce doneur exist deja."
      else:
-        insert_data("Beneficiaries", " Docs" ,Cols, docs_bin,[Name,Phone_Number,Email, bdate_conv,Address,jdate_conv,gender] )
+        insert_data("Donors", " Docs" ,Cols, docs_bin,[Name,Phone_Number,Email, bdate_conv,Address,jdate_conv,gender] )
         hey="Ce doneur a ete ajoute"
       
 
@@ -421,18 +422,14 @@ def add_Don():
 def Del_ben():
    if request.form['methods']==['POST']:
       # first display the table of benfs and the user has to display their ids
-      id=request.form['id']
-      cur=connect_db().cursor()
-      cur.execute(sel_ben,)
-      res=cur.fetchone()
-      al=""
-      if al == None:
-       al="Le beneficiere que vous avez recherche n'existe pas"
-      else :
-        al="Le beneficiere a ete retire avec succes"
-        cur.execute(del_ben,)
-        connect_db().commit()
-        connect_db().close()
+
+      A_id=request.form['Beneficiary_ID ']
+      ans = Del_data("Beneficiaries","Beneficiary_ID ", A_id) 
+      
+      if ans==1:
+         alert="Le beneficiere que vous avez selectionne n'existe pas"
+      else:
+         alert="Le beneficiere que vous avez selectionne a ete retire"
    return render_template("del_ben.html",al)
 
 @app.route('/Retirer_Evenement',methods=['GET','POST'])
@@ -480,10 +477,27 @@ def Del_Comp():
          al="La Campagne que vous avez recherche n'existe pas"
       else :
          al="La Campagne a ete retire avec succes"
-         cur.execute(del_ben,)
+         ur.execute(del_ben,)
          connect_db().commit()
          connect_db().close()
    return render_template("del_cam.html",al)
+
+
+@app.route("/Retirer_Doneurs",methods=['POST',"GET"])
+def  Del_Donor():
+   if request.form['methods']==['POST']:
+      # first display the table of benfs and the user has to display their ids
+
+      D_id=request.form['Donor_ID ']
+      ans = Del_data("Donors","Donor_ID ", D_id) 
+      
+      if ans==1:
+         alert="Le donor que vous avez selectionne n'existe pas"
+      else:
+         alert="Le donor que vous avez selectionne a ete retire"
+   return render_template("del_ben.html",al)
+
+
 # trigger on off when a campaign is deleted an announcement is autaumatically created
 # deleting an announcement:
 @app.route('/Retirer_Annonce',methods=['GET','POST'])
@@ -510,25 +524,16 @@ def Del_Ann():
 #first display contact list ..
 def Del_Authority():
    if request.form['methods']==['POST']:
-      A_id=request.form['A_id']
-      cur=connect_db().cursor()
-      cur.execute("SELECT Authority_id  FROM Authorities WHERE Authority_id=%s",)
-      con=cur.fetchone()
-      alert=""
-      if con==None:
+      A_id=request.form['Authority_ID']
+      ans = Del_data("Authorities","Authority_ID", A_id) 
+      
+      if ans==1:
          alert="Le contact que vous avez selectionne n'existe pas"
       else:
-       # ask the user whether they would like to delete the contact
-       approves=True
-       if approves:
-          cur.execute("DELETE FROM Authorities WHERE Authority_id=%s",A_id)
-          connect_db().commit()
-      
-      connect_db().close()
+         alert="Le contact que vous avez selectionne a ete retire"
 
-   return render_template("del_Auth.html") 
-
-
+      return render_template("del_Auth.html",alert=alert)
+   
 @app.route("/Retirer_Don",methods=['GET','POST'])
 #first display Donation list ..
 def Del_Don():
