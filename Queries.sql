@@ -96,4 +96,53 @@ SET
     Fax_Number = %(Fax_Number)s,
 WHERE Authority_ID = %(Authority_ID)s;
 -- Needs to be added: Forms,Donations,announcement,campaign,event, users.--
+-- Create Monetary_Donation table
+CREATE TABLE Monetary_Donation (
+    Donation_ID SERIAL PRIMARY KEY,
+    owner_ID INT,
+    Amount DECIMAL(10, 2),  
+    Payment_method VARCHAR(50),
+    is_association BOOLEAN,
+    Date_created DATE DEFAULT GETDATE()
+);
+
+-- Create Other_Donation table
+CREATE TABLE Other_Donation (
+    Donation_ID SERIAL PRIMARY KEY,
+    owner_ID INT,
+    Description TEXT,
+    Is_Association BOOLEAN,
+    Date_created DATE DEFAULT GETDATE()
+);
+
+-- Create Campaign table
+CREATE TABLE Campaign (
+    Campaign_ID SERIAL PRIMARY KEY,
+    Title VARCHAR(100),
+    Text TEXT,
+    Img VARBINARY(MAX),
+    Date_created DATE DEFAULT GETDATE(),
+    start_date DATE,
+    End_date DATE
+);
+
+-- Create Announcement table
+CREATE TABLE Announcement (
+    Announcement_ID SERIAL PRIMARY KEY,
+    title VARCHAR(100),
+    text TEXT,
+    Date_created DATE DEFAULT GETDATE()
+);
+
+-- Create Admin table
+CREATE TABLE Admin (
+    Admin_ID SERIAL PRIMARY KEY,
+    Admin_Name VARCHAR(100),
+    Admin_PhoneNumber VARCHAR(25),  -- Assuming a standard phone number format
+    Address TEXT,
+    Login VARCHAR(50),
+    Password VARCHAR(50),
+    Date_created DATE DEFAULT GETDATE()
+);
+
 
