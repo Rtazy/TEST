@@ -146,4 +146,37 @@ CREATE TABLE Admin (
     Date_created DATE DEFAULT GETDATE()
 );
 
+--Create Application forms table
+--Beneficiary Form Table
+Create Table BenfForm(
+    Beneficiaryfullname VARCHAR(100),
+    BeneficiaryBirthDate DATE,
+    birthplace VARCHAR(50),
+    Disability_Date DATE
+    disabilityType VARCHAR(0),
+    gender VARCHAR(1),
+    picture VARBINARY(MAX),
+    Beneficiary_documents VARBINARY(MAX)
+    );
+--Donor Form Table
+CREATE TABLE DonorForm(
+    DonorName VARCHAR(100),
+    DonorBirthDate DATE,
+    DonorPhone VARCHAR(25),
+    DonorEmail VARCHAR(50),
+    DonorDocuments VARBINARY(MAX) 
+    );
+--Authority Form Table
+CREATE TABLE AuthorityContactForm(
+    AuthorityName VARCHAR(100),
+    PhoneNumber VARCHAR(20),
+    FaxNumber VARCHAR(20),
+    AuthorityAddress VARCHAR(100),
+    Authorityemail VARCHAR(50)
+    );
+
+
+
+
+
 
