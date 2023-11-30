@@ -30,6 +30,6 @@ numpy==1.21.6
 pipreqs==0.4.13
 psycopg2==2.9.9
 pycountry==22.3.5
-scipy==1.11.3
+scipy==1.7.3
 selenium==4.15.2
 
