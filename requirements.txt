@@ -14,7 +14,7 @@ compressed-rtf==1.0.6
 config==0.5.1
 cryptography==41.0.3
 extract-msg==0.28.7
-Flask==2.3.3
+Flask==2.0.0
 Flask-Login==0.6.2
 fsspec==2023.9.2
 gensim==4.3.2
