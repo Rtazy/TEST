@@ -16,7 +16,7 @@ cryptography==41.0.3
 extract-msg==0.28.7
 Flask==2.0.0
 Flask-Login==0.6.2
-fsspec==2023.9.2
+fsspec==0.3.6
 gensim==4.3.2
 IMAPClient==2.1.0
 itsdangerous==2.1.2
