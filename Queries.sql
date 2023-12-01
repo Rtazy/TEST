@@ -130,7 +130,7 @@ CREATE TABLE Campaign (
 CREATE TABLE Announcement (
     Announcement_ID SERIAL PRIMARY KEY,
     title VARCHAR(100),
-    text TEXT,
+    txt TEXT,
     Date_created DATE DEFAULT GETDATE()
 );
 
@@ -148,7 +148,7 @@ CREATE TABLE Admin (
 
 --Create Application forms table
 --Beneficiary Form Table
-Create Table BenfForm(
+Create Table BenefForm(
     Form_ID SERIAL PRIMARY KEY,
     Beneficiaryfullname VARCHAR(100),
     BeneficiaryBirthDate DATE,
