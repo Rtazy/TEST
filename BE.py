@@ -355,8 +355,8 @@ def add_Authority():
       else:
        insert_data_mobin('Authorities',['Name','Address','Email','Phone_Number','Join_Date'],vals)
        al="The authority was successfully added"
-
    return render_template("add_Auth.html") 
+
 @app.route("/Ajouter_Administrateur",methods=['GET','POST'])
 #the original admin must be connected  to do that
 def add_admin():
@@ -374,16 +374,9 @@ def add_admin():
          hey="L'administrateur que vous essayer d'ajouter existe deja "
    else:
          hey="L'administrateur a ete ajoute avec succes"
-         insert_data_mobin("Admin",
-   [   
-    'Admin_Name',
-    'Admin_PhoneNumber',  
-    'Address TEXT',
-    'Email',
-    'Password'],[use_name,use_phoneN,use_address,use_email,use_pw]
-    )
+         insert_data_mobin("Admin",[ 'Admin_Name','Admin_PhoneNumber', 'Address TEXT','Email','Password'],[use_name,use_phoneN,use_address,use_email,use_pw])
 
-   return render_template("add_us.html") 
+   return render_template("add_us.html",hey =hey) 
 
 @app.route("/Ajouter_Campaingne",methods=['GET','POST'])
 
