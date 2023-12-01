@@ -592,31 +592,33 @@ def Del_Form():
    if request.form['methods']==['POST']:
       Form_id=request.form['Don_id']
       Form_type=request.form['Don_type']
-      cur=connect_db().cursor()
+      
       if Form_type == 1:
+       con=Select_entity("DonorForm",Form_id)
        
-       con=cur.fetchone()
        alert=""
        if con==None:
          alert="Le Don que vous avez selectionne n'existe pas"
        else:
-         cur.execute(del_NDonation,A_id)
-         connect_db().close()
+         Del_data("DonorForm","DonorForm_ID")
          alert="le don a ete suprime avec succes"
    elif Form_type == 2:
-       cur.execute()
-       con=cur.fetchone()
-       alert=""
-   elif Form_type == 3:
-       cur.execute()
-       con=cur.fetchone()
+       con=Select_entity("BenfForm",Form_id)
+       
        alert=""
        if con==None:
          alert="Le Don que vous avez selectionne n'existe pas"
        else:
-         cur.execute(del_MDonation,A_id)
-         connect_db().commit()
-         connect_db().close()
+         Del_data("DonorForm","DonorForm_ID")
+         alert="le don a ete suprime avec succes"
+   elif Form_type == 3:
+       con=Select_entity("AuthorityForm",Form_id)
+       
+       alert=""
+       if con==None:
+         alert="Le Don que vous avez selectionne n'existe pas"
+       else:
+         Del_data("DonorForm","DonorForm_ID")
          alert="le don a ete suprime avec succes"
 
 
