@@ -149,6 +149,7 @@ CREATE TABLE Admin (
 --Create Application forms table
 --Beneficiary Form Table
 Create Table BenfForm(
+    Form_ID SERIAL PRIMARY KEY,
     Beneficiaryfullname VARCHAR(100),
     BeneficiaryBirthDate DATE,
     birthplace VARCHAR(50),
@@ -160,6 +161,7 @@ Create Table BenfForm(
     );
 --Donor Form Table
 CREATE TABLE DonorForm(
+    Form_ID SERIAL PRIMARY KEY,
     DonorName VARCHAR(100),
     DonorBirthDate DATE,
     DonorPhone VARCHAR(25),
@@ -167,10 +169,10 @@ CREATE TABLE DonorForm(
     DonorDocuments VARBINARY(MAX) 
     );
 --Authority Form Table
-CREATE TABLE AuthorityContactForm(
+CREATE TABLE AuthorityForm(
+    Form_ID SERIAL PRIMARY KEY,
     AuthorityName VARCHAR(100),
     PhoneNumber VARCHAR(20),
-    FaxNumber VARCHAR(20),
     AuthorityAddress VARCHAR(100),
     Authorityemail VARCHAR(50)
     );
