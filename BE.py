@@ -108,6 +108,21 @@ def insert_data(table_name, maxvarbin_column, other_columns, binary_data, other_
             connect_db().close()
 ########################################
 ########################################
+def Select_entity(table,entity_id):
+            cursor = connect_db().cursor()
+            query = "SELECT * FROM your_table WHERE id = %s"
+
+            query = f"SELECT * FROM {table} WHERE id = %s"
+
+            # Execute the query with the entity_id parameter
+            cursor.execute(query, (entity_id,))
+
+            # Fetch the result
+            entity = cursor.fetchone()
+
+            return entity
+########################################
+########################################
 
 def Del_data(table_name, primary_key_column, primary_key_value):
    
@@ -310,18 +325,26 @@ def add_Authority():
 #the original admin must be connected  to do that
 def add_admin():
    if request.form['methods']==['POST']:
-      use_name=request.form['use_name']
-      use_address=request.form['use_address']
-      use_email=request.form['use_email']
+      use_name=request.form['Admin_Name']
+      use_address=request.form['Address']
+      use_email=request.form['Email']
       use_phoneN=request.form['use_phoneN']
+      use_pw=request.form['Password']
 
        
-         hey=""
-      if ath != None:
+   hey=""
+   if ath != None:
          hey="L'administrateur que vous essayer d'ajouter existe deja "
-      else:
+   else:
          hey="L'administrateur a ete ajoute avec succes"
-         insert_data_mobin(, maxvarbin_column, other_columns, binary_data, other_column_values)
+         insert_data_mobin("Admin",
+   [   
+    'Admin_Name',
+    'Admin_PhoneNumber',  
+    'Address TEXT',
+    'Email',
+    'Password'],[use_name,use_phoneN,use_address,use_email,use_pw]
+    )
 
    return render_template("add_us.html") 
 
@@ -343,13 +366,9 @@ def add_Campaingn():
 
 def add_announcement():
    if request.form['methods']==['POST']:
-      Ann_Title=request.form['Ann_name']
-      Ann_Text=request.form['Ann_address']
-      cur=connect_db().cursor()
-      ath=cur.fetchone()
-      cur.execute(insert_ann, )
-      connect_db().commit()
-      connect_db().close()
+      Ann_Title=request.form['title']
+      Ann_Text=request.form['text']
+      insert_data_mobin('Announcement',['title','text'],[Ann_Title,Ann_Text,])
 
    return render_template("add_ann.html") 
 
@@ -384,26 +403,26 @@ def add_Don():
 @app.route("/Ajouter_Donation_argent",methods=['GET','POST'])
 def add_Don():
    if request.form['methods']==['POST']:
-      Don_name=request.form['Don_name']
-      Don_address=request.form['Don_address']
+      Don_owner=request.form['owner_ID']
+      Don_Amount=request.form['Amount']
+      pm=request.form['Payment_method']
+      is_a=request.form['is_association']
+      cols=['owner_ID','Amount','Payment_method','is_association']
+      vals=[Don_owner,Don_Amount,pm,is_a]
+      insert_data_mobin('Monetary_Donation',cols,vals)
 
-      cur=connect_db().cursor()
-      cur.execute(insert_don, )
-      connect_db().commit()
-      connect_db().close()
 
    return render_template("Donation_mon.html",hey=hey) 
 @app.route("/Ajouter_Donation_autre",methods=['GET','POST'])
 def add_Don():
    if request.form['methods']==['POST']:
-      Don_name=request.form['Don_name']
-      Don_address=request.form['Don_address']
-
-      cur=connect_db().cursor()
+      Don_owner=request.form['owner_ID']
       
-      cur.execute(insert_dona_o, )
-      connect_db().commit()
-      connect_db().close()
+      Desc=request.form['Description']
+      is_a=request.form['is_association']
+      cols=['owner_ID','Amount','Payment_method','is_association']
+      vals=[Don_owner,Desc,is_a]
+      insert_data_mobin('Other_Donation',cols,vals)
 
    return render_template("Donation_oth.html") 
 
@@ -432,7 +451,7 @@ def Del_ben():
          alert="Le beneficiere que vous avez selectionne a ete retire"
    return render_template("del_ben.html",al)
 
-@app.route('/Retirer_Evenement',methods=['GET','POST'])
+@app.route('/Retirer_Campagne',methods=['GET','POST'])
 def Del_event():
    if request.form['methods']==['POST']:
       # first display the table of benfs and the user has to display their ids
@@ -540,10 +559,10 @@ def Del_Don():
    if request.form['methods']==['POST']:
       Don_id=request.form['Don_id']
       Don_type=request.form['Don_type']
-      cur=connect_db().cursor()
-      if Don_type == 1:
-       cur.execute()
-       con=cur.fetchone()
+      
+   if Don_type == 1:
+       con=Select_entity("Monetary_Donation",Don_id)
+       
        alert=""
        if con==None:
          alert="Le Don que vous avez selectionne n'existe pas"
@@ -553,14 +572,12 @@ def Del_Don():
          alert="le don a ete suprime avec succes"
    elif Don_type == 2:
        cur.execute()
-       con=cur.fetchone()
+       con=Select_entity("Other_Donation",Don_id)
        alert=""
        if con==None:
          alert="Le Don que vous avez selectionne n'existe pas"
        else:
-         cur.execute(del_MDonation,A_id)
-         connect_db().commit()
-         connect_db().close()
+         
          alert="le don a ete suprime avec succes"
 
 
@@ -612,7 +629,9 @@ def Del_Form():
  #  E X T R A
     #auto post Ai after each scheduled event
     #  Data Analitics part
+    # how will the donors donate? go get funding campain
+    # how to make sure that the user donated the correct amount?
  
 
 if __name__=='__main__':
-    app.run(host='0.0.0.0',port=5000,debug=True)
+    app.run(debug=True)
