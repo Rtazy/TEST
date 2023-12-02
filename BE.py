@@ -431,7 +431,7 @@ def add_Donor():
    return render_template("add_Don.html",hey=hey) 
   
 @app.route("/Ajouter_Donation_argent",methods=['GET','POST'])
-def add_Don():
+def add_Don_M():
    if request.form['methods']==['POST']:
       Don_owner=request.form['owner_ID']
       Don_Amount=request.form['Amount']
@@ -444,7 +444,7 @@ def add_Don():
 
    return render_template("Donation_mon.html") 
 @app.route("/Ajouter_Donation_autre",methods=['GET','POST'])
-def add_Don():
+def add_Don_o():
    if request.form['methods']==['POST']:
       Don_owner=request.form['owner_ID']
       
