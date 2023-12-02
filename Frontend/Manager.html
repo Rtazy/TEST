@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manager Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: white;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        header img {
+            height: 170px; 
+            margin-right: 10px;
+        
+        }
+        h1 {
+            color:#864d25; 
+            text-decoration: underline;
+            text-align: left;
+        }
+
+        nav {
+            background-color: #13472E;
+            color: white;
+            padding: 3px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        section {
+            margin: 20px;
+            text-align: left;
+        }
+
+        a button {
+            background-color: #bb9376;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            text-align: left;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        h2 {
+            
+            color: rgb(92, 48, 17);
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        button a {
+        text-decoration: none;
+        color: #EAE5DF; 
+        }
+        .logout-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #000;
+            color: white;
+            border: none;
+            padding: 5px 10px; /* Adjust the padding for size */
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px; /* Adjust the font size for a smaller button */
+            cursor: pointer;
+        }
+
+        .logout-button:hover {
+            background-color: #111; /* Darken the button on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+         <img src="nourlg.png" alt="Foundation Logo">
+      
+    </header>
+    <nav>
+        <ul>
+            <li>My Dashboard</li>
+        </ul>
+    </nav>
+
+    <section id="manage-benefeciaries">
+        <h2>Manage Beneficiaries:</h2>
+        <a href="ViewBenf.html" target="_blank"><button>View Beneficiaries</button> </a>
+        <a href="ADDBenf.html" target="_blank"><button>Add Beneficiaries</button> </a>
+        <a href="EditBenf.html" target="_blank"><button>Edit Beneficiaries</button> </a>
+        <a href="DeleteBenf.html" target="_blank"><button>Delete Beneficiaries</button> </a>
+    </section>
+    
+    <section id="manage-donors">
+        <h2>Manage Donors:</h2>
+        <a href="ViewDonor.html" target="_blank"><button>View Donors</button> </a>
+        <a href="ADDdonor.html" target="_blank"><button>Add Donors</button></a>
+        <a href="EditDonor.html" target="_blank"><button>Edit Donors</button> </a>
+        <a href="DeleteDonor.html" target="_blank"><button>Delete Donors</button> </a>
+    </section>
+    <section id="manage-Authorities">
+        <h2>Manage Authorities:</h2>
+        <a href="ViewAuthority.html" target="_blank"><button>View Authorities</button> </a>
+        <a href="ADDAuthority.html" target="_blank"><button>Add Authorities</button></a>
+        <a href="EditAuthority.html" target="_blank"><button>Edit Authorities</button> </a>
+        <a href="DeleteAuthority.html" target="_blank"><button>Delete Authorities</button> </a>
+    </section>
+    <section id="campaign">
+        <h2>Campaigns:</h2>
+        <a href="CreateCam.html" target="_blank"><button>Create New Campaign</button> </a>
+        <a href="DeleteCam.html" target="_blank"><button>Delete Campaign</button> </a>
+    </section>
+    <section id="announcement">
+        <h2>Announcements:</h2>
+        <a href="CreateAn.html" target="_blank"><button>Create New Announcement</button> </a>
+        <a href="DeleteAn.html" target="_blank"><button>Delete Announcement</button> </a>
+    </section>
+    <section id ="Posts"> 
+        <h2>Automate a Post:</h2>
+        <a href="AutomatePost.html" target="_blank"><button>Automate a Post</button> </a>
+    </section>
+    <footer>
+        <p>&copy; 2023 AlNourFoundation</p>
+    </footer>
+    <a href="PublicPage.html" class="logout-button">Logout</a>
+</body>
+</html>
+
+
+

@@ -4,6 +4,7 @@
     <title>Foundation - Home</title>
     <style>
         body {
+            background-color: white;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -24,19 +25,19 @@
         }
 
         header {
-            background-color: #81dac5;
+            background-color: white;
             color: white;
             text-align: center;
             padding: 10px;
         }
 
         header img {
-            height: 50px; /* Set the desired height for your logo */
+            height: 150px; 
             margin-right: 10px;
         }
 
         nav {
-            background-color: #333;
+            background-color: #13472E;
             color: white;
             padding: 3px;
         }
@@ -60,11 +61,13 @@
 
         section {
             margin: 20px;
+            font-family: 'Times New Roman', Times, serif;
         }
 
         .button {
-            background-color: #0074D9;
+            background-color: #864d25;
             color: white;
+            display: inline-block;
             border: none;
             padding: 10px 20px;
             text-align: center;
@@ -74,21 +77,33 @@
             margin: 10px;
             cursor: pointer;
         }
+        button a {
+        text-decoration: none;
+        color: #EAE5DF; 
+        }
+        
+        .img {
+            width: 200;
+            height: auto;
+        }
 
         .button:hover {
-            background-color: #0056A8;
+            background-color: #13472E;
+            
+
         }
 
         /* Map Styles */
         .map-container {
             position: relative;
-            padding-bottom: 75%; /* 4:3 Aspect Ratio (change as needed) */
+            padding-bottom: 75%; 
             height: 0;
             overflow: hidden;
         }
 
         .map-container iframe {
             position: absolute;
+    
             top: 0;
             left: 0;
             width: 100%;
@@ -98,7 +113,7 @@
 </head>
 <body>
     <header>
-        <img src="logo.png" alt="Foundation Logo"> <!-- Replace "your-logo.png" with your actual logo file -->
+        <img src="nourlg.png" alt="Foundation Logo"> 
         <h1></h1>
     </header>
     <nav>
@@ -110,25 +125,25 @@
     </nav>
     <section id="about">
         <h2>About Us</h2>
-        <img src="about-us-image.jpg" alt="About Us Image">
-        <p>Welcome to the Foundation. We are a nonprofit organization dedicated to making a positive impact on our community.</p>
+       <img src="about-us-imag.jpg" alt="About Us Image"> 
+        <p>Al-Nour Regional Association for people in a situation of disability for culture, social work and inclusive development.</p>
     </section>
     <section id="JoinUs">
         <h2>Join Us</h2>
-        <button class="button">Beneficiaries Application</button>
-        <button class="button">Donors Application</button>
-        <button class="button">Authorities </button>
+        <button class="button"><a href="BenfForm.html">Beneficiaries Application</a></button>
+        <button class="button"><a href="DonorForm.html">Donors Application</a></button>
+        <button class="button"><a href="AuthorityContactForm.html">Authorities</a></button>
     </section>
     <section id="contact">
         <h2>Contact</h2>
         <p>If you have any questions or need more information, please feel free to contact us:</p>
         <ul>
-            <li>Email: contact@foundation.org</li>
-            <li>Phone: (123) 456-7890</li>
+            <li>Email: ennourassociation3@gmail.com</li>
+            <li>Phone: +212-623466048 or +212-535561023</li>
             <li>Map: <a href="#map">View Map</a></li>
         </ul>
         <div id="map" class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3099.335433348789!2d-74.00597278421943!3d40.71277508247725!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259bf6dcb75c7%3A0x311af1b7fb045e99!2sNew%20York%2C%20NY!5e0!3m2!1sen!2sus!4v1591427714624!5m2!1sen!2sus" allowfullscreen></iframe>
+            <iframe src="https://www.google.com/maps/place/33°26'29.5%22N+5°13'27.9%22W/@33.4417481,-5.2299488,15z/data=!4m4!3m3!8m2!3d33.4415198!4d-5.2244288?hl=en-ES&entry=ttu" allowfullscreen></iframe>
         </div>
     </section>
     <footer>
