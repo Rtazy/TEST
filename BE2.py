@@ -16,7 +16,7 @@ conn_string = (
     f"{app.config['DB_HOST']}/{app.config['DB_NAME']}?sslmode=require"
 )
 def connect_db():
- return psycopg2.connect(conn_string)
+ return pg.connect(conn_string)
 
 def insert_data_mobin(table_name, columns, column_values):
    cursor = connect_db().cursor()
