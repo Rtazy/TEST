@@ -19,18 +19,19 @@ def connect_db():
  return pg.connect(conn_string)
 
 def insert_data_mobin(table_name, columns, column_values):
-   cursor = connect_db().cursor()
-    
-            # Create an INSERT query with dynamic columns
-   
-   query = sql.SQL("INSERT INTO {} ({}) VALUES ({})").format(
+    try:
+        with connect_db() as conn, conn.cursor() as cursor:
+            # Use sql.Identifier only for column names (not for table name)
+            query = sql.SQL("INSERT INTO {} ({}) VALUES ({})").format(
                 sql.Identifier(table_name),
                 sql.SQL(', ').join(map(sql.Identifier, columns)),
                 sql.SQL(', ').join(sql.Placeholder() * len(columns))
             )
-
-            # Execute the query with values
-   cursor.execute(query, column_values)
+            cursor.execute(query, column_values)
+            conn.commit()
+    except pg.Error as e:
+        # Handle the exception
+        print(f"Error: {e}")
 
 @app.route("/Ajouter_Annonce", methods=['GET', 'POST'])
 def add_announcement():
