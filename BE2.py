@@ -6,20 +6,17 @@ import time
 from datetime import datetime
 
 app = Flask(__name__)
-app.config['DB_USER'] = 'rimetazi_AlNour'
-app.config['DB_NAME'] = 'rimetazi_AlNour'
-app.config['DB_HOST'] = 'sql.bsite.net'
-app.config['DB_PORT'] = 5432  # Specify the port here
-app.config['DB_PASSWORD'] = '1202'
 
+# Load configuration from a separate file (config.py)
+app.config.from_pyfile('config.py', silent=True)
+
+# Connect to the database using configuration variables
+conn_string = (
+    f"postgresql://{app.config['DB_USER']}:{app.config['DB_PASSWORD']}@"
+    f"{app.config['DB_HOST']}/{app.config['DB_NAME']}?sslmode=require"
+)
 def connect_db():
-    return pg.connect(
-        host=app.config['DB_HOST'],
-        port=app.config['DB_PORT'],
-        dbname=app.config['DB_NAME'],
-        user=app.config['DB_USER'],
-        password=app.config['DB_PASSWORD']
-    )
+ return psycopg2.connect(conn_string)
 
 def insert_data_mobin(table_name, columns, column_values):
    cursor = connect_db().cursor()
