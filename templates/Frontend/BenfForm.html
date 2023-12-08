@@ -1,11 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Announcement Form</title>
+    <title>Beneficiary Application Form</title>
     <style>
-         body {
+          body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -92,24 +90,55 @@
    </header>
    <nav>
     <ul>
-        <li>Create New Announcement</li>
+        <li>Beneficiary Application </li>
     </ul>
 </nav>
 
+<form action="BenfForm" method="post">
+    
+
+ 
+    <label for="Beneficiaryfullname"> Beneficiary Full Name:</label>
+    <input type="text" id="Beneficiaryfullname" name="Beneficiaryfullname" required>
+
+    <label for="BeneficiaryBirthDate">Beneficiary Birth Date:</label>
+    <input type="date" id="BeneficiaryBirthDate" name="BeneficiaryBirthDate" placeholder="DD/MM/YYYY" required>
+
+    
+    <label for="birthplace">Beneficiary Birth place:</label>
+    <input type="text" id="birthplace" name="birthplace" required>
+    
+
+    <label for="Disability_Date">Beneficiary Disability Starting Date:</label>
+    <input type="date" id="Disability_Date" name="Disability_Date" required>
+
+  
+
+    <label for="disabilityType">Beneficiary Disability Type:</label>
+    <select id="disabilityType" name="disabilityType">
+        <option value="physical">Physical Disability</option>
+        <option value="mental">Mental Disability</option>
+        <option value="sensory">Sensory Disability</option>
+        <option value="other">Other</option>
+    </select>
+
+   
+    <label for="gender">Gender:</label>
+    <select id="gender" name="gender">
+        <option value="male">M</option>
+        <option value="female">F</option>
+    </select>
      
-    <form action="/submit_announcement_form" method="post">
-        <label for="title">Announcement Title:</label>
-        <input type="text" id="title" name="title" required>
+    <label for="picture">Picture:</label>
+    <input type="file" id="picture" name="picture">
 
-        <label for="text">Announcemen Text:</label>
-        <textarea id="text" name="text" rows="4" required></textarea>
+   
+    <label for="Beneficiary_documents">Upload Documents:</label>
+    <input type="file" id="Beneficiary_documents" name="Beneficiary_documents">
 
-        <label for="date">Announcemen Date:</label>
-        <input type="date" id="date" name="date" required>
-         
-        <label for="text">                              </label>
-        <button type="submit">Submit</button>
-    </form>
+    <input type="submit" value="Submit">
+</form>
 
 </body>
 </html>
+

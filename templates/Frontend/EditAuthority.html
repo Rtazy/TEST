@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Announcement Form</title>
+    <title>Edit Authority </title>
     <style>
-         body {
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -88,28 +88,45 @@
 </head>
 <body>
     <header>
-        <img src="nourlg.png" alt="Foundation Logo">
-   </header>
-   <nav>
-    <ul>
-        <li>Create New Announcement</li>
-    </ul>
-</nav>
+    <img src="nourlg.png" alt="Foundation Logo">
 
-     
-    <form action="/submit_announcement_form" method="post">
-        <label for="title">Announcement Title:</label>
-        <input type="text" id="title" name="title" required>
+    </header>
+    <nav>
+        <ul>
+            <li>Edit Authority</li>
+        </ul>
+    </nav>
+    <div class="form-container">
+        <form action="editAuthorityForm" method="post">
+            <label for="AuthorityID">Authority ID:</label>
+            <input type="text" id="AuthorityID" name="AuthorityID" required>
+    
+            <button type="button" onclick="selectAuthority()">Select Authority</button>
+    
+            <label for="AuthorityName">Authority Name:</label>
+            <input type="text" id="AuthorityName" name="AuthorityName" >
+    
+            <label for="PhoneNumber">Phone Number:</label>
+            <input type="tel" id="AuthorityPhoneNumber" name="AuthorityPhoneNumber" >
+    
+            <label for="FaxNumber">Fax Number:</label>
+            <input type="tel" id="FaxNumber" name="FaxNumber" >
 
-        <label for="text">Announcemen Text:</label>
-        <textarea id="text" name="text" rows="4" required></textarea>
+            <label for="email"> E-mail:</label>
+            <input type="email" id="Authorityemail" name="Authorityemail" >
+            
+            <label for="AuthorityAddress">Authority Address:</label>
+            <input type="text" id="AuthorityAddress" name="AuthorityAddress" >
 
-        <label for="date">Announcemen Date:</label>
-        <input type="date" id="date" name="date" required>
-         
-        <label for="text">                              </label>
-        <button type="submit">Submit</button>
-    </form>
+            <label for="documents">Upload Documents:</label>
+            <input type="file" id="documents" name="documents">
+    
+           
+    
+            <button type="button" onclick="updateAuthority()">Update Authority</button>
+        </form>
+    </div>
+    
 
 </body>
 </html>

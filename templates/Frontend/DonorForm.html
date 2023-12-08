@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Announcement Form</title>
+    <title>Donor Application Form</title>
     <style>
          body {
             font-family: Arial, sans-serif;
@@ -89,27 +87,37 @@
 <body>
     <header>
         <img src="nourlg.png" alt="Foundation Logo">
+     
    </header>
    <nav>
     <ul>
-        <li>Create New Announcement</li>
+        <li>Donor Application Form</li>
     </ul>
 </nav>
+<form action="/DonorForm" method="POST">
+    
 
-     
-    <form action="/submit_announcement_form" method="post">
-        <label for="title">Announcement Title:</label>
-        <input type="text" id="title" name="title" required>
+ 
+    <label for="DonorName">Donor Name:</label>
+    <input type="text" id="DonorName" name="DonorName" required>
 
-        <label for="text">Announcemen Text:</label>
-        <textarea id="text" name="text" rows="4" required></textarea>
+    <label for="DonorBirthDate">Birth Date:</label>
+    <input type="date" id="DonorBirthDate" name="DonorBirthDate" placeholder="DD/MM/YYYY" required>
 
-        <label for="date">Announcemen Date:</label>
-        <input type="date" id="date" name="date" required>
-         
-        <label for="text">                              </label>
-        <button type="submit">Submit</button>
-    </form>
+
+
+    <label for="DonorPhone">Phone Number:</label>
+    <input type="tel" id="DonorPhone" name="DonorPhone" required>
+
+    <label for="DonorEmail"> E-mail:</label>
+    <input type="email" id="DonorEmail" name="DonorEmail" >
+
+
+    <label for="DonorDocuments">Upload Documents:</label>
+    <input type="file" id="DonorDocuments" name="DonorDocuments">
+
+    <input type="submit" value="Submit">
+</form>
 
 </body>
 </html>

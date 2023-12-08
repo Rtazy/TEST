@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Announcement Form</title>
+    <title>Authority Contact Form</title>
     <style>
          body {
             font-family: Arial, sans-serif;
@@ -92,24 +90,31 @@
    </header>
    <nav>
     <ul>
-        <li>Create New Announcement</li>
+        <li>Authority Contact Form </li>
     </ul>
 </nav>
+<form action="/AuthorityContactForm" method="post">
+    
 
-     
-    <form action="/submit_announcement_form" method="post">
-        <label for="title">Announcement Title:</label>
-        <input type="text" id="title" name="title" required>
+   
+    <label for="AuthorityName">Authority Name:</label>
+    <input type="text" id="AuthorityName" name="AuthorityName" required>
 
-        <label for="text">Announcemen Text:</label>
-        <textarea id="text" name="text" rows="4" required></textarea>
+    
+    <label for="PhoneNumber">Phone Number:</label>
+    <input type="tel" id="AuthorityPhoneNumber" name="AuthorityPhoneNumber" required>
 
-        <label for="date">Announcemen Date:</label>
-        <input type="date" id="date" name="date" required>
-         
-        <label for="text">                              </label>
-        <button type="submit">Submit</button>
-    </form>
+    <label for="FaxNumber">Fax Number:</label>
+    <input type="tel" id="FaxNumber" name="FaxNumber" required>
+
+    <label for="AuthorityAddress">Authority Address:</label>
+    <input type="text" id="AuthorityAddress" name="AuthorityAddress" required>
+
+    <label for="Authorityemail"> E-mail:</label>
+    <input type="email" id="Authorityemail" name="Authorityemail" required >
+
+    <input type="submit" value="Submit">
+</form>
 
 </body>
 </html>

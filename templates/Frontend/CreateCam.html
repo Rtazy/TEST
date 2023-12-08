@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Announcement Form</title>
+    <title>Campaign Form</title>
     <style>
-         body {
+          body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -89,22 +89,22 @@
 <body>
     <header>
         <img src="nourlg.png" alt="Foundation Logo">
-   </header>
-   <nav>
-    <ul>
-        <li>Create New Announcement</li>
-    </ul>
-</nav>
-
+        </header>
+        <nav>
+            <ul>
+                <li>Create New Campaign</li>
+            </ul>
+        </nav>
+    
      
-    <form action="/submit_announcement_form" method="post">
-        <label for="title">Announcement Title:</label>
+    <form action="submit_campaign_form.php" method="post">
+        <label for="title">Campaign Title:</label>
         <input type="text" id="title" name="title" required>
 
-        <label for="text">Announcemen Text:</label>
+        <label for="text">Campaign Text:</label>
         <textarea id="text" name="text" rows="4" required></textarea>
 
-        <label for="date">Announcemen Date:</label>
+        <label for="date">Campaign Date:</label>
         <input type="date" id="date" name="date" required>
          
         <label for="text">                              </label>
