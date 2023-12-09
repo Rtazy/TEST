@@ -195,21 +195,82 @@ def add_ben():
      Disability_sd=request.form['Disability_startdate']
      Disability_sd_con=datetime.strptime(Disability_sd,'%Y-%m-%d').date()
      bdate_conv=datetime.strptime(b_date,'%Y-%m-%d').date()
-     jdate_conv=datetime.strptime(joining_date,'%Y-%m-%d').date()
+     pic=request.files['pictures']
      docs_bin= documents.read()
+     Pic_bin= pic.read()
      Cols=['Full_Name','Birthdate','Birth_Place','Disability_Start_Date','Gender','Disability_Category' ]
-     u=Select_entity('Beneficiary',cols,[Name,bdate_conv, b_place, gender,Disability_Category] )
+     u=Select_entity('Beneficiary',['Full_Name','Birthdate','Birth_Place','Gender','Disability_Category'],[Name,bdate_conv, b_place, gender,Disability_Category] )
      hey=""
      if u != None:
         hey="Ce membre exist deja."
      else:
-         insert_data("Beneficiaries", " Documents" ,Cols, docs_bin,[Name, bdate_conv, b_place,jdate_conv,Disability_sd_con,gender,Disability_Category] )
+         insert_data("Beneficiaries", [" Documents","picture"] ,Cols, docs_bin,[Name, bdate_conv, b_place,jdate_conv,Disability_sd_con,gender,Disability_Category] )
          hey="Ce membre a ete ajoute"
    
     return render_template('Frontend/ADDBenf.html')
 ########################################
 ########################################
+# function for Adding an assosciation's contact
+@app.route("/Ajouter_Contact",methods=['GET','POST'])
+def add_Authority():
+   if request.form['methods']==['POST']:
+      c_name=request.form['Name']
+      c_address=request.form[' Address']
+      c_email=request.form['Email ']
+      c_phoneN=request.form['Phone_Number']
+      Join_Date=request.form['Join_Date']
+      Join_Date_conv=datetime.strtime(Join_Date,"%Y-%m-%d")
+      vals=[c_name,c_address,c_email,c_phoneN,Join_Date_conv]
+      u=Select_entity("Authorities","Email",c_email)
+      al=""
+      if u!=None:
+         al="The authority already exists"
+      else:
+       insert_data_mobin('Authorities',['Name','Address','Email','Phone_Number','Join_Date'],vals)
+       al="The authority was successfully added"
+   return render_template("add_Auth.html") 
 
+########################################
+########################################
+@app.route("/Ajouter_Administrateur",methods=['GET','POST'])
+#the original admin must be connected  to do that
+def add_admin():
+   if request.form['methods']==['POST']:
+      use_name=request.form['Admin_Name']
+      use_address=request.form['Address']
+      use_email=request.form['Email']
+      use_phoneN=request.form['use_phoneN']
+      use_pw=request.form['Password']
+      u=Select_entity("Admin","Email",use_email)
+
+       
+   hey=""
+   if u != None:
+         hey="L'administrateur que vous essayer d'ajouter existe deja "
+   else:
+         hey="L'administrateur a ete ajoute avec succes"
+         insert_data_mobin("Admin",[ 'Admin_Name','Admin_PhoneNumber', 'Address TEXT','Email','Password'],[use_name,use_phoneN,use_address,use_email,use_pw])
+
+   return render_template("add_us.html",hey =hey) 
+
+########################################
+########################################
+@app.route("/Ajouter_Campaingne",methods=['GET','POST'])
+
+def add_Campaingn():
+   if request.form['methods']==['POST']:
+      C_Title=request.form['Title']
+      C_Text=request.form['Text']
+      C_img= request.files['Image']
+      C_startd=datetime.strtime(request.form['Start_date'],"%Y-%m-%d")
+      C_endd=datetime.strtime(request.form['Start_date'],"%Y-%m-%d")
+      C_img_conv=C_img.read()
+      insert_data("Campaign","Img",[ "Title","Text","start_date","End_date"],C_img_conv,[C_Title,C_Text,C_startd,C_endd])
+   return render_template("add_Camp.html") 
+
+
+########################################
+########################################
 @app.route("/Ajouter_Annonce", methods=['GET', 'POST'])
 def add_announcement():
     if request.method == 'POST':
