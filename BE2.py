@@ -87,21 +87,7 @@ def insert_data(table_name, maxvarbin_column, other_columns, binary_data, other_
             connect_db().close()
 ########################################
 ########################################
-def Select_entity(table,pkcol,entity_id):
-            cursor = connect_db().cursor()
-          
 
-            query = f"SELECT * FROM {table} WHERE {pkcol} = {entity_id}"
-
-            # Execute the query with the entity_id parameter
-            cursor.execute(query)
-
-            # Fetch the result
-            entity = cursor.fetchone()
-
-            return entity
-########################################
-########################################
 def Select_entity(table,pkcol,entity_id):
             cursor = connect_db().cursor()
           
