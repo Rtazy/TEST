@@ -159,7 +159,7 @@ def Sel_data_one(table_name, primary_key_column, primary_key_value):
        err=1
     cursor.close()
     connect_db().close()
-    return err
+    return ret
 ########################################
 ########################################
 def Sel_data_all(table_name, primary_key_column, primary_key_value):
@@ -187,9 +187,9 @@ def add_ben():
   
      Name=request.form['Name']
      gender=request.form['gender']
+     Benef_social_ID=request.form['beneficiaryId']
      Disability_Category=request.form['Disability_Category']
      documents=request.files['documents']
-     joining_date=request.form['joining_date']
      b_date=request.form['Birthdate']
      b_place=request.form['Birth_Place']
      Disability_sd=request.form['Disability_startdate']
@@ -197,8 +197,8 @@ def add_ben():
      bdate_conv=datetime.strptime(b_date,'%Y-%m-%d').date()
      jdate_conv=datetime.strptime(joining_date,'%Y-%m-%d').date()
      docs_bin= documents.read()
-     Cols=['Full_Name','Birthdate','Birth_Place','join_date','Disability_Start_Date','Gender','Disability_Category' ]
-     u=Select_entity('Beneficiary',['Full_Name','Birthdate','Birth_Place','Gender','Disability_Category' ],[Name,bdate_conv, b_place, gender,Disability_Category] )
+     Cols=['Full_Name','Birthdate','Birth_Place','Disability_Start_Date','Gender','Disability_Category' ]
+     u=Select_entity('Beneficiary',cols,[Name,bdate_conv, b_place, gender,Disability_Category] )
      hey=""
      if u != None:
         hey="Ce membre exist deja."
