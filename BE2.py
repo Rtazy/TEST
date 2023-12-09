@@ -200,7 +200,7 @@ def add_ben():
 ########################################
 ########################################
 # function for Adding an assosciation's contact
-@app.route("/Ajouter_Contact",methods=['GET','POST'])
+@app.route("/Ajouter_Spomsor",methods=['GET','POST'])
 def add_Authority():
    if request.form['methods']==['POST']:
       c_name=request.form['Name']
