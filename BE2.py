@@ -161,6 +161,7 @@ def Sel_data_one(table_name, primary_key_column, primary_key_value):
     connect_db().close()
     return err
 ########################################
+########################################
 def Sel_data_all(table_name, primary_key_column, primary_key_value):
    
     cursor = connect_db().cursor()
@@ -178,6 +179,7 @@ def Sel_data_all(table_name, primary_key_column, primary_key_value):
     cursor.close()
     connect_db().close()
     return ret
+########################################
 ########################################
 @app.route('/nouveau_beneficiere',methods=['POST','GET'])
 def add_ben():
@@ -205,6 +207,8 @@ def add_ben():
          hey="Ce membre a ete ajoute"
    
     return render_template('Frontend/ADDBenf.html')
+########################################
+########################################
 
 @app.route("/Ajouter_Annonce", methods=['GET', 'POST'])
 def add_announcement():
