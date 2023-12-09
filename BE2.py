@@ -172,16 +172,19 @@ def add_ben():
     if request.form['methods']==['POST']:
   
      Name=request.form['Name']
-     gender=request.form['gender']
      Benef_social_ID=request.form['beneficiaryId']
-     Disability_Category=request.form['Disability_Category']
-     documents=request.files['documents']
      b_date=request.form['Birthdate']
      b_place=request.form['Birth_Place']
+     gender=request.form['gender']
+     Disability_Category=request.form['Disability_Category']
+        
+     documents=request.files['documents']
+     pic=request.files['picture']
+      
      Disability_sd=request.form['Disability_startdate']
+     
      Disability_sd_con=datetime.strptime(Disability_sd,'%Y-%m-%d').date()
      bdate_conv=datetime.strptime(b_date,'%Y-%m-%d').date()
-     pic=request.files['pictures']
      docs_bin= documents.read()
      Pic_bin= pic.read()
      Cols=['Full_Name','Birthdate','Birth_Place','Disability_Start_Date','Gender','Disability_Category' ]
