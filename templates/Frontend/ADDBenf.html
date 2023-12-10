@@ -10,6 +10,15 @@
             margin: 0;
             padding: 0;
         }
+        #message {
+    background-color: #f2f2f2;
+    color: #333;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 
         header {
             background-color:white;
@@ -95,30 +104,36 @@
             <li>Add a new Beneficiary</li>
         </ul>
     </nav>
+        <div id="message">
+        {% if hey %}
+            {{ hey }}
+        {% endif %}
+    </div>
 
-    <form action="/submit_beneficiary" method="POST">
+    <form action="/nouveau_beneficiere" method="POST">
 
-        <label for="beneficiaryId">Beneficiary ID</label>
-        <input type="text" id="beneficiaryId" name="beneficiaryId"required >
+        <label for="beneficiaryId">Beneficiary social ID</label>
+        <input type="text" id="beneficiaryId" name="beneficiaryId" required >
 
-        <label for="Beneficiaryfullname"> Beneficiary Full Name:</label>
-        <input type="text" id="Beneficiaryullname" name="Beneficiaryfullname" required >
+        <label for="Name"> Beneficiary Full Name:</label>
+        <input type="text" id="Name" name="Name" required >
 
-        <label for="BeneficiaryBirthDate">Beneficiary Birth Date:</label>
-        <input type="date" id="BeneficiaryBirthDate" name="BeneficiaryBirthDate" placeholder="DD/MM/YYYY" required>
+        <label for="Birthdate">Beneficiary Birth Date:</label>
+        <input type="Birthdate" id="b_date" name="Birthdate" placeholder="DD/MM/YYYY" required>
 
     
-        <label for="birthplace">Beneficiary Birth place:</label>
-        <input type="text" id="birthplace" name="birthplace" >
+        <label for="Birth_Place">Beneficiary Birth place:</label>
+        <input type="text" id="Birth_Place" name="Birth_Place" >
     
- 
-       <label for="Disability_Date">Beneficiary Disability Starting Date:</label>
-       <input type="date" id="Disability_Date" name="Disability_Date" required>
+      
+       <label for="Disability_startdate">Beneficiary Disability Starting Date:</label>
+       <input type="date" id="Disability_startdate" name="Disability_startdate" required>
 
-  
-
-       <label for="disabilityType">Beneficiary Disability Type:</label>
-       <select id="disabilityType" name="disabilityType">
+       <label for="Join_Date">Beneficiary Joining Date:</label>
+       <input type="date" id="Join_Date" name="Join_Date" required>
+        
+       <label for="Disability_Category">Beneficiary Disability Type:</label>
+       <select id="Disability_Category" name="Disability_Category">
         <option value="physical">Physical Disability</option>
         <option value="mental">Mental Disability</option>
         <option value="sensory">Sensory Disability</option>
@@ -136,8 +151,8 @@
        <input type="file" id="picture" name="picture">
 
    
-        <label for="Beneficiary_documents">Upload Documents:</label>
-       <input type="file" id="Beneficiary_documents" name="Beneficiary_documents">
+        <label for="documents">Upload Documents:</label>
+       <input type="file" id="documents" name="documents">
 
 
 
