@@ -169,7 +169,7 @@ def Sel_data_all(table_name, primary_key_column, primary_key_value):
 ########################################
 @app.route('/nouveau_beneficiere',methods=['POST','GET'])
 def add_ben():
-    if request.form['methods']==['POST']:
+    if request.method == 'POST':
   
      Name=request.form['Name']
      Benef_social_ID=request.form['beneficiaryId']
