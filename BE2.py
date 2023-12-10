@@ -169,6 +169,7 @@ def Sel_data_all(table_name, primary_key_column, primary_key_value):
 ########################################
 @app.route('/nouveau_beneficiere',methods=['POST','GET'])
 def add_ben():
+    hey=""
     if request.method == 'POST':
   
      Name=request.form['Name']
@@ -189,7 +190,7 @@ def add_ben():
      Pic_bin= pic.read()
      Cols=['Full_Name','Birthdate','Birth_Place','Disability_Start_Date','Gender','Disability_Category' ]
      u=Select_entity('Beneficiary',['Full_Name','Birthdate','Birth_Place','Gender','Disability_Category'],[Name,bdate_conv, b_place, gender,Disability_Category] )
-     hey=""
+     
      if u != None:
         hey="Ce membre exist deja."
      else:
