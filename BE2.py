@@ -170,7 +170,7 @@ def Sel_data_all(table_name, primary_key_column, primary_key_value):
 @app.route('/nouveau_beneficiere',methods=['POST','GET'])
 
 def add_ben():
-     print("Before form submission")
+    print("Before form submission")
     hey=""
     if request.method == 'POST':
     print("Before form submission")
