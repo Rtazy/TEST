@@ -205,7 +205,7 @@ def add_ben():
 ########################################
 ########################################
 # function for Adding an assosciation's contact
-@app.route("/Ajouter_Spomsor",methods=['GET','POST'])
+@app.route("/Ajouter_Sponsor",methods=['GET','POST'])
 def add_Authority():
    if request.form['methods']==['POST']:
       c_name=request.form['Name']
@@ -229,23 +229,23 @@ def add_Authority():
 @app.route("/Ajouter_Administrateur",methods=['GET','POST'])
 #the original admin must be connected  to do that
 def add_admin():
+   hey=""
    if request.form['methods']==['POST']:
       use_name=request.form['Admin_Name']
       use_address=request.form['Address']
       use_email=request.form['Email']
       use_phoneN=request.form['use_phoneN']
       use_pw=request.form['Password']
-      u=Select_entity("Admin","Email",use_email)
+      u=Select_entity('Admin','Email',use_email)
 
-       
-   hey=""
+ 
    if u != None:
          hey="L'administrateur que vous essayer d'ajouter existe deja "
    else:
          hey="L'administrateur a ete ajoute avec succes"
-         insert_data_mobin("Admin",[ 'Admin_Name','Admin_PhoneNumber', 'Address TEXT','Email','Password'],[use_name,use_phoneN,use_address,use_email,use_pw])
+         insert_data_mobin('Admin',[ 'Admin_Name','Admin_PhoneNumber', 'Address','Email','Password'],[use_name,use_phoneN,use_address,use_email,use_pw])
 
-   return render_template("add_us.html",hey =hey) 
+   return render_template("add_us.html") 
 
 ########################################
 ########################################
@@ -253,14 +253,14 @@ def add_admin():
 
 def add_Campaingn():
    if request.form['methods']==['POST']:
-      C_Title=request.form['Title']
-      C_Text=request.form['Text']
+      C_Title=request.form['title']
+      C_Text=request.form['text']
       C_img= request.files['Image']
-      C_startd=datetime.strtime(request.form['Start_date'],"%Y-%m-%d")
-      C_endd=datetime.strtime(request.form['Start_date'],"%Y-%m-%d")
+      C_startd=datetime.strtime(request.form['date'],"%Y-%m-%d")
+      C_endd=datetime.strtime(request.form['e_date'],"%Y-%m-%d")
       C_img_conv=C_img.read()
       insert_data("Campaign","Img",[ "Title","Text","start_date","End_date"],C_img_conv,[C_Title,C_Text,C_startd,C_endd])
-   return render_template("add_Camp.html") 
+   return render_template("Frontend/CreateCam.html") 
 
 
 ########################################
