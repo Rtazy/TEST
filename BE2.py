@@ -252,7 +252,7 @@ def add_admin():
 @app.route("/Ajouter_Campaingne",methods=['GET','POST'])
 
 def add_Campaingn():
-   if request.form['methods']==['POST']:
+   if request.method == 'POST:
       C_Title=request.form['title']
       C_Text=request.form['text']
       C_img= request.files['Image']
