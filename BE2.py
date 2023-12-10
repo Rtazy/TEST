@@ -173,8 +173,9 @@ def add_ben():
     print("Before form submission")
     hey=""
     if request.method == 'POST':
-    print("Before form submission")
+     print("Before form submission")
      Name=request.form['Name']
+     Join_Date=request.form['Join_Date']
      Benef_social_ID=request.form['beneficiaryId']
      b_date=request.form['Birthdate']
      b_place=request.form['Birth_Place']
@@ -185,18 +186,18 @@ def add_ben():
      pic=request.files['picture']
       
      Disability_sd=request.form['Disability_startdate']
-     
+     Jdate_con=datetime.strptime(request.form['jdate'],'%Y-%m-%d').date()
      Disability_sd_con=datetime.strptime(Disability_sd,'%Y-%m-%d').date()
      bdate_conv=datetime.strptime(b_date,'%Y-%m-%d').date()
      docs_bin= documents.read()
      Pic_bin= pic.read()
-     Cols=['Full_Name','Birthdate','Birth_Place','Disability_Start_Date','Gender','Disability_Category' ]
+     Cols=['Join_Date','Full_Name','Birthdate','Birth_Place','Disability_Start_Date','Gender','Disability_Category' ]
      u=Select_entity('Beneficiary',['Full_Name','Birthdate','Birth_Place','Gender','Disability_Category'],[Name,bdate_conv, b_place, gender,Disability_Category] )
      
      if u != None:
         hey="Ce membre exist deja."
      else:
-         insert_data("Beneficiaries", [" Documents","picture"] ,Cols, docs_bin,[Name, bdate_conv, b_place,jdate_conv,Disability_sd_con,gender,Disability_Category] )
+         insert_data('Beneficiaries', ['Documents','picture'],Cols, [docs_bin, pic_bin],[Jdate_con,Name, bdate_conv, b_place,Disability_sd_con,gender,Disability_Category] )
          hey="Ce membre a ete ajoute"
          print("afta form submission")
    
