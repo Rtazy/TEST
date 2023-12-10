@@ -168,10 +168,12 @@ def Sel_data_all(table_name, primary_key_column, primary_key_value):
 ########################################
 ########################################
 @app.route('/nouveau_beneficiere',methods=['POST','GET'])
+
 def add_ben():
+     print("Before form submission")
     hey=""
     if request.method == 'POST':
-  
+    print("Before form submission")
      Name=request.form['Name']
      Benef_social_ID=request.form['beneficiaryId']
      b_date=request.form['Birthdate']
@@ -196,6 +198,7 @@ def add_ben():
      else:
          insert_data("Beneficiaries", [" Documents","picture"] ,Cols, docs_bin,[Name, bdate_conv, b_place,jdate_conv,Disability_sd_con,gender,Disability_Category] )
          hey="Ce membre a ete ajoute"
+         print("afta form submission")
    
     return render_template('Frontend/ADDBenf.html',hey=hey)
 ########################################
