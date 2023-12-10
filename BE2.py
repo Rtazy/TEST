@@ -196,7 +196,7 @@ def add_ben():
          insert_data("Beneficiaries", [" Documents","picture"] ,Cols, docs_bin,[Name, bdate_conv, b_place,jdate_conv,Disability_sd_con,gender,Disability_Category] )
          hey="Ce membre a ete ajoute"
    
-    return render_template('Frontend/ADDBenf.html')
+    return render_template('Frontend/ADDBenf.html',hey=hey)
 ########################################
 ########################################
 # function for Adding an assosciation's contact
