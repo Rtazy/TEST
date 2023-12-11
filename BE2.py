@@ -256,8 +256,9 @@ def add_Campaingn():
       C_Title=request.form['title']
       C_Text=request.form['text']
       C_img= request.files['picture']
-      C_startd=datetime.strptime(request.form['date'],"%Y-%m-%d")
-      C_endd=datetime.strptime(request.form['e_date'],"%Y-%m-%d")
+      C_startd = datetime.strptime(request.form['date'], "%d/%m/%Y")
+      C_endd = datetime.strptime(request.form['e_date'], "%d/%m/%Y")
+
       C_img_conv=C_img.read()
       insert_data('Campaign','picture',[ 'Title','Text','start_date','End_date'],C_img_conv,[C_Title,C_Text,C_startd,C_endd])
    return render_template("Frontend/CreateCam.html") 
