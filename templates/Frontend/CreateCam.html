@@ -6,6 +6,7 @@
     <title>Campaign Form</title>
 
     <style>
+         #dt{text-indent: -500px;height:25px; width:200px;}
           body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -109,14 +110,57 @@
         <input type="file" id="picture" name="picture">
 
         <label for="date">Campaign Start Date:</label>
-        <input type="date" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" id="date" name="date" required>
+    
   
-        <label for="e_date">Campaign End Date:</label>
-            <input type="date" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" id="e_date" name="e_date" required>
-         
-        <label for="text">                              </label>
+<label for="e_date">Campaign End Date:</label>
+       
+
+<input type="date" id="date" onchange="mydate1();" hidden/>
+<input type="text" id="ndt"  onclick="mydate();" hidden />
+<input type="button" Value="Date" onclick="mydate();" /> 
+
+<input type="date" id="e_date" onchange="mydate1();" hidden/>
+<input type="text" id="ndt2"  onclick="mydate();" hidden />
+<input type="button" Value="Date" onclick="mydate();" /> 
+       
         <button type="submit">Submit</button>
     </form>
+<script>
+function mydate()
+{
+  //alert("");
+document.getElementById("date").hidden=false;
+document.getElementById("ndt").hidden=true;
+}
+function mydate1()
+{
+d=new Date(document.getElementById("date").value);
+dt=d.getDate();
+mn=d.getMonth();
+mn++;
+yy=d.getFullYear();
+document.getElementById("ndt").value=dt+"/"+mn+"/"+yy
+document.getElementById("ndt").hidden=false;
+document.getElementById("date").hidden=true;
+}
+function mydate2()
+{
+  //alert("");
+document.getElementById("e_date").hidden=false;
+document.getElementById("ndt2").hidden=true;
+}
+function mydate3()
+{
+d=new Date(document.getElementById("e_date").value);
+dt=d.getDate();
+mn=d.getMonth();
+mn++;
+yy=d.getFullYear();
+document.getElementById("ndt2").value=dt+"/"+mn+"/"+yy
+document.getElementById("ndt2").hidden=false;
+document.getElementById("e_date").hidden=true;
+}
 
+</script>
 </body>
 </html>
