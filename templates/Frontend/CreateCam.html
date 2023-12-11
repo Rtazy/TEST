@@ -4,6 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Campaign Form</title>
+        <script>
+        // Function to update date input format and display it
+        function updateDateFormat() {
+            // Get all date input elements in the form
+            var dateInputs = document.querySelectorAll('input[type="date"]');
+            
+            // Loop through each date input
+            dateInputs.forEach(function (input) {
+                // Create a new element to display the formatted date
+                var formattedDateElement = document.createElement('div');
+                formattedDateElement.style.color = 'green'; // Optional: Style the element
+                input.parentNode.insertBefore(formattedDateElement, input.nextSibling);
+
+                // Add an event listener to update the formatted date
+                input.addEventListener('input', function () {
+                    var parts = this.value.split("-");
+                    if (parts.length === 3) {
+                        var formattedDate = parts[2] + '/' + parts[1] + '/' + parts[0];
+                        formattedDateElement.textContent = 'Formatted Date: ' + formattedDate;
+                    }
+                });
+            });
+        }
+
+        // Call the function when the document is ready
+        document.addEventListener("DOMContentLoaded", function () {
+            updateDateFormat();
+        });
+    </script>
     <style>
           body {
             font-family: Arial, sans-serif;
