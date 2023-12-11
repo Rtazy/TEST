@@ -64,7 +64,8 @@ def insert_data_mobin(table_name, columns, column_values):
     
 def insert_data(table_name, maxvarbin_column, other_columns, binary_data, other_column_values):
     #####
-            cursor = connect_db().cursor()
+    try:
+        with connect_db() as conn, conn.cursor() as cursor:
     
             # Create an INSERT query with dynamic columns
             columns = [maxvarbin_column] + other_columns
@@ -80,11 +81,14 @@ def insert_data(table_name, maxvarbin_column, other_columns, binary_data, other_
 
 
     # Commit the transaction to persist changes
-            connect_db().commit()
+            conn.commit()
 
     # Close the cursor and connection when done
             cursor.close()
-            connect_db().close()
+            conn.close()
+    except pg.Error as e:
+            # Handle the exception
+            print(f"Error: {e}")
 ########################################
 ########################################
 
