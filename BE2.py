@@ -250,20 +250,23 @@ def add_admin():
 ########################################
 ########################################
 @app.route("/Ajouter_Campaingne",methods=['GET','POST'])
-
 def add_Campaingn():
-   if request.method == 'POST':
-      C_Title=request.form['title']
-      C_Text=request.form['text']
-      C_img= request.files['picture']
-      C_startd = datetime.strptime(request.form['date'], "%d/%m/%Y")
-      C_endd = datetime.strptime(request.form['e_date'], "%d/%m/%Y")
-
-      C_img_conv=C_img.read()
-      insert_data('Campaign','picture',[ 'Title','Text','start_date','End_date'],C_img_conv,[C_Title,C_Text,C_startd,C_endd])
-   return render_template("Frontend/CreateCam.html") 
-
-
+    try:
+        if request.method == 'POST':
+            C_Title = request.form['title']
+            C_Text = request.form['text']
+            C_img = request.files['picture']
+            C_startd = datetime.strptime(request.form['date'], "%Y-%m-%d")
+            C_endd = datetime.strptime(request.form['e_date'], "%Y-%m-%d")
+            C_img_conv = C_img.read()
+            insert_data("Campaign", "Img", ["Title", "Text", "start_date", "End_date"],
+                        C_img_conv, [C_Title, C_Text, C_startd, C_endd])
+        return render_template("Frontend/CreateCam.html")
+    except Exception as e:
+        # Log the exception or print it for debugging
+        print(f"An error occurred: {str(e)}")
+        # You can customize the error message based on the exception type
+        return render_template("error.html", error_message="An unexpected error occurred.")
 ########################################
 ########################################
 @app.route("/Ajouter_Annonce", methods=['GET', 'POST'])
