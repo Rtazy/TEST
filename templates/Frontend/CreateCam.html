@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    
+    
     <title>Campaign Form</title>
 
     <style>
@@ -110,57 +116,25 @@
         <input type="file" id="picture" name="picture">
 
         <label for="date">Campaign Start Date:</label>
-    
-  
-<label for="e_date">Campaign End Date:</label>
-       
+        <input type="text" id="date" name="date" required>
 
-<input type="date" id="date" onchange="mydate1();" hidden/>
-<input type="text" id="ndt"  onclick="mydate();" hidden />
-<input type="button" Value="Date" onclick="mydate();" /> 
+        <label for="e_date">Campaign End Date:</label>
+        <input type="text" id="e_date" name="e_date" required>
 
-<input type="date" id="e_date" onchange="mydate1();" hidden/>
-<input type="text" id="ndt2"  onclick="mydate();" hidden />
-<input type="button" Value="Date" onclick="mydate();" /> 
-       
+        <!-- Other form elements -->
+
         <button type="submit">Submit</button>
     </form>
-<script>
-function mydate()
-{
-  //alert("");
-document.getElementById("date").hidden=false;
-document.getElementById("ndt").hidden=true;
-}
-function mydate1()
-{
-d=new Date(document.getElementById("date").value);
-dt=d.getDate();
-mn=d.getMonth();
-mn++;
-yy=d.getFullYear();
-document.getElementById("ndt").value=dt+"/"+mn+"/"+yy
-document.getElementById("ndt").hidden=false;
-document.getElementById("date").hidden=true;
-}
-function mydate2()
-{
-  //alert("");
-document.getElementById("e_date").hidden=false;
-document.getElementById("ndt2").hidden=true;
-}
-function mydate3()
-{
-d=new Date(document.getElementById("e_date").value);
-dt=d.getDate();
-mn=d.getMonth();
-mn++;
-yy=d.getFullYear();
-document.getElementById("ndt2").value=dt+"/"+mn+"/"+yy
-document.getElementById("ndt2").hidden=false;
-document.getElementById("e_date").hidden=true;
-}
 
-</script>
+    <!-- Initialize jQuery UI Datepicker -->
+    <script>
+        $(document).ready(function () {
+            $("#date, #e_date").datepicker({
+                dateFormat: 'dd/mm/yy', // Set the desired date format
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
 </body>
 </html>
