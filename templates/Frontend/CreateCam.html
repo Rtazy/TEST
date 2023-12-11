@@ -105,7 +105,7 @@
         </nav>
     
      
-    <form action="/Ajouter_Campaingne" method="post">
+    <form action="/Ajouter_Campaingne" method="post" enctype="multipart/form-data">
         <label for="title">Campaign Title:</label>
         <input type="text" id="title" name="title" required>
 
@@ -113,7 +113,7 @@
         <textarea id="text" name="text" rows="4" required></textarea>
 
         <label for="picture">Picture:</label>
-        <input type="file" id="picture" name="picture">
+<input type="file" name="Image" accept="image/*">
 
         <label for="date">Campaign Start Date:</label>
         <input type="text" id="date" name="date" required>
