@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <title>Add Authority </title>
     <style>
         body {
@@ -107,8 +110,10 @@
         <input type="text" id="AuthorityName" name="AuthorityName" required>
 
         <label for="PhoneNumber">Phone Number:</label>
-        <input type="tel" id="AuthorityPhoneNumber" name="AuthorityPhoneNumber" required>
-
+        <input type="tel" id="AuthorityPhoneNumber" name="AuthorityPhoneNumber" required
+        
+        <label for="Join_Date"> Join Date:</label>
+        <input type="text" id="Join_Date" name="Join_Date" required>
        
         <label for="email"> E-mail:</label>
         <input type="email" id="Authorityemail" name="Authorityemail" required >
@@ -120,6 +125,15 @@
         <button type="submit">Add Authority</button>
 
     </form>
-
+ <!-- Initialize jQuery UI Datepicker -->
+    <script>
+        $(document).ready(function () {
+            $("#Join_Date").datepicker({
+                dateFormat: 'dd/mm/yy', // Set the desired date format
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
 </body>
 </html>
