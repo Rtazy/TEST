@@ -95,7 +95,9 @@
                 <li>Delete Announcement</li>
             </ul>
         </nav>
-    
+ <div id="html-placeholder"></div>
+
+      
 
 <div class="form-container">
     <form action="/delete_campaign" method="post">
@@ -104,6 +106,19 @@
         <button type="submit">Delete Announcement</button>
     </form>
 </div>
+<script>
+        // Your JavaScript code to fetch and update the HTML content
+        async function fetchHtml() {
+            const response = await fetch('/api/get_html');
+            const data = await response.json();
+            document.getElementById('html-placeholder').innerHTML = data.html;
+        }
 
+        // Fetch HTML initially
+        fetchHtml();
+
+        // Fetch HTML every 5 seconds
+        setInterval(fetchHtml, 5000);
+    </script> 
 </body>
 </html>
