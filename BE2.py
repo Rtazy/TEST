@@ -65,10 +65,9 @@ def insert_data(table_name, maxvarbin_column, other_columns, binary_data, other_
          query = sql.SQL("INSERT INTO {} ({}) VALUES ({})").format(
             sql.Identifier(table_name),
             sql.SQL(', ').join(map(sql.Identifier, columns)),
-            sql.SQL(', ').join(sql.Placeholder() * len(columns))
-          )
+            sql.SQL(', ').join(sql.Placeholder() * len(columns)))
 
-        # Execute the query with values
+         # Execute the query with values
           values = [pg.Binary(binary_data) for binary_data in binary_data_list] + other_column_values
           cursor.execute(query, values)
 
@@ -77,11 +76,11 @@ def insert_data(table_name, maxvarbin_column, other_columns, binary_data, other_
           conn.commit()
 
     # Close the cursor and connection when done
-            cursor.close()
-            conn.close()
+          cursor.close()
+          conn.close()
     except pg.Error as e:
             # Handle the exception
-            print(f"Error: {e}")
+          print(f"Error: {e}")
 ########################################
 ########################################
 
