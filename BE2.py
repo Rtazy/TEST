@@ -272,7 +272,7 @@ def Del_Ann():
    if request.form['methods']==['POST']:
        get_data(Sel_data_all2("Announcement"))
       # first display the table of benfs and the user has to display their ids
-      id=request.form['Announcement_ID']
+      id=request.form['announcementId']
       res=Select_entity("Announcement","Announcement_ID",id)
       
       if res == None:
