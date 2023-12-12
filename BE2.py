@@ -68,15 +68,15 @@ def insert_data(table_name, maxvarbin_column, other_columns, binary_data, other_
         with connect_db() as conn, conn.cursor() as cursor:
     
             # Create an INSERT query with dynamic columns
-            columns = [maxvarbin_column] + other_columns
-            query = sql.SQL("INSERT INTO {} ({}) VALUES ({})").format(
-                sql.Identifier(table_name),
-                sql.SQL(', ').join(map(sql.Identifier, columns)),
-                sql.SQL(', ').join(sql.Placeholder() * len(columns))
-            )
+        columns = maxvarbin_columns + other_columns
+        query = sql.SQL("INSERT INTO {} ({}) VALUES ({})").format(
+            sql.Identifier(table_name),
+            sql.SQL(', ').join(map(sql.Identifier, columns)),
+            sql.SQL(', ').join(sql.Placeholder() * len(columns))
+          )
 
-            # Execute the query with values
-            values = [pg.Binary(binary_data)] + other_column_values
+        # Execute the query with values
+            values = [pg.Binary(binary_data) for binary_data in binary_data_list] + other_column_values
             cursor.execute(query, values)
 
 
