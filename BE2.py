@@ -216,9 +216,8 @@ def add_Authority():
       c_address=request.form[' Address']
       c_email=request.form['Email ']
       c_phoneN=request.form['Phone_Number']
-      Join_Date=request.form['Join_Date']
-      Join_Date_conv=datetime.strtime(Join_Date,"%Y-%m-%d")
-      vals=[c_name,c_address,c_email,c_phoneN,Join_Date_conv]
+      Join_Date = datetime.strptime(request.form['Join_Date'], "%d/%m/%Y")
+      vals=[c_name,c_address,c_email,c_phoneN,Join_Date]
       u=Select_entity("Authorities","Email",c_email)
       al=""
       if u!=None:
@@ -226,7 +225,7 @@ def add_Authority():
       else:
        insert_data_mobin('Authorities',['Name','Address','Email','Phone_Number','Join_Date'],vals)
        al="The authority was successfully added"
-   return render_template("add_Auth.html") 
+   return render_template("Frontend/add_Auth.html",hey=hey) 
 
 ########################################
 ########################################
