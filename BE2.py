@@ -30,17 +30,10 @@ def to_htmltable(lst):
               
    return res
 
-def display(querry):
 
-   res=connect_db().cursor().execute(querry).fetchall()
-   return to_htmltable(res)
-
-#send the code to AJAX?? 
 
 @app.route('/api/get_data')
 def get_data(querry):
-    # Your logic to generate or fetch updated data
-    display(querry)
     updated_data = f"Updated data at {time.strftime('%H:%M:%S')}"
     return jsonify({querry: updated_data})
 
@@ -270,8 +263,26 @@ def add_Campaingn():
         print(f"An error occurred: {str(e)}")
         # You can customize the error message based on the exception type
         return render_template("Frontend/error.html", error_message="An unexpected error occurred.")
+########################################get_data(querry)
 ########################################
-########################################
+# deleting an announcement:
+@app.route('/Retirer_Annonce',methods=['GET','POST'])
+def Del_Ann():
+   hey=""
+   if request.form['methods']==['POST']:
+       get_data(Sel_data_all2("Announcement"))
+      # first display the table of benfs and the user has to display their ids
+      id=request.form['Announcement_ID']
+      res=Select_entity("Announcement","Announcement_ID",id)
+      
+      if res == None:
+         hey="L'annonce que vous avez recherche n'existe pas"
+      else :
+         hey="L'annonce a ete retire avec succes"
+         Del_data("Announcement","Announcement_ID",id)
+
+   return render_template("Frontend/del_ann.html",hey=hey)
+    
 @app.route("/Ajouter_Annonce", methods=['GET', 'POST'])
 def add_announcement():
     if request.method == 'POST':
