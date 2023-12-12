@@ -269,7 +269,7 @@ def add_Campaingn():
 def Del_Ann():
    hey=""
    if request.form['methods']==['POST']:
-       get_data(Sel_data_all2("Announcement"))
+      get_data(Sel_data_all2("Announcement"))
       # first display the table of benfs and the user has to display their ids
       id=request.form['announcementId']
       res=Select_entity("Announcement","Announcement_ID",id)
