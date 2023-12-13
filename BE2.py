@@ -268,7 +268,7 @@ def add_Campaingn():
 @app.route('/Retirer_Annonce',methods=['GET','POST'])
 def Del_Ann():
    hey=""
-   if request.form['methods']==['POST']:
+   if request.method == 'POST':
       get_data(Sel_data_all2("Announcement"))
       # first display the table of benfs and the user has to display their ids
       id=request.form['announcementId']
