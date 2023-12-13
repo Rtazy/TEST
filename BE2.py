@@ -102,7 +102,7 @@ def Select_entity(table,pkcol,entity_id):
             cursor = connect_db().cursor()
           
 
-            query = f"SELECT * FROM {table} WHERE {pkcol} = {entity_id}"
+            query = f"SELECT * FROM "{table}" WHERE "{pkcol}" = {entity_id}"
 
             # Execute the query with the entity_id parameter
             cursor.execute(query)
@@ -395,7 +395,7 @@ def Del_Ann():
             hey = "L'annonce que vous avez recherche n'existe pas"
         else:
             hey = "L'annonce a ete retire avec succes"
-            Del_data(""Announcement"", ""Announcement_ID"", id)
+            Del_data("Announcement", "Announcement_ID", id)
 
     # Add a return statement for both GET and POST requests
     return render_template("Frontend/DeleteAn.html", hey=hey)
