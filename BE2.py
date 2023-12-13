@@ -284,23 +284,30 @@ def add_Campaingn():
 ########################################get_data(querry)
 ########################################
 # deleting an announcement:
-@app.route('/Retirer_Annonce',methods=['GET','POST'])
+@app.route('/Retirer_Annonce', methods=['GET', 'POST'])
 def Del_Ann():
-   hey=""
-   if request.method == 'POST':
-      get_data(Sel_data_all2("Announcement"))
-      # first display the table of benfs and the user has to display their ids
-      id=request.form['announcementId']
-      res=Select_entity("Announcement","Announcement_ID",id)
+    try:
+        hey = ""
+        
+        if request.method == 'POST':
+            # ... (your existing code)
+                  get_data(Sel_data_all2("Announcement"))
+                 # first display the table of benfs and the user has to display their ids
+                  id=request.form['announcementId']
+                  res=Select_entity("Announcement","Announcement_ID",id)
       
-      if res == None:
-         hey="L'annonce que vous avez recherche n'existe pas"
-      else :
-         hey="L'annonce a ete retire avec succes"
-         Del_data("Announcement","Announcement_ID",id)
+                  if res == None:
+                  hey="L'annonce que vous avez recherche n'existe pas"
+                  else :
+                  hey="L'annonce a ete retire avec succes"
+                  Del_data("Announcement","Announcement_ID",id)
 
-   return render_template("Frontend/del_ann.html",hey=hey)
-    
+                  return render_template("Frontend/del_ann.html", hey=hey)
+    except Exception as e:
+        # Log the exception
+        print(e)
+        return "Internal Server Error", 500
+
 @app.route("/Ajouter_Annonce", methods=['GET', 'POST'])
 def add_announcement():
     if request.method == 'POST':
