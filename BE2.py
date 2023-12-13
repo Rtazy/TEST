@@ -6,6 +6,19 @@ import time
 from datetime import datetime
 
 app = Flask(__name__)
+# Define Supabase credentials directly in your code
+supabase_url = "https://fnxcuzdjxvnmutcvhcqn.supabase.co"
+supabase_api_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZueGN1emRqeHZubXV0Y3ZoY3FuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDI0NzU1NzksImV4cCI6MjAxODA1MTU3OX0.8vBgJ3Iw9775FI1ATj1qb6dofMiVW3iobRM8myYTK8o"
+supabase_url_storage = f'{supabase_url}/storage/v1'
+
+
+# Use the variables in your code
+supabase_url_storage = f'{supabase_url}/storage/v1'
+
+# ... other code ...
+
+headers = {'apikey': supabase_api_key}
+
 
 # Load configuration from a separate file (config.py)
 app.config.from_pyfile('config.py', silent=True)
@@ -210,18 +223,16 @@ def add_ben():
      b_place=request.form['Birth_Place']
      gender=request.form['gender']
      Disability_Category=request.form['Disability_Category']
-        
      documents=request.files['documents']
      pic=request.files['picture']
-      
      Disability_sd=request.form['Disability_startdate']
-     Jdate_con=datetime.strptime(request.form['jdate'],'%Y-%m-%d').date()
-     Disability_sd_con=datetime.strptime(Disability_sd,'%Y-%m-%d').date()
-     bdate_conv=datetime.strptime(b_date,'%Y-%m-%d').date()
+     Jdate_con=datetime.strptime(request.form['jdate'],"%d/%m/%Y").date()
+     Disability_sd_con=datetime.strptime(Disability_sd,"%d/%m/%Y"').date()
+     bdate_conv=datetime.strptime(b_date,'%d/%m/%Y').date()
      docs_bin= documents.read()
      Pic_bin= pic.read()
-     Cols=['Join_Date','Full_Name','Birthdate','Birth_Place','Disability_Start_Date','Gender','Disability_Category' ]
-     u=Select_entity('Beneficiary',['Full_Name','Birthdate','Birth_Place','Gender','Disability_Category'],[Name,bdate_conv, b_place, gender,Disability_Category] )
+     Cols=['Join_Date','Full_Name','Birthdate','Birth_Place','Disability_Start_Date','Gender','Disability_Category' ,'Benef_social_ID']
+     u=Select_entity('Beneficiary',['Full_Name','Birthdate','Birth_Place','Gender','Disability_Category'],[Name,bdate_conv, b_place, gender,Disability_Category,Benef_social_ID] )
      
      if u != None:
         hey="Ce membre exist deja."
