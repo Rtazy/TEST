@@ -163,6 +163,25 @@ def Sel_data_all(table_name, primary_key_column, primary_key_value):
     return ret
 ########################################
 ########################################
+def Sel_data_all2(table_name):
+   
+    cursor = connect_db().cursor()
+
+    # Create an INSERT query with dynamic columns
+    
+    query = sql.SQL("SELECT * FROM {} ").format(
+        sql.Identifier(table_name))
+
+
+   # Execute the query with the primary key value
+    cursor.execute(query)
+
+    ret= cursor.fetchall()
+    cursor.close()
+    connect_db().close()
+    return ret
+########################################
+########################################
 @app.route('/nouveau_beneficiere',methods=['POST','GET'])
 
 def add_ben():
