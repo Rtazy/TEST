@@ -304,7 +304,7 @@ def Del_Ann():
             Del_data("Announcement", "Announcement_ID", id)
 
     # Add a return statement for both GET and POST requests
-    return render_template("Frontend/del_ann.html", hey=hey)
+    return render_template("Frontend/DeleteAn.html", hey=hey)
 
 
 @app.route("/Ajouter_Annonce", methods=['GET', 'POST'])
