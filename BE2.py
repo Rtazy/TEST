@@ -282,31 +282,30 @@ def add_Campaingn():
         # You can customize the error message based on the exception type
         return render_template("Frontend/error.html", error_message="An unexpected error occurred.")
 ########################################get_data(querry)
-########################################
-# deleting an announcement:
+
 @app.route('/Retirer_Annonce', methods=['GET', 'POST'])
 def Del_Ann():
-    try:
-        hey = ""
-        
-        if request.method == 'POST':
-            # ... (your existing code)
-                  get_data(Sel_data_all2("Announcement"))
-                 # first display the table of benfs and the user has to display their ids
-                  id=request.form['announcementId']
-                  res=Select_entity("Announcement","Announcement_ID",id)
-      
-                  if res == None:
-                   hey="L'annonce que vous avez recherche n'existe pas"
-                  else :
-                   hey="L'annonce a ete retire avec succes"
-                   Del_data("Announcement","Announcement_ID",id)
+    hey = ""
+    
+    if request.method == 'POST':
+        # Assuming you have a function like `get_data` defined somewhere
+        get_data(Sel_data_all2("Announcement"))
 
-                  return render_template("Frontend/del_ann.html", hey=hey)
-    except Exception as e:
-        # Log the exception
-        print(e)
-        return "Internal Server Error", 500
+        # Get the value of the 'announcementId' field from the form
+        id = request.form['announcementId']
+
+        # Check if the announcement with the provided ID exists
+        res = Select_entity("Announcement", "Announcement_ID", id)
+
+        if res is None:
+            hey = "L'annonce que vous avez recherche n'existe pas"
+        else:
+            hey = "L'annonce a ete retire avec succes"
+            Del_data("Announcement", "Announcement_ID", id)
+
+    # Add a return statement for both GET and POST requests
+    return render_template("Frontend/del_ann.html", hey=hey)
+
 
 @app.route("/Ajouter_Annonce", methods=['GET', 'POST'])
 def add_announcement():
