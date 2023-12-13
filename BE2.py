@@ -296,6 +296,28 @@ def add_Campaingn():
         # You can customize the error message based on the exception type
         return render_template("Frontend/error.html", error_message="An unexpected error occurred.")
 ########################################get_data(querry)
+########################################
+@app.route("/delete_donor", methods=['POST', 'GET'])
+def Del_Donor():
+    al = ""
+    if request.method == 'POST':
+        donor_id = request.form['DonorId']
+        res = Select_entity("Donors", "Donors_ID", donor_id)
+        
+        if res is None:
+            al = "Le donneur que vous avez recherche n'existe pas"
+        else:
+            al = "Le donneur a ete retire avec succes"
+            Del_data("Donors", "Donors_ID", donor_id)
+
+    return render_template("del_don.html", al=al)
+################################################
+########################################
+
+
+########################################
+################################################
+
 
 @app.route('/Retirer_Annonce', methods=['GET', 'POST'])
 def Del_Ann():
@@ -317,7 +339,7 @@ def Del_Ann():
             hey = "L'annonce que vous avez recherche n'existe pas"
         else:
             hey = "L'annonce a ete retire avec succes"
-            Del_data("Announcement", "Announcement_ID", id)
+            Del_data(""Announcement"", ""Announcement_ID"", id)
 
     # Add a return statement for both GET and POST requests
     return render_template("Frontend/DeleteAn.html", hey=hey)
