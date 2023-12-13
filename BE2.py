@@ -291,7 +291,7 @@ def Del_Ann():
     
     if request.method == 'POST':
         # Assuming you have a function like `get_data` defined somewhere
-        get_data(Sel_data_all2("Announcement"))
+        get_data(to_htmltable(Sel_data_all2("Announcement")))
 
         # Get the value of the 'announcementId' field from the form
         id = request.form['announcementId']
