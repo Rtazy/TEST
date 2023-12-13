@@ -35,7 +35,9 @@ def to_htmltable(lst):
 @app.route('/api/get_data')
 def get_data(querry):
     updated_data = f"Updated data at {time.strftime('%H:%M:%S')}"
-    return jsonify({querry: updated_data})
+    # Convert querry to a tuple if it's a list
+    querry_key = tuple(querry) if isinstance(querry, list) else querry
+    return jsonify({querry_key: updated_data})
 
 def connect_db():
  return pg.connect(conn_string)
