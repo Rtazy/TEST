@@ -4,18 +4,14 @@ from psycopg2 import sql
 from flask import jsonify
 import time
 from datetime import datetime
+import httpx
+
 
 app = Flask(__name__)
 # Define Supabase credentials directly in your code
 supabase_url = "https://fnxcuzdjxvnmutcvhcqn.supabase.co"
 supabase_api_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZueGN1emRqeHZubXV0Y3ZoY3FuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDI0NzU1NzksImV4cCI6MjAxODA1MTU3OX0.8vBgJ3Iw9775FI1ATj1qb6dofMiVW3iobRM8myYTK8o"
 supabase_url_storage = f'{supabase_url}/storage/v1'
-
-
-# Use the variables in your code
-supabase_url_storage = f'{supabase_url}/storage/v1'
-
-# ... other code ...
 
 headers = {'apikey': supabase_api_key}
 
@@ -115,7 +111,7 @@ def Select_entity(table,pkcol,entity_id):
             cursor = connect_db().cursor()
           
 
-            query = f"SELECT * FROM "{table}" WHERE "{pkcol}" = {entity_id}"
+            query = f'SELECT * FROM "{table}" WHERE "{pkcol}" = {entity_id}'
 
             # Execute the query with the entity_id parameter
             cursor.execute(query)
