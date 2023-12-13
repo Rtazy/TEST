@@ -1,11 +1,30 @@
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Authority Form</title>
+    <title> Retirer un sponsor </title>
     <style>
-       body {
+         #message {
+    background-color: #f2f2f2;
+    color: #333;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -88,14 +107,21 @@
 </head>
 <body>
     <header>
-        <img src="nourlg.png" alt="Foundation Logo">
-        </header>
-        <nav>
+    <img src="nourlg.png" alt="Foundation Logo">
+    </header>
+     
+           <nav>
             <ul>
                 <li>Delete Authority</li>
             </ul>
         </nav>
-
+    
+     <div id="message">
+        {% if hey %}
+            {{ hey }}
+        {% endif %}
+    </div>
+     
 
 <div class="form-container">
     <form action="/delete_authority" method="post">
@@ -104,6 +130,14 @@
         <button type="submit">Delete Authority</button>
     </form>
 </div>
-
+    <script>
+        $(document).ready(function () {
+            $("#date, #e_date").datepicker({
+                dateFormat: 'dd/mm/yy', // Set the desired date format
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
 </body>
 </html>
