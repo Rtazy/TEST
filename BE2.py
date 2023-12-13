@@ -297,10 +297,10 @@ def Del_Ann():
                   res=Select_entity("Announcement","Announcement_ID",id)
       
                   if res == None:
-                  hey="L'annonce que vous avez recherche n'existe pas"
+                   hey="L'annonce que vous avez recherche n'existe pas"
                   else :
-                  hey="L'annonce a ete retire avec succes"
-                  Del_data("Announcement","Announcement_ID",id)
+                   hey="L'annonce a ete retire avec succes"
+                   Del_data("Announcement","Announcement_ID",id)
 
                   return render_template("Frontend/del_ann.html", hey=hey)
     except Exception as e:
