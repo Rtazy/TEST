@@ -19,16 +19,28 @@ conn_string = (
 
 #create the code in HTML for ajax:
 
-def to_htmltable(lst):
-   
-   for item in lst:
-     res+='<td>'
+def to_htmltable(data):
+    res = '<table border="1">'
+    
+    if data:
+        # Calculate colspan based on the number of columns in the first row
+        colspan = len(data[0])
+        
+        for row in data:
+            res += '<tr>'
+            for col in row:
+                res += '<td>'
+                res += str(col)
+                res += '</td>'
+            res += '</tr>'
+    else:
+        # If no data, set colspan to 1
+        colspan = 1
+        res += '<tr><td colspan="{}">No data available</td></tr>'.format(colspan)
+    
+    res += '</table>'
+    print(res)
 
-     for tem in item:
-         res+="<tb>{}</tb>".format(tem)
-     res+='</td>'
-              
-   return res
 
 
 
