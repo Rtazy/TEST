@@ -8,6 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Donor </title>
     <style>
+         #message {
+    background-color: #f2f2f2;
+    color: #333;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -98,6 +106,12 @@
             <li>Add a new Donor</li>
         </ul>
     </nav>
+    
+<div id="message">
+        {% if hey %}
+            {{ hey }}
+        {% endif %}
+    </div>
 
     <form action="/Ajouter_Doneur" method="POST">
 
