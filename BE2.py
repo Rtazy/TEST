@@ -314,6 +314,62 @@ def Del_Donor():
 ################################################
 ########################################
 
+@app.route("/Ajouter_Doneur",methods=['GET','POST'])
+#the original admin must be connected  to do that
+def add_Donor():
+   if request.form['methods']==['POST']:
+     Name=request.form['Name']
+     Phone_Number=request.form['Phone_Number']
+     Email=request.form['Email']
+     gender=request.form['Gender']
+     Address=request.files['Address']
+     documents=request.files['Docs']
+     joining_date=request.form['joining_date']
+     b_date=request.form['Birthdate']
+     bdate_conv=datetime.strptime(b_date,'%Y-%m-%d').date()
+     jdate_conv=datetime.strptime(joining_date,'%Y-%m-%d').date()
+     docs_bin= documents.read()
+     Cols=['Full_Name','Phone_Number','Email','Birthdate','Address','join_date','Gender' ]
+     u=Select_entity("Donors","Email",Email)
+     hey=""
+     if u != None:
+        hey="Ce doneur exist deja."
+     else:
+        insert_data("Donors", " Docs" ,Cols, docs_bin,[Name,Phone_Number,Email, bdate_conv,Address,jdate_conv,gender] )
+        hey="Ce doneur a ete ajoute"
+     return render_template("add_Don.html",hey=hey) 
+      
+########################################
+################################################
+
+  
+@app.route("/Ajouter_Donation_argent",methods=['GET','POST'])
+def add_Don_M():
+   if request.form['methods']==['POST']:
+      Don_owner=request.form['owner_ID']
+      Don_Amount=request.form['Amount']
+      pm=request.form['Payment_method']
+      is_a=request.form['is_association']
+      cols=['owner_ID','Amount','Payment_method','is_association']
+      vals=[Don_owner,Don_Amount,pm,is_a]
+      insert_data_mobin('Monetary_Donation',cols,vals)
+
+
+   return render_template("Donation_mon.html") 
+########################################
+################################################
+@app.route("/Ajouter_Donation_autre",methods=['GET','POST'])
+def add_Don_o():
+   if request.form['methods']==['POST']:
+      Don_owner=request.form['owner_ID']
+      
+      Desc=request.form['Description']
+      is_a=request.form['is_association']
+      cols=['owner_ID','Amount','Payment_method','is_association']
+      vals=[Don_owner,Desc,is_a]
+      insert_data_mobin('Other_Donation',cols,vals)
+
+   return render_template("Donation_oth.html") 
 
 ########################################
 ################################################
