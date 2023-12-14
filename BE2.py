@@ -448,9 +448,9 @@ def Del_Ann():
     
     if request.method == 'POST':
         
-        print(Sel_data_all2("Announcement"))
-        print(to_htmltable(Sel_data_all2("Announcement")))
-        get_data(to_htmltable(Sel_data_all2("Announcement")))
+        ##print(Sel_data_all2("Announcement"))
+        #print(to_htmltable(Sel_data_all2("Announcement")))
+        #get_data(to_htmltable(Sel_data_all2("Announcement")))
 
         # Get the value of the 'announcementId' field from the form
         id = request.form['announcementId']
