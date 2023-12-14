@@ -11,9 +11,10 @@ app = Flask(__name__)
 # Define Supabase credentials directly in your code
 supabase_url = "https://fnxcuzdjxvnmutcvhcqn.supabase.co"
 supabase_api_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZueGN1emRqeHZubXV0Y3ZoY3FuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDI0NzU1NzksImV4cCI6MjAxODA1MTU3OX0.8vBgJ3Iw9775FI1ATj1qb6dofMiVW3iobRM8myYTK8o"
-supabase_url_storage = f'{supabase_url}/storage/v1'
-
-headers = {'apikey': supabase_api_key}
+def insert_image(entity_id, image_data):
+    
+    image_data['entity_id'] = entity_id
+    result_image = supabase_client.table('Images').upsert([image_data], ['image_id'])
 
 
 # Load configuration from a separate file (config.py)
@@ -223,7 +224,7 @@ def add_ben():
      pic=request.files['picture']
      Disability_sd=request.form['Disability_startdate']
      Jdate_con=datetime.strptime(request.form['jdate'],"%d/%m/%Y").date()
-     Disability_sd_con=datetime.strptime(Disability_sd,"%d/%m/%Y"').date()
+     Disability_sd_con = datetime.strptime(Disability_sd, "%d/%m/%Y").date()
      bdate_conv=datetime.strptime(b_date,'%d/%m/%Y').date()
      docs_bin= documents.read()
      Pic_bin= pic.read()
