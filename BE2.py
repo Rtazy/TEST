@@ -5,7 +5,7 @@ from flask import jsonify
 import time
 from datetime import datetime
 import httpx
-
+import base64
 
 app = Flask(__name__)
 # Define Supabase credentials directly in your code
@@ -27,7 +27,66 @@ conn_string = (
 )
 
 
-#create the code in HTML for ajax:
+async def insert_image_into_supabase(table_name, column_name, image_data):
+    # Encode image data as base64
+    encoded_image = base64.b64encode(image_data).decode('utf-8')
+
+    url = f"{supabase_url}/table/{table_name}"
+
+    # Set up headers with the Supabase API key
+    headers = {
+        "Content-Type": "application/json",
+        "apikey": supabase_api_key,
+    }
+
+    # Construct the request payload
+    payload = {
+        column_name: encoded_image,
+    }
+
+    async with httpx.AsyncClient() as client:
+        # Make the request to insert the image
+        response = await client.post(url, headers=headers, json=payload)
+
+        # Check if the request was successful
+        if response.status_code == 201:
+            # Return the inserted image's ID
+            return response.json().get('id')
+        else:
+            # Handle the error case (you may want to raise an exception or handle it differently)
+            print(f"Failed to insert image. Status code: {response.status_code}")
+            return None
+
+async def insert_document_into_supabase(table_name, column_name, document_data):
+    # Encode document data as base64
+    encoded_document = base64.b64encode(document_data).decode('utf-8')
+
+    # Construct the Supabase URL
+    url = f"{supabase_url}/table/{table_name}"
+
+    # Set up headers with the Supabase API key
+    headers = {
+        "Content-Type": "application/json",
+        "apikey": supabase_api_key,
+    }
+
+    # Construct the request payload
+    payload = {
+        column_name: encoded_document,
+    }
+
+    async with httpx.AsyncClient() as client:
+        # Make the request to insert the document
+        response = await client.post(url, headers=headers, json=payload)
+
+        # Check if the request was successful
+        if response.status_code == 201:
+            # Return the inserted document's ID
+            return response.json().get('id')
+        else:
+            # Handle the error case (you may want to raise an exception or handle it differently)
+            print(f"Failed to insert document. Status code: {response.status_code}")
+            return None
 
 def to_htmltable(data):
     res = '<table border="1">'
@@ -417,6 +476,8 @@ def add_announcement():
         insert_data_mobin('Announcement', ['title', 'text'], [Ann_Title, Ann_Text])
 
     return render_template("Frontend/CreateAn.html")
+
+
 @app.route('/profile')
 def profile():
     return 'Hello, this is a test response from the /profile route!'
