@@ -3,6 +3,14 @@
 <head>
     <title>Login Page</title>
     <style>
+          #message {
+    background-color: #f2f2f2;
+    color: #333;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
        header {
             background-color: white;
             color: white;
@@ -80,7 +88,11 @@
         <img src="nourlg.png" alt="Foundation Logo"> 
         <h1></h1>
     </header>
-    
+         <div id="message">
+        {% if hey %}
+            {{ hey }}
+        {% endif %}
+    </div>
     
     <div class="login-container">
         <h2>Login</h2>
