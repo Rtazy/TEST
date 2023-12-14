@@ -295,8 +295,9 @@ def add_Campaingn():
             C_startd = datetime.strptime(request.form['date'], "%d/%m/%Y")
             C_endd = datetime.strptime(request.form['e_date'], "%d/%m/%Y")
             C_img_conv = C_img.read()
-            insert_data("Campaign", "Img", ["Title", "Text", "start_date", "End_date"],
-                        C_img_conv, [C_Title, C_Text, C_startd, C_endd])
+            img_url = insert_image_into_supabase("Campaign", "Img", C_img_conv)
+
+            insert_data_mobin("Campaign", ["Title", "Text", "start_date", "End_date","img_url"], [C_Title, C_Text, C_startd, C_endd,img_url])
         return render_template("Frontend/CreateCam.html")
     except Exception as e:
         # Log the exception or print it for debugging
@@ -332,7 +333,7 @@ def add_Donor():
      gender=request.form['Gender']
      Address=request.files['Address']
      documents=request.files['Docs']
-     joining_date=request.form['joining_date']
+     joining_date=request.form['joining_date']r
      b_date=request.form['Birthdate']
      bdate_conv=datetime.strptime(b_date,'%Y-%m-%d').date()
      jdate_conv=datetime.strptime(joining_date,'%Y-%m-%d').date()
