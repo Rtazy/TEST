@@ -325,7 +325,7 @@ def add_Authority():
       else:
        insert_data_mobin('Authorities',['Name','Address','Email','Phone_Number','Join_Date'],vals)
        al="The authority was successfully added"
-   return render_template("Frontend/add_Auth.html",hey=hey) 
+   return render_template("Frontend/AddAuthority.html",hey=hey) 
 
 ########################################
 ########################################
@@ -348,7 +348,7 @@ def add_admin():
          hey="L'administrateur a ete ajoute avec succes"
          insert_data_mobin('Admin',[ 'Admin_Name','Admin_PhoneNumber', 'Address','Email','Password'],[use_name,use_phoneN,use_address,use_email,use_pw])
 
-   return render_template("add_us.html") 
+   return render_template("Frontend/add_us.html") 
 
 ########################################
 ########################################
@@ -366,27 +366,25 @@ def add_Campaingn():
 
             insert_data_mobin("Campaign", ["Title", "Text", "start_date", "End_date","img_url"], [C_Title, C_Text, C_startd, C_endd,img_url])
         return render_template("Frontend/CreateCam.html")
-    except Exception as e:
-        # Log the exception or print it for debugging
+    except Exception as e:        
         print(f"An error occurred: {str(e)}")
-        # You can customize the error message based on the exception type
         return render_template("Frontend/error.html", error_message="An unexpected error occurred.")
 ########################################get_data(querry)
 ########################################
-@app.route("/delete_donor", methods=['POST', 'GET'])
+@app.route("/Retirer_Doneur", methods=['POST', 'GET'])
 def Del_Donor():
-    al = ""
+    hey = ""
     if request.method == 'POST':
         donor_id = request.form['DonorId']
         res = Select_entity("Donors", "Donors_ID", donor_id)
         
         if res is None:
-            al = "Le donneur que vous avez recherche n'existe pas"
+            hey = "Le donneur que vous avez recherche n'existe pas"
         else:
-            al = "Le donneur a ete retire avec succes"
+            hey = "Le donneur a ete retire avec succes"
             Del_data("Donors", "Donors_ID", donor_id)
 
-    return render_template("del_don.html", al=al)
+    return render_template("Frontend/DeleteDonor.html", hey=hey)
 ################################################
 ########################################
 
@@ -413,7 +411,7 @@ def add_Donor():
      else:
         insert_data("Donors", " Docs" ,Cols, docs_bin,[Name,Phone_Number,Email, bdate_conv,Address,jdate_conv,gender] )
         hey="Ce doneur a ete ajoute"
-     return render_template("add_Don.html",hey=hey) 
+     return render_template("Frontend/ADDdonor.htm",hey=hey) 
       
 ########################################
 ################################################
