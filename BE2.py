@@ -123,7 +123,7 @@ def get_html(table,key,id):
     if key is None and id is None: 
       query=f"SELECT * FROM \"{table}\" "
     else:
-      query=f"SELECT * FROM  \"{table}\" WHERE {key}={id} "
+      query=f"SELECT * FROM  \"{table}\" WHERE \"{key}\"={id} "
     data=cursor.execute(query) 
     return jsonify({'html': to_html(data)})
 
@@ -260,7 +260,7 @@ def Sel_data_all2(table_name):
 
     # Create an INSERT query with dynamic columns
     
-    query = sql.SQL("SELECT * FROM {} ").format(
+    query = sql.SQL("SELECT * FROM \"{}\" ").format(
         sql.Identifier(table_name))
 
 
