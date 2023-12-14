@@ -114,9 +114,17 @@ def to_htmltable(data):
 
 
 
-##@app.route('/api/get_html')
-#def get_html(data):
-   # return jsonify({'html': data})
+@app.route('/api/get_html')
+def get_html(table,key,id):
+    
+    conn=connect_db()
+    cursor=conn.cursor()
+    if key is None and id is None: 
+      query=f"SELECT * FROM "{table}" "
+    else:
+      query=f"SELECT * FROM "{table}" WHERE {key}={id} "
+    data=cursor.execute(query) 
+    return jsonify({'html': to_html(data)})
 
 
 def connect_db():
@@ -450,7 +458,7 @@ def Del_Ann():
         
         ##print(Sel_data_all2("Announcement"))
         #print(to_htmltable(Sel_data_all2("Announcement")))
-        #get_data(to_htmltable(Sel_data_all2("Announcement")))
+        get_html('Announcement',None,None)
 
         # Get the value of the 'announcementId' field from the form
         id = request.form['announcementId']
@@ -464,7 +472,6 @@ def Del_Ann():
             hey = "L'annonce a ete retire avec succes"
             Del_data("Announcement", "Announcement_ID", id)
 
-    # Add a return statement for both GET and POST requests
     return render_template("Frontend/DeleteAn.html", hey=hey)
 
 
