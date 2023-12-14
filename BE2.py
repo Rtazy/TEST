@@ -108,7 +108,7 @@ def to_htmltable(data):
         res += '<tr><td colspan="{}">No data available</td></tr>'.format(colspan)
     
     res += '</table>'
-    print(res)
+    return res
 
 
 
