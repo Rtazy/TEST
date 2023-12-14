@@ -1,3 +1,4 @@
+httpx==0.23.2
 argcomplete==1.10.3
 attrs==23.1.0
 bcrypt==4.0.1
