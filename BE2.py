@@ -333,7 +333,7 @@ def add_Donor():
      gender=request.form['Gender']
      Address=request.files['Address']
      documents=request.files['Docs']
-     joining_date=request.form['joining_date']r
+     joining_date=request.form['joining_date']
      b_date=request.form['Birthdate']
      bdate_conv=datetime.strptime(b_date,'%Y-%m-%d').date()
      jdate_conv=datetime.strptime(joining_date,'%Y-%m-%d').date()
