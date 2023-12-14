@@ -114,9 +114,9 @@ def to_htmltable(data):
 
 
 
-@app.route('/api/get_html')
-def get_html(data):
-    return jsonify({'html': data})
+##@app.route('/api/get_html')
+#def get_html(data):
+   # return jsonify({'html': data})
 
 
 def connect_db():
