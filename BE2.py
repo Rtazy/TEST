@@ -121,7 +121,7 @@ def get_html(table,key,id):
     conn=connect_db()
     cursor=conn.cursor()
     if key is None and id is None: 
-      query=f"SELECT * FROM "{table}" "
+      query=f"SELECT * FROM \"{table}\" "
     else:
       query=f"SELECT * FROM  \"{table}\" WHERE {key}={id} "
     data=cursor.execute(query) 
@@ -486,9 +486,9 @@ def add_announcement():
     return render_template("Frontend/CreateAn.html")
 
 
-@app.route('/profile')
+@app.route('/Gestion')
 def profile():
-    return 'Hello, this is a test response from the /profile route!'
+    return render_template("Frontend/Manager.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
