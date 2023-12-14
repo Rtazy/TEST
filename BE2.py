@@ -54,12 +54,11 @@ def to_htmltable(data):
 
 
 
-@app.route('/api/get_data')
-def get_data(querry):
-    updated_data = f"Updated data at {time.strftime('%H:%M:%S')}"
-    # Convert querry to a tuple if it's a list
-    querry_key = tuple(querry) if isinstance(querry, list) else querry
-    return jsonify({querry_key: updated_data})
+
+@app.route('/api/get_html')
+def get_html(data):
+    return jsonify({'html': data})
+
 
 def connect_db():
  return pg.connect(conn_string)
@@ -389,7 +388,7 @@ def Del_Ann():
     hey = ""
     
     if request.method == 'POST':
-        # Assuming you have a function like `get_data` defined somewhere
+        
         print(Sel_data_all2("Announcement"))
         print(to_htmltable(Sel_data_all2("Announcement")))
         get_data(to_htmltable(Sel_data_all2("Announcement")))
