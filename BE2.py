@@ -113,14 +113,11 @@ def to_htmltable(data):
 
 
 @app.route('/api/get_html')
-def get_html(table,key,id):
-    
+def get_html(table):
     conn=connect_db()
     cursor=conn.cursor()
-    if key is None and id is None: 
-      query=f"SELECT * FROM \"{table}\" "
-    else:
-      query=f"SELECT * FROM  \"{table}\" WHERE \"{key}\"={id} "
+
+    query=f"SELECT * FROM  \"{table}\" WHERE \"{key}\"={id} "
     data=cursor.execute(query) 
     return jsonify({'html': to_htmltable(data)})
 
