@@ -18,11 +18,10 @@ supabase_api_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSI
 # Load configuration from a separate file (config.py)
 app.config.from_pyfile('config.py', silent=True)
 
-# Connect to the database using configuration variables
+ Connect to the database using configuration variables
 conn_string = (
     f"postgresql://{app.config['DB_USER']}:{app.config['DB_PASSWORD']}@"
-    f"{app.config['DB_HOST']}/{app.config['DB_NAME']}?sslmode=require"
-)
+    f"{app.config['DB_HOST']}/{app.config['DB_NAME']}?sslmode=require")
 
 
 async def insert_image_into_supabase(table_name, column_name, image_data):
@@ -90,7 +89,6 @@ def to_htmltable(data):
     res = '<table border="1">'
     
     if data:
-        # Calculate colspan based on the number of columns in the first row
         colspan = len(data[0])
         
         for row in data:
@@ -101,7 +99,6 @@ def to_htmltable(data):
                 res += '</td>'
             res += '</tr>'
     else:
-        # If no data, set colspan to 1
         colspan = 1
         res += '<tr><td colspan="{}">No data available</td></tr>'.format(colspan)
     
@@ -439,12 +436,12 @@ def add_Don_o():
 @app.route('/Retirer_Annonce', methods=['GET', 'POST'])
 def Del_Ann():
     hey = ""
-    
+    tbl = ""
     if request.method == 'POST':
         
         ##print(Sel_data_all2("Announcement"))
         #print(to_htmltable(Sel_data_all2("Announcement")))
-        get_html('Announcement',None,None)
+        tbl=to_htmltable(Sel_data_all2("Announcement"))
 
         id = request.form['announcementId']
 
@@ -458,7 +455,7 @@ def Del_Ann():
             hey = "L'annonce a ete retire avec succes"
             
 
-    return render_template("Frontend/DeleteAn.html", hey=hey)
+    return render_template("Frontend/DeleteAn.html", hey=hey,tbl=tbl)
 
 
 @app.route("/Ajouter_Annonce", methods=['GET', 'POST'])
