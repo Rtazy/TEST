@@ -184,17 +184,17 @@ def Select_entity(table,pkcol,entity_id):
 ########################################
 
 def Del_data(table_name, key_column, key_value):
-    query = f"DELETE FROM \"{table_name}\" WHERE \"{key_column}\" = %s"
-    cursor= connect_db().cursor()
     try:
-     cursor.execute(query, (key_value,))
-     connect_db().commit()
+        cursor = connect_db().cursor()
+        query = f"DELETE FROM \"{table_name}\" WHERE \"{key_column}\" = %s"
+        print("Query:", query)  # Add this line
+        cursor.execute(query, key_value)
+        connect_db().commit()
     except Exception as e:
-     print(f"Error: {e}")
-     connect_db().rollback()
-
-    cursor.close()
-    connect_db().close()
+        print("Error:", e)  # Add this line for error logging
+    finally:
+        cursor.close()
+        connect_db().close()
 ########################################
 ########################################
 
