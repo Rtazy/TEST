@@ -188,23 +188,16 @@ def Select_entity(table,pkcol,entity_id):
 ########################################
 ########################################
 
-def Del_data(table_name, primary_key_column, primary_key_value):
+def Del_data(table_name, key_column, key_value):
    
     cursor = connect_db().cursor()
-
-    # Create an INSERT query with dynamic columns
     
-    query = sql.SQL("DELETE FROM {} WHERE {}= %s").format(
-        sql.Identifier(table_name), sql.Identifier(primary_key_column))
+    query = f("DELETE FROM \"{table_name}\" WHERE \"{key_column}\" = {key_value}")
 
+    cursor.execute(query)
 
-   # Execute the query with the primary key value
-    cursor.execute(query, (primary_key_value,))
-
-    # Commit the transaction to persist changes
     connect_db().commit()
 
-    # Close the cursor and connection when done
     cursor.close()
     connect_db().close()
 ########################################
