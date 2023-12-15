@@ -185,6 +185,7 @@ def Select_entity(table,pkcol,entity_id):
 
 def Del_data(table_name, key_column, key_value):
     query = f"DELETE FROM \"{table_name}\" WHERE \"{key_column}\" = %s"
+    cursor= connect_db().cursor()
     try:
      cursor.execute(query, (key_value,))
      connect_db().commit()
