@@ -456,7 +456,6 @@ def Del_Ann():
         #print(to_htmltable(Sel_data_all2("Announcement")))
         get_html('Announcement',None,None)
 
-        # Get the value of the 'announcementId' field from the form
         id = request.form['announcementId']
 
         # Check if the announcement with the provided ID exists
@@ -465,8 +464,9 @@ def Del_Ann():
         if res is None:
             hey = "L'annonce que vous avez recherche n'existe pas"
         else:
-            hey = "L'annonce a ete retire avec succes"
             Del_data("Announcement", "Announcement_ID", id)
+            hey = "L'annonce a ete retire avec succes"
+            
 
     return render_template("Frontend/DeleteAn.html", hey=hey)
 
