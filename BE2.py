@@ -18,7 +18,7 @@ supabase_api_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSI
 # Load configuration from a separate file (config.py)
 app.config.from_pyfile('config.py', silent=True)
 
-Connect to the database using configuration variables
+
 conn_string = (
     f"postgresql://{app.config['DB_USER']}:{app.config['DB_PASSWORD']}@"
     f"{app.config['DB_HOST']}/{app.config['DB_NAME']}?sslmode=require")
