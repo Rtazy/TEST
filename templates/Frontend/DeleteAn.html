@@ -109,7 +109,10 @@
             {{ hey }}
         {% endif %}
     </div>
- <div id="html-placeholder"></div>
+ <div id="html-placeholder">        
+     {% if tbl %}
+            {{ tbl }}
+     {% endif %}</div>
 
       
 
@@ -122,14 +125,14 @@
 </div>
 <script>
          
-        async function fetchHtml() {
+        /* async function fetchHtml() {
             const response = await fetch('/api/get_html');
             const data = await response;
             document.getElementById('html-placeholder').innerHTML = data.html;
-        }
+        }*/
 
          
-        fetchHtml();
+        //fetchHtml();
 
        // setInterval(fetchHtml, 5000);
     </script> 
