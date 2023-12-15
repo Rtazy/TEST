@@ -12,10 +12,7 @@ app = Flask(__name__)
 supabase_url = "https://fnxcuzdjxvnmutcvhcqn.supabase.co"
 supabase_api_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZueGN1emRqeHZubXV0Y3ZoY3FuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDI0NzU1NzksImV4cCI6MjAxODA1MTU3OX0.8vBgJ3Iw9775FI1ATj1qb6dofMiVW3iobRM8myYTK8o"
 
-def insert_image(entity_id, image_data):
-    
-    image_data['entity_id'] = entity_id
-    result_image = supabase_client.table('Images').upsert([image_data], ['image_id'])
+
 
 
 # Load configuration from a separate file (config.py)
