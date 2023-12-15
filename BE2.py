@@ -183,7 +183,7 @@ def Select_entity(table,pkcol,entity_id):
 ########################################
 ########################################
 
-def delete_data(table_name, key_column, key_value):
+def Del_data(table_name, key_column, key_value):
 
 
     cursor = connect_db().cursor()
