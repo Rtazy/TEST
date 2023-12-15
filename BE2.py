@@ -184,14 +184,13 @@ def Select_entity(table,pkcol,entity_id):
 ########################################
 
 def Del_data(table_name, key_column, key_value):
-   
-    cursor = connect_db().cursor()
-    
     query = f"DELETE FROM \"{table_name}\" WHERE \"{key_column}\" = %s"
-
-    cursor.execute(query,key_value)
-
-    connect_db().commit()
+    try:
+     cursor.execute(query, (key_value,))
+     connect_db().commit()
+    except Exception as e:
+     print(f"Error: {e}")
+     connect_db().rollback()
 
     cursor.close()
     connect_db().close()
@@ -452,7 +451,7 @@ def Del_Ann():
         if res is None:
             hey = "L'annonce que vous avez recherche n'existe pas"
         else:
-            Del_data("Announcement", "Announcement_ID", id)
+            Del_data('Announcement', 'Announcement_ID', id)
             hey = "L'annonce a ete retire avec succes"
             
 
