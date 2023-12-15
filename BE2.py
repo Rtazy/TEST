@@ -376,16 +376,15 @@ def Del_Donor():
 #the original admin must be connected  to do that
 def add_Donor():
    if request.form['methods']==['POST']:
-     Name=request.form['Name']
-     Phone_Number=request.form['Phone_Number']
+     Name=request.form['Full_Name']
      Email=request.form['Email']
      gender=request.form['Gender']
      Address=request.files['Address']
      documents=request.files['DonorDocuments']
      joining_date=request.form['joining_date']
      b_date=request.form['Birthdate']
-     bdate_conv=datetime.strptime(b_date,'%Y-%m-%d').date()
-     jdate_conv=datetime.strptime(joining_date,'%Y-%m-%d').date()
+     bdate_conv=datetime.strptime(b_date,"%d/%m/%Y").date()
+     jdate_conv=datetime.strptime(joining_date,"%d/%m/%Y").date()
      docs_bin= documents.read()
      Cols=['Full_Name','Phone_Number','Email','Birthdate','Address','join_date','Gender' ]
      u=Select_entity("Donors","Email",Email)
