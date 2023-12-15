@@ -125,7 +125,7 @@ def get_html(table,key,id):
     else:
       query=f"SELECT * FROM  \"{table}\" WHERE \"{key}\"={id} "
     data=cursor.execute(query) 
-    return jsonify({'html': to_html(data)})
+    return jsonify({'html': to_htmltable(data)})
 
 
 def connect_db():
@@ -388,7 +388,7 @@ def Del_Donor():
 ################################################
 ########################################
 
-@app.route("/Ajouter_Doneur",methods=['GET','POST'])
+@app.route("/Ajouter_Donneur",methods=['GET','POST'])
 #the original admin must be connected  to do that
 def add_Donor():
    if request.form['methods']==['POST']:
@@ -397,7 +397,7 @@ def add_Donor():
      Email=request.form['Email']
      gender=request.form['Gender']
      Address=request.files['Address']
-     documents=request.files['Docs']
+     documents=request.files['DonorDocuments']
      joining_date=request.form['joining_date']
      b_date=request.form['Birthdate']
      bdate_conv=datetime.strptime(b_date,'%Y-%m-%d').date()
