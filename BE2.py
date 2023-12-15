@@ -117,6 +117,7 @@ def get_html(table):
     query=f"SELECT * FROM  \"{table}\" WHERE \"{key}\"={id} "
     data=cursor.execute(query) 
     return jsonify({'html': to_htmltable(data)})
+    #
 
 
 def connect_db():
