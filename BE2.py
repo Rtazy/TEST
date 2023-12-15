@@ -183,18 +183,22 @@ def Select_entity(table,pkcol,entity_id):
 ########################################
 ########################################
 
-def Del_data(table_name, key_column, key_value):
-    try:
-        cursor = connect_db().cursor()
-        query = f'DELETE FROM "{table_name}" WHERE "{key_column}" = %s'
-        print("Query:", query)  # Add this line
-        cursor.execute(query, key_value)
-        connect_db().commit()
-    except Exception as e:
-        print("Error:", e)  # Add this line for error logging
-    finally:
-        cursor.close()
-        connect_db().close()
+def delete_data(table_name, key_column, key_value):
+
+
+    cursor = connect_db().cursor()
+
+    query = sql.SQL("DELETE FROM {} WHERE {} = %s").format(
+        sql.Identifier(table_name),
+        sql.Identifier(key_column)
+    )
+
+    cursor.execute(query, (key_value,))
+
+    connection.commit()
+
+    cursor.close()
+    connection.close()
 ########################################
 ########################################
 
@@ -451,6 +455,10 @@ def Del_Ann():
             try:
                 # Attempt to delete the announcement
                 Del_data('Announcement', 'Announcement_ID', id)
+                print("Before deletion")
+                Del_data('Announcement', 'Announcement_ID', 3)
+                print("After deletion")
+
                 hey = "L'annonce a ete retire avec succes"
             except Exception as e:
                 # Log the exception for debugging
