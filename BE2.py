@@ -192,7 +192,7 @@ def Del_data(table_name, key_column, key_value):
    
     cursor = connect_db().cursor()
     
-    query = f("DELETE FROM \"{table_name}\" WHERE \"{key_column}\" = {key_value}")
+    query = f"DELETE FROM \"{table_name}\" WHERE \"{key_column}\" = {key_value}"
 
     cursor.execute(query)
 
