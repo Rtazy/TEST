@@ -193,7 +193,7 @@ def Del_data(table_name, key_column, key_value):
         sql.Identifier(key_column)
     )
 
-    cursor.execute(query, (key_value,))
+    connect_db().execute(query, (key_value,))
 
     connection.commit()
 
