@@ -244,7 +244,7 @@ def Sel_data_all2(table_name):
 
     # Create an INSERT query with dynamic columns
     
-    query = sql.SQL("SELECT * FROM \"{}\" ").format(
+    query = sql.SQL("SELECT * FROM {} ").format(
         sql.Identifier(table_name))
 
 
