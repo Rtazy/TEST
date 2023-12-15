@@ -438,10 +438,7 @@ def Del_Ann():
     hey = ""
     tbl = ""
     if request.method == 'POST':
-        
-        ##print(Sel_data_all2("Announcement"))
-        #print(to_htmltable(Sel_data_all2("Announcement")))
-        tbl=to_htmltable(Sel_data_all2("Announcement"))
+        tbl = to_htmltable(Sel_data_all2("Announcement"))
 
         id = request.form['announcementId']
 
@@ -451,12 +448,16 @@ def Del_Ann():
         if res is None:
             hey = "L'annonce que vous avez recherche n'existe pas"
         else:
-            Del_data('Announcement', 'Announcement_ID', id)
-            hey = "L'annonce a ete retire avec succes"
-            
+            try:
+                # Attempt to delete the announcement
+                Del_data('Announcement', 'Announcement_ID', id)
+                hey = "L'annonce a ete retire avec succes"
+            except Exception as e:
+                # Log the exception for debugging
+                print(f"Error during deletion: {e}")
+                hey = "Une erreur s'est produite lors de la suppression de l'annonce."
 
-    return render_template("Frontend/DeleteAn.html", hey=hey,tbl=tbl)
-
+    return render_template("Frontend/DeleteAn.html", hey=hey, tbl=tbl)
 
 @app.route("/Ajouter_Annonce", methods=['GET', 'POST'])
 def add_announcement():
