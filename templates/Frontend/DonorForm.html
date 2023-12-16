@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Donor Application Form</title>
     <style>
-         body {
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
 
         header {
-            background-color:white;
+            background-color: white;
             color: white;
             text-align: center;
             padding: 10px;
         }
+
         header img {
             height: 170px; 
             margin-right: 10px;
-        
         }
-        h1 {
-            text-align: center;
-        }
+
         nav {
             background-color: #13472E;
             color: white;
@@ -46,7 +46,6 @@
             color: white;
         }
 
-
         form {
             max-width: 500px;
             margin: 0 auto;
@@ -57,7 +56,9 @@
             margin-top: 10px;
         }
 
-        button[type="text"], input[type="tel"], select {
+        button[type="text"],
+        input[type="tel"],
+        select {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
@@ -71,7 +72,7 @@
         }
 
         button[type="submit"] {
-            background-color:#864d25 ;
+            background-color: #864d25;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -87,37 +88,47 @@
 <body>
     <header>
         <img src="nourlg.png" alt="Foundation Logo">
-     
-   </header>
-   <nav>
-    <ul>
-        <li>Donor Application Form</li>
-    </ul>
-</nav>
-<form action="/DonorForm" method="POST">
-    
+    </header>
+    <nav>
+        <ul>
+            <li>
+                <div lang="en">Donor Application Form</div>
+                <div lang="ar">نموذج طلب المتبرع</div>
+            </li>
+        </ul>
+    </nav>
+    <form action="/DonorForm" method="POST">
+        <label for="DonorName">
+            <div lang="en">Donor Name:</div>
+            <div lang="ar">اسم المتبرع:</div>
+        </label>
+        <input type="text" id="DonorName" name="DonorName" required>
 
- 
-    <label for="DonorName">Donor Name:</label>
-    <input type="text" id="DonorName" name="DonorName" required>
+        <label for="DonorBirthDate">
+            <div lang="en">Birth Date:</div>
+            <div lang="ar">تاريخ الميلاد:</div>
+        </label>
+        <input type="date" id="DonorBirthDate" name="DonorBirthDate" placeholder="DD/MM/YYYY" required>
 
-    <label for="DonorBirthDate">Birth Date:</label>
-    <input type="date" id="DonorBirthDate" name="DonorBirthDate" placeholder="DD/MM/YYYY" required>
+        <label for="DonorPhone">
+            <div lang="en">Phone Number:</div>
+            <div lang="ar">رقم الهاتف:</div>
+        </label>
+        <input type="tel" id="DonorPhone" name="DonorPhone" required>
 
+        <label for="DonorEmail">
+            <div lang="en">E-mail:</div>
+            <div lang="ar">البريد الإلكتروني:</div>
+        </label>
+        <input type="email" id="DonorEmail" name="DonorEmail">
 
+        <label for="DonorDocuments">
+            <div lang="en">Upload Documents:</div>
+            <div lang="ar">تحميل المستندات:</div>
+        </label>
+        <input type="file" id="DonorDocuments" name="DonorDocuments">
 
-    <label for="DonorPhone">Phone Number:</label>
-    <input type="tel" id="DonorPhone" name="DonorPhone" required>
-
-    <label for="DonorEmail"> E-mail:</label>
-    <input type="email" id="DonorEmail" name="DonorEmail" >
-
-
-    <label for="DonorDocuments">Upload Documents:</label>
-    <input type="file" id="DonorDocuments" name="DonorDocuments">
-
-    <input type="submit" value="Submit">
-</form>
-
+        <input type="submit" value="Submit">
+    </form>
 </body>
 </html>
