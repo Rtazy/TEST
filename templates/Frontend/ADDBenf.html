@@ -3,9 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <title>Add Beneficiary </title>
     <style>
         body {
@@ -14,14 +11,13 @@
             padding: 0;
         }
         #message {
-    background-color: #f2f2f2;
-    color: #333;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
+            background-color: #f2f2f2;
+            color: #333;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
 
         header {
             background-color:white;
@@ -32,11 +28,8 @@
         header img {
             height: 170px; 
             margin-right: 10px;
-        
         }
-        h1 {
-            text-align: center;
-        }
+
         nav {
             background-color: #13472E;
             color: white;
@@ -59,7 +52,6 @@
             text-decoration: none;
             color: white;
         }
-
 
         form {
             max-width: 500px;
@@ -85,7 +77,7 @@
         }
 
         button[type="submit"] {
-            background-color:#864d25 ;
+            background-color: #864d25;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -99,144 +91,125 @@
     </style>
 </head>
 <body>
-    <header>
-    <img src="nourlg.png" alt="Foundation Logo">
-    </header>
-    <nav>
-        <ul>
-            <li>Add a new Beneficiary</li>
-        </ul>
-    </nav>
-    <button onclick="toggleLanguage()">Toggle Language</button>
-
+    <div lang="en">
         <div id="message">
-        {% if hey %}
-            {{ hey }}
-        {% endif %}
+            {% if hey %}
+                {{ hey }}
+            {% endif %}
+        </div>
+
+        <header>
+            <img src="nourlg.png" alt="Foundation Logo">
+        </header>
+        <nav>
+            <ul>
+                <li>Add a new Beneficiary</li>
+            </ul>
+        </nav>
+
+        <form action="/nouveau_beneficiere" method="POST">
+
+            <label for="beneficiaryId">Beneficiary social ID</label>
+            <input type="text" id="beneficiaryId" name="beneficiaryId" required >
+
+            <label for="Name"> Beneficiary Full Name:</label>
+            <input type="text" id="Name" name="Name" required >
+
+            <label for="Birthdate">Beneficiary Birth Date:</label>
+            <input type="Birthdate" id="b_date" name="Birthdate" placeholder="DD/MM/YYYY" required>
+
+            <label for="Birth_Place">Beneficiary Birth place:</label>
+            <input type="text" id="Birth_Place" name="Birth_Place" >
+
+            <label for="Disability_startdate">Beneficiary Disability Starting Date:</label>
+            <input type="date" id="Disability_startdate" name="Disability_startdate" required>
+
+            <label for="Join_Date">Beneficiary Joining Date:</label>
+            <input type="date" id="Join_Date" name="Join_Date" required>
+
+            <label for="Disability_Category">Beneficiary Disability Type:</label>
+            <select id="Disability_Category" name="Disability_Category">
+                <option value="physical">Physical Disability</option>
+                <option value="mental">Mental Disability</option>
+                <option value="sensory">Sensory Disability</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option value="male">M</option>
+                <option value="female">F</option>
+            </select>
+
+            <label for="picture">Picture:</label>
+            <input type="file" id="picture" name="picture">
+
+            <label for="documents">Upload Documents:</label>
+            <input type="file" id="documents" name="documents">
+
+            <button type="submit">Add Beneficiary</button>
+
+        </form>
     </div>
-<div lang="en">
-    <form action="/nouveau_beneficiere" method="POST">
 
-        <label for="beneficiaryId">Beneficiary social ID</label>
-        <input type="text" id="beneficiaryId" name="beneficiaryId" required >
-
-        <label for="Name"> Beneficiary Full Name:</label>
-        <input type="text" id="Name" name="Name" required >
-
-        <label for="Birthdate">Beneficiary Birth Date:</label>
-        <input type="text" id="b_date" name="b_date"  required>
-
-    
-        <label for="Birth_Place">Beneficiary Birth place:</label>
-        <input type="text" id="Birth_Place" name="Birth_Place"  required>
-    
-      
-       <label for="d_date">Beneficiary Disability Starting Date:</label>
-       <input type="text" id="d_date" name="date" required>
-
-       <label for="date">Beneficiary Joining Date:</label>
-       <input type="text" id="date" name="date" required>
-        
-       <label for="Disability_Category">Beneficiary Disability Type:</label>
-       <select id="Disability_Category" name="Disability_Category">
-        <option value="physical">Physical Disability</option>
-        <option value="mental">Mental Disability</option>
-        <option value="sensory">Sensory Disability</option>
-        <option value="other">Other</option>
-        </select>
-   
-   
-       <label for="gender">Gender:</label>
-       <select id="gender" name="gender">
-        <option value="male">M</option>
-        <option value="female">F</option>
-       </select>
-     
-       <label for="picture">Picture:</label>
-       <input type="file" id="picture" name="picture">
-
-   
-        <label for="documents">Upload Documents:</label>
-       <input type="file" id="documents" name="documents">
-
-
-
-     <button type="submit">Add Beneficiary</button>
-
-    </form>
-      </div>
     <div lang="ar">
-    <form action="/nouveau_beneficiere" method="POST">
+        <form action="/nouveau_beneficiere" method="POST">
 
-        <label for="beneficiaryId">:رقم البطاقة الوطنية للمستفيد</label>
-        <input type="text" id="beneficiaryId" name="beneficiaryId" required >
+            <label for="beneficiaryId">رقم الهوية الاجتماعية للمستفيد</label>
+            <input type="text" id="beneficiaryId" name="beneficiaryId" required >
 
-        <label for="Name"> :الاسم الكامل للمستفيد</label>
-        <input type="text" id="Name" name="Name" required >
+            <label for="Name"> اسم المستفيد الكامل:</label>
+            <input type="text" id="Name" name="Name" required >
 
-        <label for="Birthdate">:تاريخ ميلاد المستفيد</label>
-        <input type="text" id="b_date" name="b_date"  required>
+            <label for="Birthdate">تاريخ ميلاد المستفيد:</label>
+            <input type="Birthdate" id="b_date" name="Birthdate" placeholder="DD/MM/YYYY" required>
 
-    
-        <label for="Birth_Place">:مكان ميلاد المستفيد</label>
-        <input type="text" id="Birth_Place" name="Birth_Place"  required>
-    
-      
-       <label for="d_date">:تاريخ بدء إعاقة المستفيد</label>
-       <input type="text" id="d_date" name="date" required>
+            <label for="Birth_Place">مكان ميلاد المستفيد:</label>
+            <input type="text" id="Birth_Place" name="Birth_Place" >
 
-       <label for="date">:تاريخ انضمام المستفيد</label>
-       <input type="text" id="date" name="date" required>
-        
-       <label for="Disability_Category">نوع إعاقة المستفيد:</label>
-       <select id="Disability_Category" name="Disability_Category">
-        <option value="physical">إعاقة حركية</option>
-        <option value="mental">إعاقة ذهنية</option>
-        <option value="sensory">إعاقة حسية</option>
-        <option value="other">آخر</option>
-        </select>
-   
-   
-       <label for="gender">Gender:</label>
-       <select id="gender" name="gender">
-        <option value="male">M</option>
-        <option value="female">F</option>
-       </select>
-     
-       <label for="picture">Picture:</label>
-       <input type="file" id="picture" name="picture">
+            <label for="Disability_startdate">تاريخ بدء إعاقة المستفيد:</label>
+            <input type="date" id="Disability_startdate" name="Disability_startdate" required>
 
-   
-        <label for="documents">Upload Documents:</label>
-       <input type="file" id="documents" name="documents">
+            <label for="Join_Date">تاريخ انضمام المستفيد:</label>
+            <input type="date" id="Join_Date" name="Join_Date" required>
 
+            <label for="Disability_Category">نوع إعاقة المستفيد:</label>
+            <select id="Disability_Category" name="Disability_Category">
+                <option value="physical">إعاقة جسدية</option>
+                <option value="mental">إعاقة عقلية</option>
+                <option value="sensory">إعاقة حسية</option>
+                <option value="other">أخرى</option>
+            </select>
 
+            <label for="gender">الجنس:</label>
+            <select id="gender" name="gender">
+                <option value="male">ذكر</option>
+                <option value="female">أنثى</option>
+            </select>
 
-     <button type="submit">Add Beneficiary</button>
+            <label for="picture">الصورة:</label>
+            <input type="file" id="picture" name="picture">
 
-    </form>
-         </div>
-<script>
-    <button onclick="toggleLanguage()">Toggle Language</button>
+            <label for="documents">تحميل المستندات:</label>
+            <input type="file" id="documents" name="documents">
 
+            <button type="submit">إضافة مستفيد</button>
 
-  function toggleLanguage() {
-    var element = document.querySelector('div');
-    if (element.lang === 'ar') {
-      element.lang = 'en';
-    } else {
-      element.lang = 'ar';
-    }
-  }
+        </form>
+    </div>
 
+    <!-- Initialize jQuery UI Datepicker -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script>
         $(document).ready(function () {
-            $("#date, #b_date, #d_date").datepicker({
+            $("#b_date, #Disability_startdate, #Join_Date").datepicker({
                 dateFormat: 'dd/mm/yy', // Set the desired date format
                 changeMonth: true,
                 changeYear: true
             });
         });
     </script>
-
 </body>
 </html>
