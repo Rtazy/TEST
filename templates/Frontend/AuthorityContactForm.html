@@ -93,6 +93,9 @@
         <li>Authority Contact Form </li>
     </ul>
 </nav>
+
+
+    <div lang="en">
 <form action="/AuthorityContactForm" method="post">
     
 
@@ -115,6 +118,30 @@
 
     <input type="submit" value="Submit">
 </form>
+    </div >
+    <div lang="ar">
+ <form action="/AuthorityContactForm" method="post">
+
+    <label for="AuthorityName">اسم السلطة:</label>
+    <input type="text" id="AuthorityName" name="AuthorityName" required>
+
+    <label for="PhoneNumber">رقم الهاتف:</label>
+    <input type="tel" id="AuthorityPhoneNumber" name="AuthorityPhoneNumber" required>
+
+    <label for="FaxNumber">رقم الفاكس:</label>
+    <input type="tel" id="FaxNumber" name="FaxNumber" required>
+
+    <label for="AuthorityAddress">عنوان السلطة:</label>
+    <input type="text" id="AuthorityAddress" name="AuthorityAddress" required>
+
+    <label for="Authorityemail">البريد الإلكتروني:</label>
+    <input type="email" id="Authorityemail" name="Authorityemail" required>
+
+    <input type="submit" value="إرسال">
+</form>
+</div>
+
+
 
 </body>
 </html>
