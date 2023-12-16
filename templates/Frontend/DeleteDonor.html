@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,16 +6,17 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Retirer un sponsor </title>
+    <title>Remove a Sponsor</title>
     <style>
-         #message {
-    background-color: #f2f2f2;
-    color: #333;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+        #message {
+            background-color: #f2f2f2;
+            color: #333;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -31,19 +24,21 @@
         }
 
         header {
-            background-color:white;
+            background-color: white;
             color: white;
             text-align: center;
             padding: 10px;
         }
+
         header img {
-            height: 170px; 
+            height: 170px;
             margin-right: 10px;
-        
         }
+
         h1 {
             text-align: center;
         }
+
         nav {
             background-color: #13472E;
             color: white;
@@ -67,7 +62,6 @@
             color: white;
         }
 
-
         form {
             max-width: 500px;
             margin: 0 auto;
@@ -78,7 +72,9 @@
             margin-top: 10px;
         }
 
-        button[type="text"], input[type="tel"], select {
+        button[type="text"],
+        input[type="tel"],
+        select {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
@@ -92,7 +88,7 @@
         }
 
         button[type="submit"] {
-            background-color:#864d25 ;
+            background-color: #864d25;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -107,33 +103,57 @@
 </head>
 <body>
     <header>
-    <img src="nourlg.png" alt="Foundation Logo">
+        <img src="nourlg.png" alt="Foundation Logo">
     </header>
-     
-           <nav>
+
+    <div id="lang-en">
+        <nav>
             <ul>
-                <li>Retirer Donneur</li>
+                <li>Remove Donor</li>
             </ul>
         </nav>
-    
-     <div id="message">
-        {% if hey %}
-            {{ hey }}
-        {% endif %}
-    </div>
-     
 
-<div class="form-container">
-    <form action="/Retirer_Donneur" method="post">
-        <label for="DonorId">Donor ID:</label>
-        <input type="text" id="DonorId" name="DonorId" required>
-        <button type="submit">Delete Donor</button>
-    </form>
-</div>
+        <div id="message">
+            {% if hey %}
+                {{ hey }}
+            {% endif %}
+        </div>
+
+        <div class="form-container">
+            <form action="/Remove_Donor" method="post">
+                <label for="DonorId">Donor ID:</label>
+                <input type="text" id="DonorId" name="DonorId" required>
+                <button type="submit">Delete Donor</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="lang-ar" dir="rtl">
+        <nav>
+            <ul>
+                <li>حذف مانح</li>
+            </ul>
+        </nav>
+
+        <div id="message">
+            {% if hey %}
+                {{ hey }} <!-- Add Arabic translation here -->
+            {% endif %}
+        </div>
+
+        <div class="form-container">
+            <form action="/Remove_Donor" method="post">
+                <label for="DonorId">رقم المانح:</label>
+                <input type="text" id="DonorId" name="DonorId" required>
+                <button type="submit">حذف المانح</button>
+            </form>
+        </div>
+    </div>
+
     <script>
         $(document).ready(function () {
             $("#date, #e_date").datepicker({
-                dateFormat: 'dd/mm/yy', // Set the desired date format
+                dateFormat: 'dd/mm/yy',
                 changeMonth: true,
                 changeYear: true
             });
