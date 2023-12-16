@@ -107,9 +107,6 @@ def to_htmltable(data):
 
 
 
-
-
-@app.route('/api/get_html')
 def get_html(table):
     conn=connect_db()
     cursor=conn.cursor()
@@ -439,10 +436,9 @@ def add_Don_o():
 @app.route('/Retirer_Annonce', methods=['GET', 'POST'])
 def Del_Ann():
     hey = ""
-    tbl = ""
+    tbl = to_htmltable(Sel_data_all2("Announcement"))
     if request.method == 'POST':
-        tbl = to_htmltable(Sel_data_all2("Announcement"))
-
+       
         id = request.form['announcementId']
 
         # Check if the announcement with the provided ID exists
@@ -454,10 +450,6 @@ def Del_Ann():
             try:
                 # Attempt to delete the announcement
                 Del_data('Announcement', 'Announcement_ID', id)
-                print("Before deletion")
-                Del_data('Announcement', 'Announcement_ID', 3)
-                print("After deletion")
-
                 hey = "L'annonce a ete retire avec succes"
             except Exception as e:
                 # Log the exception for debugging
