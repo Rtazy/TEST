@@ -1,64 +1,26 @@
-from flask import Flask, render_template, request
 import openai
-import tweepy
 
-app = Flask(__name__)
+def generate_post(prompt):
+    # Set your OpenAI API key
+    api_key = "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"
+    openai.api_key = api_key
 
-# Set API key
-openai.api_key = 'YOUR_API_KEY'
-consumer_key = 'your_twitter_consumer_key'
-consumer_secret = 'your_twitter_consumer_secret'
-access_token = 'your_twitter_access_token'
-access_token_secret = 'your_twitter_access_token_secret'
+    # Specify the model and parameters
+    model = "text-davinci-002"  # You can use other models provided by OpenAI
 
-# Configure Tweepy
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
-twitter_api = tweepy.API(auth)
-
-
-def generate_special_needs_post():
-    #
-    prompt = (
-        "Our foundation, Al Nour, is dedicated to supporting individuals with special needs. "
-        "We believe in creating a more inclusive and supportive community for everyone. "
-        "Our mission is to integrating people with special needs into society and guarantee their needs. "
-        "Through our various programs and activities. "
-        "We have witnessed incredible stories of resilience and growth, showcasing the positive impact "
-         "our foundation has on the lives of those we serve. Join us in making a difference for people with "
-         "special needs and help us build a world where everyone is valued and included. "
-         "Your financial support is crucial to our mission. With your generous donations"
-        "special needs and help us build a world where everyone is valued and included."
-    )
-
-    # OpenAI  generates text based on the prompt
+    # Generate the post using OpenAI API
     response = openai.Completion.create(
-        engine="text-davinci-002",
+        engine=model,
         prompt=prompt,
-        max_tokens=300
+        max_tokens=200  # You can adjust the max_tokens parameter based on your needs
     )
 
-    return response.choices[0].text.strip()
+    # Extract the generated text from the response
+    generated_post = response['choices'][0]['text']
 
-@app.route('/')
-def index():
-    return render_template('Post.html')
+    return generated_post
 
-@app.route('/generate_post', methods=['POST'])
-def generate_post():
-    generated_post = generate_special_needs_post()
-    return render_template('Post.html', post=generated_post)
-
-@app.route('/post_to_twitter', methods=['POST'])
-def post_to_twitter():
-    generated_post = request.form['generated_post']
-
-    # Post to Twitter
-    try:
-        twitter_api.update_status(status=generated_post)
-        return redirect(url_for('home'))
-    except tweepy.TweepError as e:
-        return f"Error posting to Twitter: {e}"
-
-if __name__ == '__main__':
-    app.run(debug=True)
+# Example usage
+prompt_text = "Create engaging and informative social media posts for Al Nour Foundation, focusing on empowering and integrating people with special needs into society. Generate content that highlights the foundation's mission, achievements, and upcoming events. Consider including personal stories of beneficiaries, success stories, and calls to action for donations or volunteer participation. Ensure the posts are inclusive, respectful, and inspire community support. Emphasize the importance of creating an inclusive society and showcase the positive impact of the foundation's work. You may also integrate relevant hashtags and visuals to enhance the posts' reach and appeal"
+generated_post = generate_post(prompt_text)
+print(generated_post)
