@@ -3,37 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Beneficiary </title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <title>Add Authority</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
-        #message {
-    background-color: #f2f2f2;
-    color: #333;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
 
+        #message {
+            background-color: #f2f2f2;
+            color: #333;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
 
         header {
-            background-color:white;
+            background-color: white;
             color: white;
             text-align: center;
             padding: 10px;
         }
+
         header img {
-            height: 170px; 
+            height: 170px;
             margin-right: 10px;
-        
         }
-        h1 {
-            text-align: center;
-        }
+
         nav {
             background-color: #13472E;
             color: white;
@@ -57,7 +58,6 @@
             color: white;
         }
 
-
         form {
             max-width: 500px;
             margin: 0 auto;
@@ -68,7 +68,10 @@
             margin-top: 10px;
         }
 
-        button[type="text"], input[type="tel"], select {
+        button[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        select {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
@@ -82,7 +85,7 @@
         }
 
         button[type="submit"] {
-            background-color:#864d25 ;
+            background-color: #864d25;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -96,69 +99,82 @@
     </style>
 </head>
 <body>
-    <header>
-    <img src="nourlg.png" alt="Foundation Logo">
-    </header>
-    <nav>
-        <ul>
-            <li>Add a new Beneficiary</li>
-        </ul>
-    </nav>
-        <div id="message">
+    <div id="message">
         {% if hey %}
             {{ hey }}
         {% endif %}
     </div>
 
-    <form action="/nouveau_beneficiere" method="POST">
-
-        <label for="beneficiaryId">Beneficiary social ID</label>
-        <input type="text" id="beneficiaryId" name="beneficiaryId" required >
-
-        <label for="Name"> Beneficiary Full Name:</label>
-        <input type="text" id="Name" name="Name" required >
-
-        <label for="Birthdate">Beneficiary Birth Date:</label>
-        <input type="Birthdate" id="b_date" name="Birthdate" placeholder="DD/MM/YYYY" required>
-
-    
-        <label for="Birth_Place">Beneficiary Birth place:</label>
-        <input type="text" id="Birth_Place" name="Birth_Place" >
-    
-      
-       <label for="Disability_startdate">Beneficiary Disability Starting Date:</label>
-       <input type="date" id="Disability_startdate" name="Disability_startdate" required>
-
-       <label for="Join_Date">Beneficiary Joining Date:</label>
-       <input type="date" id="Join_Date" name="Join_Date" required>
-        
-       <label for="Disability_Category">Beneficiary Disability Type:</label>
-       <select id="Disability_Category" name="Disability_Category">
-        <option value="physical">Physical Disability</option>
-        <option value="mental">Mental Disability</option>
-        <option value="sensory">Sensory Disability</option>
-        <option value="other">Other</option>
-        </select>
-   
-   
-       <label for="gender">Gender:</label>
-       <select id="gender" name="gender">
-        <option value="male">M</option>
-        <option value="female">F</option>
-       </select>
-     
-       <label for="picture">Picture:</label>
-       <input type="file" id="picture" name="picture">
-
-   
-        <label for="documents">Upload Documents:</label>
-       <input type="file" id="documents" name="documents">
+    <header>
+        <img src="nourlg.png" alt="Foundation Logo">
+    </header>
+    <nav>
+        <ul>
+            <li id="toggleLang" onclick="toggleLanguage()">إضافة راعي</li>
+        </ul>
+    </nav>
 
 
+    <div lang="en">
+        <form action="/Ajouter_Sponsor" method="POST">
+            <label for="AuthorityName">Sponsor Name:</label>
+            <input type="text" id="AuthorityName" name="AuthorityName" required>
 
-     <button type="submit">Add Beneficiary</button>
+            <label for="AuthorityPhoneNumber">Phone Number:</label>
+            <input type="tel" id="AuthorityPhoneNumber" name="AuthorityPhoneNumber" required>
 
-    </form>
+            <label for="Join_Date">Join Date:</label>
+            <input type="text" id="Join_Date" name="Join_Date" required>
 
+            <label for="Authorityemail">E-mail:</label>
+            <input type="email" id="Authorityemail" name="Authorityemail" required>
+
+            <label for="AuthorityAddress">Sponsor Address:</label>
+            <input type="text" id="AuthorityAddress" name="AuthorityAddress" required>
+
+            <button type="submit">Add Sponsor</button>
+        </form>
+    </div>
+
+    <div lang="ar">
+        <form action="/Ajouter_Sponsor" method="POST">
+            <label for="AuthorityName">اسم الراعي:</label>
+            <input type="text" id="AuthorityName" name="AuthorityName" required>
+
+            <label for="AuthorityPhoneNumber">رقم الهاتف:</label>
+            <input type="tel" id="AuthorityPhoneNumber" name="AuthorityPhoneNumber" required>
+
+            <label for="Join_Date">تاريخ الانضمام:</label>
+            <input type="text" id="Join_Date" name="Join_Date" required>
+
+            <label for="Authorityemail">البريد الإلكتروني:</label>
+            <input type="email" id="Authorityemail" name="Authorityemail" required>
+
+            <label for="AuthorityAddress">عنوان الراعي:</label>
+            <input type="text" id="AuthorityAddress" name="AuthorityAddress" required>
+
+            <button type="submit">إضافة راعي</button>
+        </form>
+    </div>
+
+    <!-- Initialize jQuery UI Datepicker -->
+    <script>
+        $(document).ready(function () {
+            $("#Join_Date").datepicker({
+                dateFormat: 'dd/mm/yy', // Set the desired date format
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+
+        function toggleLanguage() {
+            var element = document.querySelector('div[lang]');
+            if (element.lang === 'en') {
+                element.lang = 'ar';
+            } else {
+                element.lang = 'en';
+            }
+        }
+    </script>
 </body>
 </html>
