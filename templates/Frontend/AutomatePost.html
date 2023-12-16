@@ -3,26 +3,28 @@
 <head>
     <title>Automate a Post</title>
     <style>
-         body {
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
 
         header {
-            background-color:white;
+            background-color: white;
             color: white;
             text-align: center;
             padding: 10px;
         }
+
         header img {
-            height: 170px; 
+            height: 170px;
             margin-right: 10px;
-        
         }
+
         h1 {
             text-align: center;
         }
+
         nav {
             background-color: #13472E;
             color: white;
@@ -46,7 +48,6 @@
             color: white;
         }
 
-
         form {
             max-width: 500px;
             margin: 0 auto;
@@ -57,7 +58,7 @@
             margin-top: 10px;
         }
 
-        button[type="text"], input[type="tel"], select {
+        textarea {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
@@ -65,13 +66,8 @@
             border-radius: 4px;
         }
 
-        button[type="file"] {
-            width: 100%;
-            margin-top: 5px;
-        }
-
         button[type="submit"] {
-            background-color:#864d25 ;
+            background-color: #864d25;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -87,19 +83,42 @@
 <body>
     <header>
         <img src="nourlg.png" alt="Foundation Logo">
-   </header>
-   <nav>
-    <ul>
-        <li>Automate a Post </li>
-    </ul>
-</nav>
-<form action="/AutomatePost" method="post">
+    </header>
+    <nav>
+        <ul>
+            <li>Automate a Post</li>
+        </ul>
+    </nav>
+    <button onclick="toggleLanguage()">تبديل اللغة</button>
 
-    <label for="post_content">Post Content:</label>
-        <textarea id="post_content" name="post_content" rows="4" cols="50" required></textarea>
-        <br>
-        <button type="submit">Post on Facebook</button>
-</form>
+    <div lang="en">
+        <form action="/AutomatePost" method="post">
+            <label for="post_content">Post Content:</label>
+            <textarea id="post_content" name="post_content" rows="4" cols="50" required></textarea>
+            <br>
+            <button type="submit">Post on Facebook</button>
+        </form>
+    </div>
+
+    <div lang="ar">
+        <form action="/AutomatePost" method="post">
+            <label for="post_content">محتوى النشر:</label>
+            <textarea id="post_content" name="post_content" rows="4" cols="50" required></textarea>
+            <br>
+            <button type="submit">النشر على فيسبوك</button>
+        </form>
+    </div>
+
+    <script>
+        function toggleLanguage() {
+            var element = document.querySelector('div');
+            if (element.lang === 'en') {
+                element.lang = 'ar';
+            } else {
+                element.lang = 'en';
+            }
+        }
+    </script>
 
 </body>
 </html>
