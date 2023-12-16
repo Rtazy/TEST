@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Database Record</title>
     <style>
-       body {
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -23,8 +23,6 @@
             margin-right: 10px;
         }
 
-        
-       
         nav {
             background-color: #13472E;
             color: white;
@@ -47,7 +45,7 @@
             text-decoration: none;
             color: white;
         }
-        
+
         table {
             width: 95%;
             margin: 20px auto;
@@ -55,49 +53,94 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             background-color: white;
         }
+
         th, td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
+
         th {
             background-color: #f2f2f2;
         }
     </style>
 </head>
 <body>
-
     <header>
         <img src="nourlg.png" alt="Foundation Logo">
-   
-        </header>
-        <nav>
-            <ul>
-                <li>Beneficiaries Records</li>
-            </ul>
-        </nav>
+    </header>
+    <nav>
+        <ul>
+            <li>Beneficiaries Records</li>
+        </ul>
+    </nav>
 
+    <button onclick="toggleLanguage()">تبديل اللغة</button>
 
-<table>
-    <tr>
-        <th>Beneficiary ID</th>
-        <th>Full Name</th>
-        <th>Birth Place</th>
-        <th>Birth Date</th>
-        <th>Disability Starting Date</th>
-        <th>Disability Type</th>
-        <th>Gender</th>
-    </tr>
-    
+    <table>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <th>
+                <div lang="en">Beneficiary ID</div>
+                <div lang="ar">رقم المستفيد</div>
+            </th>
+            <th>
+                <div lang="en">Full Name</div>
+                <div lang="ar">الاسم الكامل</div>
+            </th>
+            <th>
+                <div lang="en">Birth Place</div>
+                <div lang="ar">مكان الميلاد</div>
+            </th>
+            <th>
+                <div lang="en">Birth Date</div>
+                <div lang="ar">تاريخ الميلاد</div>
+            </th>
+            <th>
+                <div lang="en">Disability Starting Date</div>
+                <div lang="ar">تاريخ بدء الإعاقة</div>
+            </th>
+            <th>
+                <div lang="en">Disability Type</div>
+                <div lang="ar">نوع الإعاقة</div>
+            </th>
+            <th>
+                <div lang="en">Gender</div>
+                <div lang="ar">الجنس</div>
+            </th>
         </tr>
-    
-</table>
+        <tr>
+            <td>1</td>
+            <td>
+                <div lang="en">John Doe</div>
+                <div lang="ar">جون دو</div>
+            </td>
+            <td>
+                <div lang="en">City, Country</div>
+                <div lang="ar">المدينة، البلد</div>
+            </td>
+            <td>01/01/1990</td>
+            <td>01/01/2020</td>
+            <td>
+                <div lang="en">Physical Disability</div>
+                <div lang="ar">إعاقة جسدية</div>
+            </td>
+            <td>
+                <div lang="en">Male</div>
+                <div lang="ar">ذكر</div>
+            </td>
+        </tr>
+        <!-- Add more beneficiary records as needed -->
+    </table>
 
+    <script>
+        function toggleLanguage() {
+            var element = document.querySelector('body');
+            if (element.lang === 'en') {
+                element.lang = 'ar';
+            } else {
+                element.lang = 'en';
+            }
+        }
+    </script>
 </body>
 </html>
