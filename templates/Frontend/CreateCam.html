@@ -1,30 +1,26 @@
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Donor </title>
+    <title>Add Campaign</title>
     <style>
-         #message {
-    background-color: #f2f2f2;
-    color: #333;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+        }
+
+        #message {
+            background-color: #f2f2f2;
+            color: #333;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
         }
 
         header {
@@ -33,14 +29,12 @@
             text-align: center;
             padding: 10px;
         }
+
         header img {
             height: 170px; 
             margin-right: 10px;
-        
         }
-        h1 {
-            text-align: center;
-        }
+
         nav {
             background-color: #13472E;
             color: white;
@@ -63,7 +57,6 @@
             text-decoration: none;
             color: white;
         }
-
 
         form {
             max-width: 500px;
@@ -89,7 +82,7 @@
         }
 
         button[type="submit"] {
-            background-color:#864d25 ;
+            background-color: #864d25;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -103,43 +96,78 @@
     </style>
 </head>
 <body>
-    <header>
-    <img src="nourlg.png" alt="Foundation Logo">
-    </header>
-     
-            <ul>
-                <li>Create New Campaign</li>
-            </ul>
-        </nav>
-     <div id="message">
+    <div id="message">
         {% if hey %}
             {{ hey }}
         {% endif %}
     </div>
-     
-    <form action="/Ajouter_Campaingne" method="post" enctype="multipart/form-data">
-        <label for="title">Campaign Title:</label>
-        <input type="text" id="title" name="title" required>
 
-        <label for="text">Campaign Text:</label>
-        <textarea id="text" name="text" rows="4" required></textarea>
+    <header>
+        <img src="nourlg.png" alt="Foundation Logo">
+    </header>
+    
+    <nav>
+        <ul>
+            <li>Add Campaign</li>
+        </ul>
+    </nav>
 
-        <label for="picture">Picture:</label>
-        <input type="file" id="picture" name="picture" accept="image/*">
+    <div lang="en">
+        <form action="/Ajouter_Campaign" method="post" enctype="multipart/form-data">
+            <label for="title">Campaign Title:</label>
+            <input type="text" id="title" name="title" required>
 
-        <label for="date">Campaign Start Date:</label>
-        <input type="text" id="date" name="date" required>
+            <label for="text">Campaign Text:</label>
+            <textarea id="text" name="text" rows="4" required></textarea>
 
-        <label for="e_date">Campaign End Date:</label>
-        <input type="text" id="e_date" name="e_date" required>
+            <label for="picture">Picture:</label>
+            <input type="file" id="picture" name="picture" accept="image/*">
 
-        <!-- Other form elements -->
+            <label for="date">Campaign Start Date:</label>
+            <input type="text" id="date" name="date" required>
 
-        <button type="submit">Submit</button>
-    </form>
+            <label for="e_date">Campaign End Date:</label>
+            <input type="text" id="e_date" name="e_date" required>
+
+            <!-- Other form elements -->
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div lang="ar">
+        <form action="/Ajouter_Campaign" method="post" enctype="multipart/form-data">
+            <label for="title">عنوان الحملة:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="text">نص الحملة:</label>
+            <textarea id="text" name="text" rows="4" required></textarea>
+
+            <label for="picture">صورة:</label>
+            <input type="file" id="picture" name="picture" accept="image/*">
+
+            <label for="date">تاريخ بدء الحملة:</label>
+            <input type="text" id="date" name="date" required>
+
+            <label for="e_date">تاريخ انتهاء الحملة:</label>
+            <input type="text" id="e_date" name="e_date" required>
+
+            <!-- Other form elements -->
+
+            <button type="submit">إرسال</button>
+        </form>
+    </div>
 
     <!-- Initialize jQuery UI Datepicker -->
     <script>
+        function toggleLanguage() {
+            var element = document.querySelector('div');
+            if (element.lang === 'en') {
+                element.lang = 'ar';
+            } else {
+                element.lang = 'en';
+            }
+        }
         $(document).ready(function () {
             $("#date, #e_date").datepicker({
                 dateFormat: 'dd/mm/yy', // Set the desired date format
