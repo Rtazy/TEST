@@ -1,28 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beneficiary Application Form</title>
     <style>
-          body {
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
 
         header {
-            background-color:white;
+            background-color: white;
             color: white;
             text-align: center;
             padding: 10px;
         }
+
         header img {
-            height: 170px; 
+            height: 170px;
             margin-right: 10px;
-        
         }
+
         h1 {
             text-align: center;
         }
+
         nav {
             background-color: #13472E;
             color: white;
@@ -46,7 +50,6 @@
             color: white;
         }
 
-
         form {
             max-width: 500px;
             margin: 0 auto;
@@ -57,7 +60,9 @@
             margin-top: 10px;
         }
 
-        button[type="text"], input[type="tel"], select {
+        button[type="text"],
+        input[type="tel"],
+        select {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
@@ -71,7 +76,7 @@
         }
 
         button[type="submit"] {
-            background-color:#864d25 ;
+            background-color: #864d25;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -87,58 +92,70 @@
 <body>
     <header>
         <img src="nourlg.png" alt="Foundation Logo">
-   </header>
-   <nav>
-    <ul>
-        <li>Beneficiary Application </li>
-    </ul>
-</nav>
+    </header>
+    <nav>
+        <ul>
+            <li>Beneficiary Application </li>
+        </ul>
+    </nav>
 
-<form action="BenfForm" method="post">
-    
+    <button onclick="toggleLanguage()">تبديل اللغة</button>
 
- 
-    <label for="Beneficiaryfullname"> Beneficiary Full Name:</label>
-    <input type="text" id="Beneficiaryfullname" name="Beneficiaryfullname" required>
+    <div lang="en">
+        <form action="BenfForm" method="post">
+            <!-- English form content here -->
 
-    <label for="BeneficiaryBirthDate">Beneficiary Birth Date:</label>
-    <input type="date" id="BeneficiaryBirthDate" name="BeneficiaryBirthDate" placeholder="DD/MM/YYYY" required>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
 
-    
-    <label for="birthplace">Beneficiary Birth place:</label>
-    <input type="text" id="birthplace" name="birthplace" required>
-    
+    <div lang="ar">
+        <form action="BenfForm" method="post">
+            <label for="Beneficiaryfullname">اسم المستفيد:</label>
+            <input type="text" id="Beneficiaryfullname" name="Beneficiaryfullname" required>
 
-    <label for="Disability_Date">Beneficiary Disability Starting Date:</label>
-    <input type="date" id="Disability_Date" name="Disability_Date" required>
+            <label for="BeneficiaryBirthDate">تاريخ ميلاد المستفيد:</label>
+            <input type="date" id="BeneficiaryBirthDate" name="BeneficiaryBirthDate" placeholder="DD/MM/YYYY" required>
 
-  
+            <label for="birthplace">مكان ولادة المستفيد:</label>
+            <input type="text" id="birthplace" name="birthplace" required>
 
-    <label for="disabilityType">Beneficiary Disability Type:</label>
-    <select id="disabilityType" name="disabilityType">
-        <option value="physical">Physical Disability</option>
-        <option value="mental">Mental Disability</option>
-        <option value="sensory">Sensory Disability</option>
-        <option value="other">Other</option>
-    </select>
+            <label for="Disability_Date">تاريخ بداية الإعاقة:</label>
+            <input type="date" id="Disability_Date" name="Disability_Date" required>
 
-   
-    <label for="gender">Gender:</label>
-    <select id="gender" name="gender">
-        <option value="male">M</option>
-        <option value="female">F</option>
-    </select>
-     
-    <label for="picture">Picture:</label>
-    <input type="file" id="picture" name="picture">
+            <label for="disabilityType">نوع الإعاقة للمستفيد:</label>
+            <select id="disabilityType" name="disabilityType">
+                <option value="physical">إعاقة جسدية</option>
+                <option value="mental">إعاقة عقلية</option>
+                <option value="sensory">إعاقة حسية</option>
+                <option value="other">أخرى</option>
+            </select>
 
-   
-    <label for="Beneficiary_documents">Upload Documents:</label>
-    <input type="file" id="Beneficiary_documents" name="Beneficiary_documents">
+            <label for="gender">الجنس:</label>
+            <select id="gender" name="gender">
+                <option value="male">ذكر</option>
+                <option value="female">أنثى</option>
+            </select>
 
-    <input type="submit" value="Submit">
-</form>
+            <label for="picture">صورة المستفيد:</label>
+            <input type="file" id="picture" name="picture">
 
+            <label for="Beneficiary_documents">تحميل المستندات:</label>
+            <input type="file" id="Beneficiary_documents" name="Beneficiary_documents">
+
+            <input type="submit" value="إرسال">
+        </form>
+    </div>
+
+    <script>
+        function toggleLanguage() {
+            var element = document.querySelector('div[lang]');
+            if (element.lang === 'en') {
+                element.lang = 'ar';
+            } else {
+                element.lang = 'en';
+            }
+        }
+    </script>
 </body>
 </html>
-
