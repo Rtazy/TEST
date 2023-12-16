@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Announcement Form</title>
     <style>
-                #message {
-    background-color: #f2f2f2;
-    color: #333;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+        #message {
+            background-color: #f2f2f2;
+            color: #333;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -20,19 +21,17 @@
         }
 
         header {
-            background-color:white;
+            background-color: white;
             color: white;
             text-align: center;
             padding: 10px;
         }
+
         header img {
             height: 170px; 
             margin-right: 10px;
-        
         }
-        h1 {
-            text-align: center;
-        }
+
         nav {
             background-color: #13472E;
             color: white;
@@ -56,7 +55,6 @@
             color: white;
         }
 
-
         form {
             max-width: 500px;
             margin: 0 auto;
@@ -67,7 +65,9 @@
             margin-top: 10px;
         }
 
-        button[type="text"], input[type="tel"], select {
+        button[type="text"],
+        input[type="tel"],
+        select {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
@@ -81,7 +81,7 @@
         }
 
         button[type="submit"] {
-            background-color:#864d25 ;
+            background-color: #864d25;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -92,49 +92,60 @@
         button[type="submit"]:hover {
             background-color: blue;
         }
+
+        .form-container {
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <header>
         <img src="nourlg.png" alt="Foundation Logo">
-        </header>
-        <nav>
-            <ul>
-                <li>Delete Announcement</li>
-            </ul>
-        </nav>
-        </nav>
-        <div id="message">
+    </header>
+    
+    <nav>
+        <ul>
+            <li>Delete Announcement</li>
+        </ul>
+    </nav>
+
+    <div id="message">
         {% if hey %}
             {{ hey }}
         {% endif %}
     </div>
- <div id="html-placeholder">        
-     {% if tbl %}
-            {{ tbl | safe}}
-     {% endif %}</div>
 
-      
+    <div id="html-placeholder">        
+        {% if tbl %}
+            {{ tbl | safe }}
+        {% endif %}
+    </div>
 
-<div class="form-container">
-    <form action="/Retirer_Annonce" method="post">
-        <label for="announcementId">Announcement ID:</label>
-        <input type="text" id="announcementId" name="announcementId" required>
-        <button type="submit">Delete Announcement</button>
-    </form>
-</div>
-<script>
-         
-        /* async function fetchHtml() {
-            const response = await fetch('/api/get_html');
-            const data = await response;
-            document.getElementById('html-placeholder').innerHTML = data.html;
-        }*/
+    <div class="form-container" lang="en">
+        <form action="/Retirer_Annonce" method="post">
+            <label for="announcementId">Announcement ID:</label>
+            <input type="text" id="announcementId" name="announcementId" required>
+            <button type="submit">Delete Announcement</button>
+        </form>
+    </div>
 
-         
-        //fetchHtml();
+    <div class="form-container" lang="ar">
+        <form action="/Retirer_Annonce" method="post">
+            <label for="announcementId">رقم الإعلان:</label>
+            <input type="text" id="announcementId" name="announcementId" required>
+            <button type="submit">حذف الإعلان</button>
+        </form>
+    </div>
 
-       // setInterval(fetchHtml, 5000);
-    </script> 
+    <script>
+        function toggleLanguage() {
+            var element = document.querySelector('div');
+            if (element.lang === 'en') {
+                element.lang = 'ar';
+            } else {
+                element.lang = 'en';
+            }
+        }
+    </script>
 </body>
 </html>
