@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dasboard Arabic</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color:white;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        header img {
+            height: 170px; 
+            margin-right: 10px;
+        
+        }
+        h1 {
+            text-align: center;
+        }
+        nav {
+            background-color: #13472E;
+            color: white;
+            padding: 3px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+        }
+        section {
+            margin: 20px;
+            font-family: 'Times New Roman', Times, serif;
+            text-align: right;
+        }
+
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        button[type="text"], input[type="tel"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button[type="file"] {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+       
+
+        button[type="submit"]:hover {
+            background-color: blue;
+        }
+        .button {
+            background-color: #864d25;
+            color: white;
+            display: inline-block;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        button a {
+        text-decoration: none;
+        color: #EAE5DF; 
+        }
+        
+        .img {
+            width: 200;
+            height: auto;
+        }
+
+        .button:hover {
+            background-color: #13472E;
+            
+
+        }
+
+        /* Map Styles */
+        .map-container {
+            position: relative;
+            padding-bottom: 75%; 
+            height: 0;
+            overflow: hidden;
+        }
+
+        .map-container iframe {
+            position: absolute;
+    
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        a button {
+            background-color: #bb9376;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            text-align: left;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+        }
+        h2 {
+            
+            color: rgb(92, 48, 17);
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        button a {
+        text-decoration: none;
+        color: #EAE5DF; 
+        }
+    </style>
+</head>
+<body>
+    <header>
+         <img src="nourlg.png" alt="Foundation Logo">
+      
+    </header>
+    <nav>
+        <ul>
+            <li>الرئيسية</li>
+        </ul>
+    </nav>
+
+    <section id="manage-benefeciaries">
+        <h2> المستفيدين</h2>
+        <a href="ViewBenf.html" target="_blank"><button>عرض المستفيدين</button> </a>
+        <a href="ADDBenf.html" target="_blank"><button>إضافة المستفيدين </button> </a>
+        <a href="EditBenf.html" target="_blank"><button>تعديل المستفيدين</button> </a>
+        <a href="DeleteBenf.html" target="_blank"><button>حذف المستفيدين</button> </a>
+    </section>
+    
+    <section id="manage-donors">
+        <h2>المتبرعين</h2>
+        <a href="ViewDonor.html" target="_blank"><button>عرض المتبرعين</button> </a>
+        <a href="ADDdonor.html" target="_blank"><button>إضافة المتبرعين</button></a>
+        <a href="EditDonor.html" target="_blank"><button>تعديل المتبرعين</button> </a>
+        <a href="DeleteDonor.html" target="_blank"><button>حذف المتبرعين</button> </a>
+    </section>
+    <section id="manage-Authorities">
+        <h2>السلطات</h2>
+        <a href="ViewAuthority.html" target="_blank"><button>عرض السلطات</button> </a>
+        <a href="ADDAuthority.html" target="_blank"><button>إضافة السلطات</button></a>
+        <a href="EditAuthority.html" target="_blank"><button>تحرير السلطات</button> </a>
+        <a href="DeleteAuthority.html" target="_blank"><button>حذف السلطات</button> </a>
+    </section>
+    <section id="campaign">
+        <h2>حملات</h2>
+        <a href="CreateCam.html" target="_blank"><button>إنشاء حملة</button> </a>
+        <a href="DeleteCam.html" target="_blank"><button>حذف الحملة</button> </a>
+    </section>
+    <section id="announcement">
+        <h2>إعلانات</h2>
+        <a href="CreateAn.html" target="_blank"><button>إنشاء إعلان</button> </a>
+        <a href="DeleteAn.html" target="_blank"><button>حذف الإعلان</button> </a>
+    </section>
+    <section id ="Posts"> 
+        <h2>إنشاء منشور </h2>
+        <a href="Post.html" target="_blank"><button>إنشاء منشور </button> </a>
+    </section>
+    <footer>
+        <p>&copy; 2023 AlNourFoundation</p>
+    </footer>
+    <a href="PublicPage.html" class="logout-button">Logout</a>
+</body>
+</html>
