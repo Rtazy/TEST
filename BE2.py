@@ -185,8 +185,8 @@ def Select_entity(table,pkcol,entity_id):
 
 def Del_data(table_name, key_column, key_value):
 
-
-    cursor = connect_db().cursor()
+    conn=connect_db()
+    cursor = conn.cursor()
 
     query = sql.SQL("DELETE FROM {} WHERE {} = %s").format(
         sql.Identifier(table_name),
@@ -194,11 +194,10 @@ def Del_data(table_name, key_column, key_value):
     )
 
     cursor.execute(query, (key_value,))
-    connect_db().commit()
-    connect_db().commit()
-    connect_db().commit()
+  
+    conn.commit()
     cursor.close()
-    connect_db().close()
+    conn.close()
 ########################################
 ########################################
 
