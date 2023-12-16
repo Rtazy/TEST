@@ -1,131 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Campaign Form</title>
-    <style>
-       body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
 
-        header {
-            background-color:white;
-            color: white;
-            text-align: center;
-            padding: 10px;
-        }
-        header img {
-            height: 170px; 
-            margin-right: 10px;
-        
-        }
-        h1 {
-            text-align: center;
-        }
-        nav {
-            background-color: #13472E;
-            color: white;
-            padding: 3px;
-        }
-
-        nav ul {
-            list-style-type: none;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin-right: 10px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: white;
-        }
-
-
-        form {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        label {
-            display: block;
-            margin-top: 10px;
-        }
-
-        button[type="text"], input[type="tel"], select {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        button[type="file"] {
-            width: 100%;
-            margin-top: 5px;
-        }
-
-        button[type="submit"] {
-            background-color:#864d25 ;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button[type="submit"]:hover {
-            background-color: blue;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <img src="nourlg.png" alt="Foundation Logo">
-        </header>
-        <nav>
-            <ul>
-                <li>Delete Campaign</li>
-            </ul>
-        </nav>
-
-
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Retirer un sponsor </title>
+    <title>Remove a Sponsor</title>
     <style>
-         #message {
-    background-color: #f2f2f2;
-    color: #333;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+        #message {
+            background-color: #f2f2f2;
+            color: #333;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -133,19 +25,21 @@
         }
 
         header {
-            background-color:white;
+            background-color: white;
             color: white;
             text-align: center;
             padding: 10px;
         }
+
         header img {
-            height: 170px; 
+            height: 170px;
             margin-right: 10px;
-        
         }
+
         h1 {
             text-align: center;
         }
+
         nav {
             background-color: #13472E;
             color: white;
@@ -169,7 +63,6 @@
             color: white;
         }
 
-
         form {
             max-width: 500px;
             margin: 0 auto;
@@ -180,7 +73,9 @@
             margin-top: 10px;
         }
 
-        button[type="text"], input[type="tel"], select {
+        button[type="text"],
+        input[type="tel"],
+        select {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
@@ -194,7 +89,7 @@
         }
 
         button[type="submit"] {
-            background-color:#864d25 ;
+            background-color: #864d25;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -207,42 +102,78 @@
         }
     </style>
 </head>
+
 <body>
-    <header>
-    <img src="nourlg.png" alt="Foundation Logo">
-    </header>
-     
-           <nav>
+    <div id="lang-en">
+        <header>
+            <img src="nourlg.png" alt="Foundation Logo">
+        </header>
+
+        <nav>
             <ul>
-                <li>Retirer Campagne</li>
+                <li>Remove Sponsor</li>
             </ul>
         </nav>
-    
-     <div id="message">
-        {% if hey %}
-            {{ hey }}
-        {% endif %}
-    </div>
-     
 
-<div class="form-container">
-    <form action="/Retirer_Campaign" method="post">
-        <label for="campaignId">Campaign ID:</label>
-        <input type="text" id="campaignId" name="campaignId" required>
-        <button type="submit">Retirer Campaign</button>
-    </form>
-</div>
+        <div id="message">
+            {% if hey %}
+                {{ hey }}
+            {% endif %}
+        </div>
+
+        <div class="form-container">
+            <form action="/Remove_Sponsor" method="post">
+                <label for="SponsorId">Sponsor ID:</label>
+                <input type="text" id="SponsorId" name="SponsorId" required>
+                <button type="submit">Delete Sponsor</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="lang-ar" dir="rtl">
+        <header>
+            <img src="nourlg.png" alt="Foundation Logo">
+        </header>
+
+        <nav>
+            <ul>
+                <li>حذف كفيل</li>
+            </ul>
+        </nav>
+
+        <div id="message">
+            {% if hey %}
+                {{ hey }} <!-- Add Arabic translation here -->
+            {% endif %}
+        </div>
+
+        <div class="form-container">
+            <form action="/Remove_Sponsor" method="post">
+                <label for="SponsorId">رقم الكفيل:</label>
+                <input type="text" id="SponsorId" name="SponsorId" required>
+                <button type="submit">حذف الكفيل</button>
+            </form>
+        </div>
+    </div>
 
     <script>
         $(document).ready(function () {
             $("#date, #e_date").datepicker({
-                dateFormat: 'dd/mm/yy', // Set the desired date format
+                dateFormat: 'dd/mm/yy',
                 changeMonth: true,
                 changeYear: true
             });
         });
+
+        function toggleLanguage() {
+            var element = document.querySelector('body');
+            if (element.lang === 'en') {
+                element.lang = 'ar';
+            } else {
+                element.lang = 'en';
+            }
+        }
     </script>
 </body>
+
 </html>
-
-
