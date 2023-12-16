@@ -23,8 +23,6 @@
             margin-right: 10px;
         }
 
-        
-       
         nav {
             background-color: #13472E;
             color: white;
@@ -47,7 +45,7 @@
             text-decoration: none;
             color: white;
         }
-        
+
         table {
             width: 95%;
             margin: 20px auto;
@@ -55,49 +53,83 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             background-color: white;
         }
+
         th, td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
+
         th {
             background-color: #f2f2f2;
         }
     </style>
 </head>
 <body>
-
     <header>
         <img src="nourlg.png" alt="Foundation Logo">
-        
-        </header>
-        <nav>
-            <ul>
-                <li>Authorities Records</li>
-            </ul>
-        </nav>
+    </header>
+    <nav>
+        <ul>
+            <li>Authorities Records</li>
+        </ul>
+    </nav>
 
-<table>
-    <tr>
-        <th>Authority ID</th>
-        <th>Full Name</th>
-        <th>Phone Number</th>
-        <th>Fax Number</th>
-        <th>Email</th>
-        <th>Address</th>
-       
-    </tr>
-    
+    <button onclick="toggleLanguage()">تبديل اللغة</button>
+
+    <table>
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <th>
+                <div lang="en">Authority ID</div>
+                <div lang="ar">رقم السلطة</div>
+            </th>
+            <th>
+                <div lang="en">Full Name</div>
+                <div lang="ar">الاسم الكامل</div>
+            </th>
+            <th>
+                <div lang="en">Phone Number</div>
+                <div lang="ar">رقم الهاتف</div>
+            </th>
+            <th>
+                <div lang="en">Fax Number</div>
+                <div lang="ar">رقم الفاكس</div>
+            </th>
+            <th>
+                <div lang="en">Email</div>
+                <div lang="ar">البريد الإلكتروني</div>
+            </th>
+            <th>
+                <div lang="en">Address</div>
+                <div lang="ar">العنوان</div>
+            </th>
         </tr>
-    
-</table>
+        <tr>
+            <td>1</td>
+            <td>
+                <div lang="en">John Doe</div>
+                <div lang="ar">جون دو</div>
+            </td>
+            <td>123456789</td>
+            <td>987654321</td>
+            <td>john.doe@example.com</td>
+            <td>
+                <div lang="en">City, Country</div>
+                <div lang="ar">المدينة، البلد</div>
+            </td>
+        </tr>
+        <!-- Add more authority records as needed -->
+    </table>
 
+    <script>
+        function toggleLanguage() {
+            var element = document.querySelector('body');
+            if (element.lang === 'en') {
+                element.lang = 'ar';
+            } else {
+                element.lang = 'en';
+            }
+        }
+    </script>
 </body>
 </html>
