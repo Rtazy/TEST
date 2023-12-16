@@ -110,17 +110,16 @@
     </header>
     <nav>
         <ul>
-            <li>Add Authority</li>
+            <li>إضافة راعي</li>
         </ul>
     </nav>
 
+    
+    <div lang="en">
     <form action="/Ajouter_Sponsor" method="POST">
 
         
-        <label for="AuthorityID">Authority ID:</label>
-        <input type="text" id="AuthorityID" name="AuthorityID" required>
-
-        <label for="AuthorityName">Authority Name:</label>
+        <label for="AuthorityName">Sponsor Name:</label>
         <input type="text" id="AuthorityName" name="AuthorityName" required>
 
         <label for="PhoneNumber">Phone Number:</label>
@@ -132,13 +131,38 @@
         <label for="email"> E-mail:</label>
         <input type="email" id="Authorityemail" name="Authorityemail" required >
         
-       <label for="AuthorityAddress">Authority Address:</label>
+       <label for="AuthorityAddress">Sponsor Address:</label>
        <input type="text" id="AuthorityAddress" name="AuthorityAddress" required>
 
 
-        <button type="submit">Add Authority</button>
+        <button type="submit">Add Sponsor</button>
 
     </form>
+    </div>
+    <div lang="ar">
+     <form action="/Ajouter_Sponsor" method="POST">
+
+    <label for="AuthorityName">اسم الراعي:</label>
+    <input type="text" id="AuthorityName" name="AuthorityName" required>
+
+    <label for="PhoneNumber">رقم الهاتف:</label>
+    <input type="tel" id="AuthorityPhoneNumber" name="AuthorityPhoneNumber" required>
+
+    <label for="Join_Date">تاريخ الانضمام:</label>
+    <input type="text" id="Join_Date" name="Join_Date" required>
+
+    <label for="email">البريد الإلكتروني:</label>
+    <input type="email" id="Authorityemail" name="Authorityemail" required>
+
+    <label for="AuthorityAddress">عنوان الراعي:</label>
+    <input type="text" id="AuthorityAddress" name="AuthorityAddress" required>
+
+    <button type="submit">إضافة راعي</button>
+
+</form>
+
+        
+    </div >
  <!-- Initialize jQuery UI Datepicker -->
     <script>
         $(document).ready(function () {
