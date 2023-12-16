@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+         <!DOCTYPE html>
 <html>
 <head>
     <title>Authority Contact Form</title>
@@ -93,6 +93,8 @@
         <li>Authority Contact Form </li>
     </ul>
 </nav>
+<button onclick="toggleLanguage()">تبديل اللغة</button>
+
 
 
     <div lang="en">
@@ -142,6 +144,16 @@
 </div>
 
 
+<script>
+  function toggleLanguage() {
+    var element = document.querySelector('div');
+    if (element.lang === 'en') {
+      element.lang = 'es';
+    } else {
+      element.lang = 'en';
+    }
+  }
+</script>
 
 </body>
 </html>
