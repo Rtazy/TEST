@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Authority </title>
+    <title>Edit Authority</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,19 +12,17 @@
         }
 
         header {
-            background-color:white;
+            background-color: white;
             color: white;
             text-align: center;
             padding: 10px;
         }
+
         header img {
             height: 170px; 
             margin-right: 10px;
-        
         }
-        h1 {
-            text-align: center;
-        }
+
         nav {
             background-color: #13472E;
             color: white;
@@ -48,8 +46,7 @@
             color: white;
         }
 
-
-        form {
+        .form-container {
             max-width: 500px;
             margin: 0 auto;
         }
@@ -59,7 +56,9 @@
             margin-top: 10px;
         }
 
-        button[type="text"], input[type="tel"], select {
+        button[type="text"],
+        input[type="tel"],
+        select {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
@@ -73,7 +72,7 @@
         }
 
         button[type="submit"] {
-            background-color:#864d25 ;
+            background-color: #864d25;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -88,45 +87,68 @@
 </head>
 <body>
     <header>
-    <img src="nourlg.png" alt="Foundation Logo">
-
+        <img src="nourlg.png" alt="Foundation Logo">
     </header>
     <nav>
         <ul>
-            <li>Edit Authority</li>
+            <li>
+                <div lang="en">Edit Authority</div>
+                <div lang="ar">تحرير السلطة</div>
+            </li>
         </ul>
     </nav>
     <div class="form-container">
         <form action="editAuthorityForm" method="post">
             <label for="AuthorityID">Authority ID:</label>
             <input type="text" id="AuthorityID" name="AuthorityID" required>
-    
-            <button type="button" onclick="selectAuthority()">Select Authority</button>
-    
-            <label for="AuthorityName">Authority Name:</label>
-            <input type="text" id="AuthorityName" name="AuthorityName" >
-    
-            <label for="PhoneNumber">Phone Number:</label>
-            <input type="tel" id="AuthorityPhoneNumber" name="AuthorityPhoneNumber" >
-    
-            <label for="FaxNumber">Fax Number:</label>
-            <input type="tel" id="FaxNumber" name="FaxNumber" >
 
-            <label for="email"> E-mail:</label>
-            <input type="email" id="Authorityemail" name="Authorityemail" >
-            
+            <button type="button" onclick="selectAuthority()">
+                <div lang="en">Select Authority</div>
+                <div lang="ar">تحديد السلطة</div>
+            </button>
+
+            <label for="AuthorityName">Authority Name:</label>
+            <input type="text" id="AuthorityName" name="AuthorityName">
+
+            <label for="AuthorityPhoneNumber">Phone Number:</label>
+            <input type="tel" id="AuthorityPhoneNumber" name="AuthorityPhoneNumber">
+
+            <label for="FaxNumber">Fax Number:</label>
+            <input type="tel" id="FaxNumber" name="FaxNumber">
+
+            <label for="Authorityemail">E-mail:</label>
+            <input type="email" id="Authorityemail" name="Authorityemail">
+
             <label for="AuthorityAddress">Authority Address:</label>
-            <input type="text" id="AuthorityAddress" name="AuthorityAddress" >
+            <input type="text" id="AuthorityAddress" name="AuthorityAddress">
 
             <label for="documents">Upload Documents:</label>
             <input type="file" id="documents" name="documents">
-    
-           
-    
-            <button type="button" onclick="updateAuthority()">Update Authority</button>
+
+            <button type="button" onclick="updateAuthority()">
+                <div lang="en">Update Authority</div>
+                <div lang="ar">تحديث السلطة</div>
+            </button>
         </form>
     </div>
-    
 
+    <script>
+        function toggleLanguage() {
+            var element = document.querySelector('body');
+            if (element.lang === 'en') {
+                element.lang = 'ar';
+            } else {
+                element.lang = 'en';
+            }
+        }
+
+        function selectAuthority() {
+            // Add logic for selecting authority
+        }
+
+        function updateAuthority() {
+            // Add logic for updating authority
+        }
+    </script>
 </body>
 </html>
