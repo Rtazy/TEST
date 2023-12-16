@@ -107,12 +107,14 @@
             <li>Add a new Beneficiary</li>
         </ul>
     </nav>
+    <button onclick="toggleLanguage()">Toggle Language</button>
+
         <div id="message">
         {% if hey %}
             {{ hey }}
         {% endif %}
     </div>
-
+<div lang="en">
     <form action="/nouveau_beneficiere" method="POST">
 
         <label for="beneficiaryId">Beneficiary social ID</label>
@@ -162,7 +164,71 @@
      <button type="submit">Add Beneficiary</button>
 
     </form>
+      </div>
+    <div lang="ar">
+    <form action="/nouveau_beneficiere" method="POST">
+
+        <label for="beneficiaryId">:رقم البطاقة الوطنية للمستفيد</label>
+        <input type="text" id="beneficiaryId" name="beneficiaryId" required >
+
+        <label for="Name"> :الاسم الكامل للمستفيد</label>
+        <input type="text" id="Name" name="Name" required >
+
+        <label for="Birthdate">:تاريخ ميلاد المستفيد</label>
+        <input type="text" id="b_date" name="b_date"  required>
+
+    
+        <label for="Birth_Place">:مكان ميلاد المستفيد</label>
+        <input type="text" id="Birth_Place" name="Birth_Place"  required>
+    
+      
+       <label for="d_date">:تاريخ بدء إعاقة المستفيد</label>
+       <input type="text" id="d_date" name="date" required>
+
+       <label for="date">:تاريخ انضمام المستفيد</label>
+       <input type="text" id="date" name="date" required>
+        
+       <label for="Disability_Category">نوع إعاقة المستفيد:</label>
+       <select id="Disability_Category" name="Disability_Category">
+        <option value="physical">إعاقة حركية</option>
+        <option value="mental">إعاقة ذهنية</option>
+        <option value="sensory">إعاقة حسية</option>
+        <option value="other">آخر</option>
+        </select>
+   
+   
+       <label for="gender">Gender:</label>
+       <select id="gender" name="gender">
+        <option value="male">M</option>
+        <option value="female">F</option>
+       </select>
+     
+       <label for="picture">Picture:</label>
+       <input type="file" id="picture" name="picture">
+
+   
+        <label for="documents">Upload Documents:</label>
+       <input type="file" id="documents" name="documents">
+
+
+
+     <button type="submit">Add Beneficiary</button>
+
+    </form>
+         </div>
 <script>
+    <button onclick="toggleLanguage()">Toggle Language</button>
+
+
+  function toggleLanguage() {
+    var element = document.querySelector('div');
+    if (element.lang === 'ar') {
+      element.lang = 'en';
+    } else {
+      element.lang = 'ar';
+    }
+  }
+
         $(document).ready(function () {
             $("#date, #b_date, #d_date").datepicker({
                 dateFormat: 'dd/mm/yy', // Set the desired date format
