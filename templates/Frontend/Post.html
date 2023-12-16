@@ -90,6 +90,110 @@
 </nav>
     <button>Generate Post</button>
     <div id="generatedPost"></div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Needs Foundation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: white;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        header img {
+            height: 170px;
+            margin-right: 10px;
+        }
+
+        nav {
+            background-color: #13472E;
+            color: white;
+            padding: 3px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        button {
+            background-color: #864d25;
+            color: white;
+            padding: 25px 50px;
+            border: none;
+            border-radius: 4px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        button:hover {
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="nourlg.png" alt="Foundation Logo">
+    </header>
+    <nav>
+        <ul>
+            <li>
+                <div lang="en">Generate a Post</div>
+                <div lang="ar">إنشاء منشور</div>
+            </li>
+        </ul>
+    </nav>
+    <button onclick="generatePost()">Generate Post</button>
+    <div id="generatedPost"></div>
+
+    <script>
+        function toggleLanguage() {
+            var element = document.querySelector('body');
+            if (element.lang === 'en') {
+                element.lang = 'ar';
+            } else {
+                element.lang = 'en';
+            }
+        }
+
+        function generatePost() {
+            var generatedPostDiv = document.getElementById('generatedPost');
+            // Your post generation logic here
+            // You can update the innerHTML of generatedPostDiv with the generated post content
+        }
+    </script>
 
     
 </body>
