@@ -194,9 +194,9 @@ def Del_data(table_name, key_column, key_value):
     )
 
     cursor.execute(query, (key_value,))
-
     connect_db().commit()
-
+    connect_db().commit()
+    connect_db().commit()
     cursor.close()
     connect_db().close()
 ########################################
