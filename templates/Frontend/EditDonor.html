@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Donor </title>
+    <title>Edit Donor</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,19 +13,17 @@
         }
 
         header {
-            background-color:white;
+            background-color: white;
             color: white;
             text-align: center;
             padding: 10px;
         }
+
         header img {
-            height: 170px; 
+            height: 170px;
             margin-right: 10px;
-        
         }
-        h1 {
-            text-align: center;
-        }
+
         nav {
             background-color: #13472E;
             color: white;
@@ -48,8 +47,7 @@
             color: white;
         }
 
-
-        form {
+        .form-container {
             max-width: 500px;
             margin: 0 auto;
         }
@@ -59,7 +57,9 @@
             margin-top: 10px;
         }
 
-        button[type="text"], input[type="tel"], select {
+        button[type="text"],
+        input[type="tel"],
+        select {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
@@ -73,7 +73,7 @@
         }
 
         button[type="submit"] {
-            background-color:#864d25 ;
+            background-color: #864d25;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -86,44 +86,69 @@
         }
     </style>
 </head>
+
 <body>
     <header>
-    <img src="nourlg.png" alt="Foundation Logo">
-
+        <img src="nourlg.png" alt="Foundation Logo">
     </header>
     <nav>
         <ul>
-            <li>Edit Donor</li>
+            <li>
+                <div lang="en">Edit Donor</div>
+                <div lang="ar">تحرير المانح</div>
+            </li>
         </ul>
     </nav>
     <div class="form-container">
         <form action="/EditDonor" method="POST">
             <label for="DonorID">Donor ID:</label>
             <input type="text" id="DonorID" name="DonorID" required>
-    
-            <button type="button" onclick="selectDonor()">Select Donor</button>
-    
+
+            <button type="button" onclick="selectDonor()">
+                <div lang="en">Select Donor</div>
+                <div lang="ar">تحديد المانح</div>
+            </button>
+
             <label for="DonorName">Donor Name:</label>
             <input type="text" id="DonorName" name="DonorName">
-    
+
             <label for="DonorPhone">Phone Number:</label>
-            <input type="tel" id="DonorPhone" name="DonorPhone" >
-    
-            <label for="DonorEmail"> E-mail:</label>
-            <input type="email" id="DonorEmail" name="DonorEmail" >
+            <input type="tel" id="DonorPhone" name="DonorPhone">
+
+            <label for="DonorEmail">E-mail:</label>
+            <input type="email" id="DonorEmail" name="DonorEmail">
 
             <label for="Donor_Join_Date">Joining Date:</label>
             <input type="date" id="Donor_Join_Date" name="Donor_Join_Date" placeholder="DD/MM/YYYY" required>
 
             <label for="DonorDocuments">Upload Documents:</label>
             <input type="file" id="DonorDocuments" name="DonorDocuments">
-    
-           
-    
-            <button type="button" onclick="updateDonor()">Update Donor</button>
+
+            <button type="button" onclick="updateDonor()">
+                <div lang="en">Update Donor</div>
+                <div lang="ar">تحديث المانح</div>
+            </button>
         </form>
     </div>
-    
 
+    <script>
+        function toggleLanguage() {
+            var element = document.querySelector('body');
+            if (element.lang === 'en') {
+                element.lang = 'ar';
+            } else {
+                element.lang = 'en';
+            }
+        }
+
+        function selectDonor() {
+            // Add logic for selecting donor
+        }
+
+        function updateDonor() {
+            // Add logic for updating donor
+        }
+    </script>
 </body>
+
 </html>
