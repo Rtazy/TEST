@@ -129,9 +129,12 @@ def Send_Form():
 def fill_fD():
    hey=""
    if request.form['methods']==['POST']:
+     sid=request.form['DonorSID
+DonorSID']
      Name=request.form['DonorName']
      Email=request.form['DonorEmail']
      gender=request.form['Gender']
+     pnum=request.form['Phone_Number']
      Address=request.files['Address']
      documents=request.files['DonorDocuments']
      joining_date=request.form['joining_date']
@@ -470,9 +473,9 @@ def Del_Donor():
 def add_Donor():
    hey=""
    if request.form['methods']==['POST']:
-     Name=request.form['DonorName']
-     Email=request.form['DonorEmail']
-     gender=request.form['Gender']
+     Name=request.form['Full_Name']
+     Email=request.form['Email']
+     gender=request.form['gender']
      Address=request.files['Address']
      documents=request.files['DonorDocuments']
      joining_date=request.form['joining_date']
