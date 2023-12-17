@@ -175,25 +175,27 @@ def fill_fB():
          hey="Ce membre a ete ajoute"
    
      return render_template('Frontend/BenForm.html',hey=hey)   
+#################################################################
+#################################################################
      
 @app.route("/Formulair_A",methods=["GET","POST"])
 def fill_fA():
-  if request.form["methods"]==['GET','POST']: 
-      c_name=request.form['Name']
-      c_address=request.form[' Address']
-      c_email=request.form['Email ']
-      c_phoneN=request.form['Phone_Number']
-      Join_Date=request.form['Join_Date']
-      Join_Date_conv=datetime.strtime(Join_Date,"%Y-%m-%d")
-      vals=[c_name,c_address,c_email,c_phoneN,Join_Date_conv]
-      u=Select_entity("AuthoritiesForm","Email",c_email)
-      al=""
+ hey=""
+   if request.form['methods']==['POST']:
+      c_name=request.form['AuthorityName']
+      c_address=request.form['AuthorityAddress']
+      c_email=request.form['Authorityemail']
+      c_phoneN=request.form['AuthorityPhoneNumber']
+      Join_Date = datetime.strptime(request.form['Join_Date'], "%d/%m/%Y")
+      vals=[c_name,c_address,c_email,c_phoneN,Join_Date]
+      u=Select_entity("Authorities","Email",c_email)
+    
       if u!=None:
-         al="The authority already exists"
+         hey="The authority already exists"
       else:
-       insert_data_mobin('AuthoritiesForm',['Name','Address','Email','Phone_Number','Join_Date'],vals)
+       insert_data_mobin('Authorities',['Name','Address','Email','Phone_Number','Join_Date'],vals)
        al="The authority was successfully added"
-  return render_template('AuthorityContactForm.html')   
+    return render_template("Frontend/AuthorityContactForm.html",hey=hey)  
           
 #################################################################
 def get_html(table):
@@ -385,17 +387,18 @@ def add_ben():
 # function for Adding an assosciation's contact
 @app.route("/Ajouter_Sponsor",methods=['GET','POST'])
 def add_Authority():
+   hey=""
    if request.form['methods']==['POST']:
-      c_name=request.form['Name']
+      c_name=request.form['AuthorityName']
       c_address=request.form['AuthorityAddress']
       c_email=request.form['Authorityemail']
       c_phoneN=request.form['AuthorityPhoneNumber']
       Join_Date = datetime.strptime(request.form['Join_Date'], "%d/%m/%Y")
       vals=[c_name,c_address,c_email,c_phoneN,Join_Date]
       u=Select_entity("Authorities","Email",c_email)
-      al=""
+    
       if u!=None:
-         al="The authority already exists"
+         hey="The authority already exists"
       else:
        insert_data_mobin('Authorities',['Name','Address','Email','Phone_Number','Join_Date'],vals)
        al="The authority was successfully added"
