@@ -127,7 +127,7 @@ def Send_Form():
 
 @app.route("/Formulair_D",methods=["GET","POST"])
 def fill_fD():
-  hey=""
+   hey=""
    if request.form['methods']==['POST']:
      Name=request.form['DonorName']
      Email=request.form['DonorEmail']
@@ -174,7 +174,7 @@ def fill_fB():
          insert_data("BenefForm", " Documents" ,Cols, docs_bin,[Name, bdate_conv, b_place,jdate_conv,Disability_sd_con,gender,Disability_Category] )
          hey="Ce membre a ete ajoute"
    
-     return render_template('Frontend/BenForm.html')   
+     return render_template('Frontend/BenForm.html',hey=hey)   
      
 @app.route("/Formulair_A",methods=["GET","POST"])
 def fill_fA():
