@@ -146,6 +146,11 @@
                 {{ hey }} <!-- Add Arabic translation here -->
             {% endif %}
         </div>
+                <div id="message">
+            {% if hey %}
+                {{ tbl }|safe} 
+            {% endif %}
+        </div>
 
         <div class="form-container">
             <form action="/Remove_Sponsor" method="post">
