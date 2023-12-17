@@ -151,6 +151,7 @@ def fill_fD():
        
 @app.route("/Formulair_B",methods=["GET","POST"])
 def fill_fB():
+  hey=""
   if request.form["methods"]==['GET','POST']: 
      Name=request.form['BeneficiaryFullName']
      gender=request.form['Gender']
@@ -173,7 +174,7 @@ def fill_fB():
          insert_data("BenefForm", " Documents" ,Cols, docs_bin,[Name, bdate_conv, b_place,jdate_conv,Disability_sd_con,gender,Disability_Category] )
          hey="Ce membre a ete ajoute"
    
-     return render_template('BenForm.html')   
+     return render_template('Frontend/BenForm.html')   
      
 @app.route("/Formulair_A",methods=["GET","POST"])
 def fill_fA():
