@@ -91,60 +91,74 @@
             <li>Authority Contact Form </li>
         </ul>
     </nav>
+     <div id="message">
+        {% if hey %}
+            {{ hey }}
+        {% endif %}
+    </div>
     <button onclick="toggleLanguage()">تبديل اللغة</button>
 
+
+    
     <div lang="en">
-        <form action="/AuthorityContactForm" method="post">
-            <label for="AuthorityName">Authority Name:</label>
-            <input type="text" id="AuthorityName" name="AuthorityName" required>
-            
-            <label for="PhoneNumber">Phone Number:</label>
-            <input type="tel" id="AuthorityPhoneNumber" name="AuthorityPhoneNumber" required>
-            
-            <label for="FaxNumber">Fax Number:</label>
-            <input type="tel" id="FaxNumber" name="FaxNumber" required>
-            
-            <label for="AuthorityAddress">Authority Address:</label>
-            <input type="text" id="AuthorityAddress" name="AuthorityAddress" required>
-            
-            <label for="Authorityemail">E-mail:</label>
-            <input type="email" id="Authorityemail" name="Authorityemail" required>
-            
-            <input type="submit" value="Submit">
-        </form>
-    </div>
+    <form action="/Ajouter_Sponsor" method="POST">
 
+        
+        <label for="AuthorityName">Sponsor Name:</label>
+        <input type="text" id="AuthorityName" name="AuthorityName" required>
+
+        <label for="PhoneNumber">Phone Number:</label>
+        <input type="tel" id="AuthorityPhoneNumber" name="AuthorityPhoneNumber" required
+        
+       
+        <label for="Authorityemail"> E-mail:</label>
+        <input type="email" id="Authorityemail" name="Authorityemail" required >
+        
+       <label for="AuthorityAddress">Sponsor Address:</label>
+       <input type="text" id="AuthorityAddress" name="AuthorityAddress" required>
+
+
+        <button type="submit">Add Sponsor</button>
+
+    </form>
+    </div>
     <div lang="ar">
-        <form action="/AuthorityContactForm" method="post">
-            <label for="AuthorityName">اسم السلطة:</label>
-            <input type="text" id="AuthorityName" name="AuthorityName" required>
-            
-            <label for="PhoneNumber">رقم الهاتف:</label>
-            <input type="tel" id="AuthorityPhoneNumber" name="AuthorityPhoneNumber" required>
-            
-            <label for="FaxNumber">رقم الفاكس:</label>
-            <input type="tel" id="FaxNumber" name="FaxNumber" required>
-            
-            <label for="AuthorityAddress">عنوان السلطة:</label>
-            <input type="text" id="AuthorityAddress" name="AuthorityAddress" required>
-            
-            <label for="Authorityemail">البريد الإلكتروني:</label>
-            <input type="email" id="Authorityemail" name="Authorityemail" required>
-            
-            <input type="submit" value="إرسال">
-        </form>
-    </div>
+     <form action="/Ajouter_Sponsor" method="POST">
 
+    <label for="AuthorityName">اسم الراعي:</label>
+    <input type="text" id="AuthorityName" name="AuthorityName" required>
+
+    <label for="AuthorityPhoneNumber">رقم الهاتف:</label>
+    <input type="tel" id="AuthorityPhoneNumber" name="AuthorityPhoneNumber" required>
+
+    <label for="Authorityemail">البريد الإلكتروني:</label>
+    <input type="email" id="Authorityemail" name="Authorityemail" required>
+
+    <label for="AuthorityAddress">عنوان الراعي:</label>
+    <input type="text" id="AuthorityAddress" name="AuthorityAddress" required>
+
+    <button type="submit">إضافة راعي</button>
+
+</form>
+
+        
+    </div >
     <script>
-        function toggleLanguage() {
+             function toggleLanguage() {
             var element = document.querySelector('div');
             if (element.lang === 'en') {
-                element.lang = 'es';
+                element.lang = 'ar';
             } else {
                 element.lang = 'en';
             }
         }
+        $(document).ready(function () {
+            $("#Join_Date").datepicker({
+                dateFormat: 'dd/mm/yy', // Set the desired date format
+                changeMonth: true,
+                changeYear: true
+            });
+        });
     </script>
-
 </body>
 </html>
