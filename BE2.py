@@ -152,14 +152,14 @@ def fill_fD():
 @app.route("/Formulair_B",methods=["GET","POST"])
 def fill_fB():
   if request.form["methods"]==['GET','POST']: 
-     Name=request.form['Name']
-     gender=request.form['gender']
-     Disability_Category=request.form['disabilityType']
-     documents=request.files['Beneficiary_documents']
-     joining_date=request.form['joining_date']
+     Name=request.form['BeneficiaryFullName']
+     gender=request.form['Gender']
+     Disability_Category=request.form['DisabilityType']
+     documents=request.files['BeneficiaryDocuments']
      b_date=request.form['BeneficiaryBirthDate']
-     b_place=request.form['birthplace']
-     Disability_sd=request.form['Disability_Date']
+     b_place=request.form['Birthplace']
+     Disability_sd=request.form['DisabilityDate']
+     pic=request.files['Picture']
      Disability_sd_con=datetime.strptime(Disability_sd,"%d/%m/%Y").date()
      bdate_conv=datetime.strptime(b_date,"%d/%m/%Y").date()
      jdate_conv=datetime.strptime(joining_date,"%d/%m/%Y").date()
