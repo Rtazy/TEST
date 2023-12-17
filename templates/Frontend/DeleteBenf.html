@@ -118,6 +118,13 @@
         {% endif %}
     </div>
 
+    
+    <div id="message">
+        {% if hey %}
+            {{ tbl }| safe}
+        {% endif %}
+    </div>
+
     <div class="form-container" lang="en">
         <form action="/Retirer_Beneficiere" method="post">
             <label for="beneficiaryId">Beneficiary ID:</label>
