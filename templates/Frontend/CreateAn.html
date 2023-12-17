@@ -1,22 +1,20 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Donor </title>
+    <title>Delete Announcement Form</title>
     <style>
-         #message {
-    background-color: #f2f2f2;
-    color: #333;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
+        #message {
+            background-color: #f2f2f2;
+            color: #333;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -24,19 +22,17 @@
         }
 
         header {
-            background-color:white;
+            background-color: white;
             color: white;
             text-align: center;
             padding: 10px;
         }
+
         header img {
-            height: 170px; 
+            height: 170px;
             margin-right: 10px;
-        
         }
-        h1 {
-            text-align: center;
-        }
+
         nav {
             background-color: #13472E;
             color: white;
@@ -60,7 +56,6 @@
             color: white;
         }
 
-
         form {
             max-width: 500px;
             margin: 0 auto;
@@ -71,7 +66,9 @@
             margin-top: 10px;
         }
 
-        button[type="text"], input[type="tel"], select {
+        button[type="text"],
+        input[type="tel"],
+        select {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
@@ -85,7 +82,7 @@
         }
 
         button[type="submit"] {
-            background-color:#864d25 ;
+            background-color: #864d25;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -96,41 +93,62 @@
         button[type="submit"]:hover {
             background-color: blue;
         }
+
+        .form-container {
+            margin-top: 20px;
+        }
     </style>
 </head>
+
 <body>
     <header>
-    <img src="nourlg.png" alt="Foundation Logo">
+        <img src="nourlg.png" alt="Foundation Logo">
     </header>
-       <nav>
-    <ul>
-        <li>Create New Announcement</li>
-    </ul>
-</nav>
 
-     
-    <form action="/Ajouter_Annonce" method="post">
-        <label for="title">Announcement Title:</label>
-        <input type="text" id="title" name="title" required>
+    <nav>
+        <ul>
+            <li>Delete Announcement</li>
+        </ul>
+    </nav>
 
-        <label for="text">Announcemen Text:</label>
-        <textarea id="text" name="text" rows="4" required></textarea>
+    <div id="message">
+        {% if hey %}
+            {{ hey }}
+        {% endif %}
+    </div>
 
-        <button type="submit">Submit</button>
-    </form>
-   
-    <!-- Initialize jQuery UI Datepicker -->
+    <div id="html-placeholder">
+        {% if tbl %}
+            {{ tbl | safe }}
+        {% endif %}
+    </div>
+
+    <div class="form-container" lang="en">
+        <form action="/Retirer_Annonce" method="post">
+            <label for="announcementId">Announcement ID:</label>
+            <input type="text" id="announcementId" name="announcementId" required>
+            <button type="submit">Delete Announcement</button>
+        </form>
+    </div>
+
+    <div class="form-container" lang="ar">
+        <form action="/Retirer_Annonce" method="post">
+            <label for="announcementId">رقم الإعلان:</label>
+            <input type="text" id="announcementId" name="announcementId" required>
+            <button type="submit">حذف الإعلان</button>
+        </form>
+    </div>
+
     <script>
-        $(document).ready(function () {
-            $("#Birthdate,#Join_Date").datepicker({
-                dateFormat: 'dd/mm/yy', // Set the desired date format
-                changeMonth: true,
-                changeYear: true
-            });
-        });
+        function toggleLanguage() {
+            var element = document.querySelector('.form-container');
+            if (element.lang === 'en') {
+                element.lang = 'ar';
+            } else {
+                element.lang = 'en';
+            }
+        }
     </script>
-
-
 </body>
-</html>
 
+</html>
