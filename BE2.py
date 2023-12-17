@@ -298,9 +298,9 @@ def add_ben():
 def add_Authority():
    if request.form['methods']==['POST']:
       c_name=request.form['Name']
-      c_address=request.form[' Address']
-      c_email=request.form['Email ']
-      c_phoneN=request.form['Phone_Number']
+      c_address=request.form['AuthorityAddress']
+      c_email=request.form['Authorityemail']
+      c_phoneN=request.form['AuthorityPhoneNumber']
       Join_Date = datetime.strptime(request.form['Join_Date'], "%d/%m/%Y")
       vals=[c_name,c_address,c_email,c_phoneN,Join_Date]
       u=Select_entity("Authorities","Email",c_email)
@@ -377,13 +377,13 @@ def Del_Donor():
 #the original admin must be connected  to do that
 def add_Donor():
    if request.form['methods']==['POST']:
-     Name=request.form['Full_Name']
-     Email=request.form['Email']
+     Name=request.form['DonorName']
+     Email=request.form['DonorEmail']
      gender=request.form['Gender']
      Address=request.files['Address']
      documents=request.files['DonorDocuments']
      joining_date=request.form['joining_date']
-     b_date=request.form['Birthdate']
+     b_date=request.form['DonorBirthDate']
      bdate_conv=datetime.strptime(b_date,"%d/%m/%Y").date()
      jdate_conv=datetime.strptime(joining_date,"%d/%m/%Y").date()
      docs_bin= documents.read()
