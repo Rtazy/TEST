@@ -116,16 +116,16 @@
             <input type="text" id="Name" name="Name" required >
 
             <label for="Birthdate">Beneficiary Birth Date:</label>
-            <input type="Birthdate" id="b_date" name="Birthdate" placeholder="DD/MM/YYYY" required>
+            <input type="text" id="Birthdate" name="Birthdate" placeholder="DD/MM/YYYY" required>
 
             <label for="Birth_Place">Beneficiary Birth place:</label>
             <input type="text" id="Birth_Place" name="Birth_Place" >
 
             <label for="Disability_startdate">Beneficiary Disability Starting Date:</label>
-            <input type="date" id="Disability_startdate" name="Disability_startdate" required>
+            <input type="text" id="Disability_startdate" name="Disability_startdate" required>
 
             <label for="Join_Date">Beneficiary Joining Date:</label>
-            <input type="date" id="Join_Date" name="Join_Date" required>
+            <input type="text" id="Join_Date" name="JoinDate" required>
 
             <label for="Disability_Category">Beneficiary Disability Type:</label>
             <select id="Disability_Category" name="Disability_Category">
@@ -213,7 +213,7 @@
             }
         }
         $(document).ready(function () {
-            $("#b_date, #Disability_startdate, #Join_Date").datepicker({
+            $("#Birthdate, #Disability_startdate, #Join_Date").datepicker({
                 dateFormat: 'dd/mm/yy', // Set the desired date format
                 changeMonth: true,
                 changeYear: true
