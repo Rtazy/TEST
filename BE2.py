@@ -457,6 +457,8 @@ def Del_Ann():
                 hey = "Une erreur s'est produite lors de la suppression de l'annonce."
 
     return render_template("Frontend/DeleteAn.html", hey=hey, tbl=tbl)
+########################################
+################################################
 
 @app.route("/Ajouter_Annonce", methods=['GET', 'POST'])
 def add_announcement():
@@ -465,7 +467,25 @@ def add_announcement():
         Ann_Text = request.form['text']
         insert_data_mobin('Announcement', ['title', 'text'], [Ann_Title, Ann_Text])
 
-    return render_template("Frontend/CreateAn.html")
+    return render_template("Frontend/CreateAn.html") 
+########################################
+################################################
+@app.route("/Retirer_contact",methods=['GET','POST'])
+#first display contact list ..
+def Del_Authority():
+    hey = ""
+    tbl = to_htmltable(Sel_data_all2("Authority"))
+   if request.form['methods']==['POST']:
+      A_id=request.form['Authority_ID']
+      ans = Select_entity("Authorities","Authority_ID", A_id) 
+      
+      if ans is None:
+         hey="Le contact que vous avez selectionne n'existe pas"
+      else:
+         hey="Le contact que vous avez selectionne a ete retire"
+         Del_data("Authorities","Authority_ID", A_id) 
+
+      return render_template("Frontend/DeleteAuthority.html",tbl=tbl,hey=hey)
 
 
 @app.route('/Gestion')
