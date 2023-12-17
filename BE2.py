@@ -106,7 +106,95 @@ def to_htmltable(data):
     return res
 
 
+@app.route('/Formulair',methods=['GET','POST'])
+def Send_Form():
+    if request.form['methods']==['GET','POST']:
+       cat=request.form['cat']
+      
+       if cat is 1:
+          redirect(url_for('Formulair_D'))
+          
+       elif cat is 2:
+          redirect(url_for('Formulair_B'))
+          
+       elif cat is 3:
+          redirect(url_for('Formulair_A'))
+          
+        
+    return render_template('Form.html')
 
+##### FORMS ######
+
+@app.route("/Formulair_D",methods=["GET","POST"])
+def fill_fD():
+  hey=""
+   if request.form['methods']==['POST']:
+     Name=request.form['DonorName']
+     Email=request.form['DonorEmail']
+     gender=request.form['Gender']
+     Address=request.files['Address']
+     documents=request.files['DonorDocuments']
+     joining_date=request.form['joining_date']
+     b_date=request.form['DonorBirthDate']
+     bdate_conv=datetime.strptime(b_date,"%d/%m/%Y").date()
+     jdate_conv=datetime.strptime(joining_date,"%d/%m/%Y").date()
+     docs_bin= documents.read()
+     Cols=['Full_Name','Phone_Number','Email','Birthdate','Address','join_date','Gender' ]
+     u=Select_entity("Donors","Email",Email)
+     hey=""
+     if u != None:
+        hey="Ce doneur exist deja."
+     else:
+        insert_data("Donors", " Docs" ,Cols, docs_bin,[Name,Phone_Number,Email, bdate_conv,Address,jdate_conv,gender] )
+        hey="Ce doneur a ete ajoute"
+     return render_template("Frontend/DonorForm.html",hey=hey)
+       
+@app.route("/Formulair_B",methods=["GET","POST"])
+def fill_fB():
+  if request.form["methods"]==['GET','POST']: 
+     Name=request.form['Name']
+     gender=request.form['gender']
+     Disability_Category=request.form['disabilityType']
+     documents=request.files['Beneficiary_documents']
+     joining_date=request.form['joining_date']
+     b_date=request.form['BeneficiaryBirthDate']
+     b_place=request.form['birthplace']
+     Disability_sd=request.form['Disability_Date']
+     Disability_sd_con=datetime.strptime(Disability_sd,"%d/%m/%Y").date()
+     bdate_conv=datetime.strptime(b_date,"%d/%m/%Y").date()
+     jdate_conv=datetime.strptime(joining_date,"%d/%m/%Y").date()
+     docs_bin= documents.read()
+     Cols=['Full_Name','Birthdate','Birth_Place','join_date','Disability_Start_Date','Gender','Disability_Category' ]
+     u=Select_entity("BenefForm","Birthdate",b_date)
+     hey=""
+     if u != None:
+        hey="Ce membre exist deja."
+     else:
+         insert_data("BenefForm", " Documents" ,Cols, docs_bin,[Name, bdate_conv, b_place,jdate_conv,Disability_sd_con,gender,Disability_Category] )
+         hey="Ce membre a ete ajoute"
+   
+     return render_template('BenForm.html')   
+     
+@app.route("/Formulair_A",methods=["GET","POST"])
+def fill_fA():
+  if request.form["methods"]==['GET','POST']: 
+      c_name=request.form['Name']
+      c_address=request.form[' Address']
+      c_email=request.form['Email ']
+      c_phoneN=request.form['Phone_Number']
+      Join_Date=request.form['Join_Date']
+      Join_Date_conv=datetime.strtime(Join_Date,"%Y-%m-%d")
+      vals=[c_name,c_address,c_email,c_phoneN,Join_Date_conv]
+      u=Select_entity("AuthoritiesForm","Email",c_email)
+      al=""
+      if u!=None:
+         al="The authority already exists"
+      else:
+       insert_data_mobin('AuthoritiesForm',['Name','Address','Email','Phone_Number','Join_Date'],vals)
+       al="The authority was successfully added"
+  return render_template('AuthorityContactForm.html')   
+          
+#################################################################
 def get_html(table):
     conn=connect_db()
     cursor=conn.cursor()
@@ -376,6 +464,7 @@ def Del_Donor():
 @app.route("/Ajouter_Donneur",methods=['GET','POST'])
 #the original admin must be connected  to do that
 def add_Donor():
+   hey=""
    if request.form['methods']==['POST']:
      Name=request.form['DonorName']
      Email=request.form['DonorEmail']
@@ -476,7 +565,7 @@ def Del_Authority():
     hey = ""
     tbl = to_htmltable(Sel_data_all2("Authority"))
    if request.form['methods']==['POST']:
-      A_id=request.form['Authority_ID']
+      A_id=request.form['SponsorId']
       ans = Select_entity("Authorities","Authority_ID", A_id) 
       
       if ans is None:
