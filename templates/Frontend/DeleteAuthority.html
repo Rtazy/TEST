@@ -120,6 +120,11 @@
                 {{ hey }}
             {% endif %}
         </div>
+        <div id="html-placeholder">        
+        {% if tbl %}
+            {{ tbl | safe }}
+        {% endif %}
+    </div>
 
         <div class="form-container">
             <form action="/Remove_Sponsor" method="post">
