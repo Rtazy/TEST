@@ -101,13 +101,44 @@
 
     <button onclick="toggleLanguage()">تبديل اللغة</button>
 
-    <div lang="en">
-        <form action="BenfForm" method="post">
-            <!-- English form content here -->
+<div lang="en">
+    <form action="BenfForm" method="post">
+        <label for="BeneficiaryFullName">Beneficiary Name:</label>
+        <input type="text" id="BeneficiaryFullName" name="BeneficiaryFullName" required>
 
-            <input type="submit" value="Submit">
-        </form>
-    </div>
+        <label for="BeneficiaryBirthDate">Beneficiary Birth Date:</label>
+        <input type="text" id="BeneficiaryBirthDate" name="BeneficiaryBirthDate" placeholder="DD/MM/YYYY" required>
+
+        <label for="Birthplace">Birthplace of the Beneficiary:</label>
+        <input type="text" id="Birthplace" name="Birthplace" required>
+
+        <label for="DisabilityDate">Disability Start Date:</label>
+        <input type="text" id="DisabilityDate" name="DisabilityDate" required>
+
+        <label for="DisabilityType">Beneficiary's Disability Type:</label>
+        <select id="DisabilityType" name="DisabilityType">
+            <option value="physical">Physical Disability</option>
+            <option value="mental">Mental Disability</option>
+            <option value="sensory">Sensory Disability</option>
+            <option value="other">Other</option>
+        </select>
+
+        <label for="Gender">Gender:</label>
+        <select id="Gender" name="Gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+
+        <label for="Picture">Beneficiary's Picture:</label>
+        <input type="file" id="Picture" name="Picture">
+
+        <label for="BeneficiaryDocuments">Upload Documents:</label>
+        <input type="file" id="BeneficiaryDocuments" name="BeneficiaryDocuments">
+
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
 
     <div lang="ar">
         <form action="BenfForm" method="post">
@@ -115,13 +146,13 @@
             <input type="text" id="Beneficiaryfullname" name="Beneficiaryfullname" required>
 
             <label for="BeneficiaryBirthDate">تاريخ ميلاد المستفيد:</label>
-            <input type="date" id="BeneficiaryBirthDate" name="BeneficiaryBirthDate" placeholder="DD/MM/YYYY" required>
+            <input type="text" id="BeneficiaryBirthDate" name="BeneficiaryBirthDate" placeholder="DD/MM/YYYY" required>
 
             <label for="birthplace">مكان ولادة المستفيد:</label>
             <input type="text" id="birthplace" name="birthplace" required>
 
             <label for="Disability_Date">تاريخ بداية الإعاقة:</label>
-            <input type="date" id="Disability_Date" name="Disability_Date" required>
+            <input type="text" id="Disability_Date" name="Disability_Date" required>
 
             <label for="disabilityType">نوع الإعاقة للمستفيد:</label>
             <select id="disabilityType" name="disabilityType">
@@ -156,6 +187,13 @@
                 element.lang = 'en';
             }
         }
+                $(document).ready(function () {
+            $("#Disability_Date,#birthplace,").datepicker({
+                dateFormat: 'dd/mm/yy', // Set the desired date format
+                changeMonth: true,
+                changeYear: true
+            });
+        });
     </script>
 </body>
 </html>
