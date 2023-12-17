@@ -134,7 +134,11 @@
                 <li>حذف مانح</li>
             </ul>
         </nav>
-
+        <div id="message">
+            {% if hey %}
+                {{ tbl }|safe} 
+            {% endif %}
+        </div>
         <div id="message">
             {% if hey %}
                 {{ hey }} <!-- Add Arabic translation here -->
