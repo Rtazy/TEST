@@ -145,9 +145,11 @@
                 <li>حذف كفيل</li>
             </ul>
         </nav>
-            {% if tbl %}
-                {{ tbl }|safe} 
-            {% endif %}
+    <div id="html-placeholder">        
+        {% if tbl %}
+            {{ tbl | safe }}
+        {% endif %}
+    </div>
         <div id="message">
             {% if hey %}
                 {{ hey }} <!-- Add Arabic translation here -->
