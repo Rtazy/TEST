@@ -77,36 +77,22 @@
 
     <button onclick="toggleLanguage()">تبديل اللغة</button>
 
-    <table>
-        <tr>
-            <th>
-                <div lang="en">Donors ID</div>
-                <div lang="ar">رقم المتبرع</div>
-            </th>
-            <th>
-                <div lang="en">Full Name</div>
-                <div lang="ar">الاسم الكامل</div>
-            </th>
-            <th>
-                <div lang="en">Phone Number</div>
-                <div lang="ar">رقم الهاتف</div>
-            </th>
-            <th>
-                <div lang="en">E-mail</div>
-                <div lang="ar">البريد الإلكتروني</div>
-            </th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>
-                <div lang="en">John Doe</div>
-                <div lang="ar">جون دو</div>
-            </td>
-            <td>+123456789</td>
-            <td>johndoe@example.com</td>
-        </tr>
-        <!-- Add more donor records as needed -->
-    </table>
+ <!-- Donors View -->
+<div class="form-container" lang="en">
+    <form action="/View_Donor" method="post">
+        <label for="donorId">Donor ID:</label>
+        <input type="text" id="donorId" name="donorId" required>
+        <button type="submit">View Donor</button>
+    </form>
+</div>
+
+<div class="form-container" lang="ar">
+    <form action="/View_Donor" method="post">
+        <label for="donorId">رقم المتبرع:</label>
+        <input type="text" id="donorId" name="donorId" required>
+        <button type="submit">عرض المتبرع</button>
+    </form>
+</div>
 
     <script>
         function toggleLanguage() {
