@@ -189,6 +189,14 @@
 </div>
     <!-- Initialize jQuery UI Datepicker -->
     <script>
+        function toggleLanguage() {
+            var element = document.querySelector('div');
+            if (element.lang === 'en') {
+                element.lang = 'ar';
+            } else {
+                element.lang = 'en';
+            }
+        }
         $(document).ready(function () {
             $("#Birthdate,#Join_Date").datepicker({
                 dateFormat: 'dd/mm/yy', // Set the desired date format
