@@ -624,6 +624,123 @@ def Del_Authority():
       return render_template("Frontend/DeleteAuthority.html",tbl=tbl,hey=hey)
 ########################################
 ################################################
+# Get Admin ID
+@app.route("/View_Admin", methods=['POST', 'GET'])
+def view_admin():
+        hey = ""     
+        tbl = to_htmltable(Sel_data_all2("Donors"))
+    if request.method == 'POST':
+        admin_id = request.form['adminId']
+        entity_data = select_entity("Admin", "Admin_ID", admin_id)
+
+        if entity_data:
+          entity_data = select_entity("Donors", "Donor_ID", D_id) 
+        else:
+            hey= f"No admin found with ID {admin_id}."
+            
+
+    return render_template("Frontend/ViewAdmin.html",tbl=tbl, hey=hey, entity_data=entity_data)
+# Get Announcement ID
+@app.route("/View_Announcement", methods=['POST', 'GET'])
+def view_announcement():
+        hey = ""     
+        tbl = to_htmltable(Sel_data_all2("Donors"))
+    if request.method == 'POST':
+        announcement_id = request.form['announcementId']
+        entity_data = select_entity("Announcement", "Announcement_ID", announcement_id)
+
+        if entity_data:
+             entity_data = select_entity("Donors", "Donor_ID", D_id) 
+        else:
+            hey = f"No announcement found with ID {announcement_id}."
+            return render_template("Frontend/ViewCamp.html, message=message)
+
+    return render_template("Frontend/ViewAn.html", tbl=tbl, hey=hey, entity_data=entity_data)
+# Get Campaign ID
+@app.route("/View_Campaign", methods=['POST', 'GET'])
+def view_campaign():
+    if request.method == 'POST':
+            hey = ""     
+            tbl = to_htmltable(Sel_data_all2("Donors"))
+        campaign_id = request.form['campaignId']
+        entity_data = select_entity("Campaign", "Campaign_ID", campaign_id)
+
+        if entity_data:
+            entity_data = select_entity("Donors", "Donor_ID", D_id) 
+        else:
+            hey = f"No campaign found with ID {campaign_id}."
+             
+
+    return render_template("Frontend/GetCampaignId.html",tbl=tbl, hey=hey, entity_data=entity_data)
+# Get Other Donation ID
+@app.route("/View_Other_Donation", methods=['POST', 'GET'])
+def view_other_donation():
+        hey = ""     
+        tbl = to_htmltable(Sel_data_all2("Donors"))
+    if request.method == 'POST':
+        other_donation_id = request.form['otherDonationId']
+        entity_data = select_entity("Other_Donation", "Donation_ID", other_donation_id)
+
+        if entity_data:
+             entity_data = select_entity("Donors", "Donor_ID", D_id) 
+        else:
+           hey= f"No other donation found with ID {other_donation_id}."
+           
+    return render_template("Frontend/GetOtherDonationId.html",tbl=tbl, hey=hey, entity_data=entity_data)
+
+# Get Monetary Donation ID
+@app.route("/View_Monetary_Donation", methods=['POST', 'GET'])
+def view_monetary_donation():
+        hey = ""     
+        tbl = to_htmltable(Sel_data_all2("Monetary_Donation"))
+    if request.method == 'POST':
+        monetary_donation_id = request.form['monetaryDonationId']
+        entity_data = select_entity("Monetary_Donation", "Donation_ID", monetary_donation_id)
+
+        if entity_data:
+           entity_data = select_entity("Donors", "Donor_ID", D_id) 
+        else:
+            message = f"No monetary donation found with ID {monetary_donation_id}."
+           
+    return render_template("Frontend/ViewDonation_mon.html",tbl=tbl, hey=hey, entity_data=entity_data)
+@app.route("/View_Donor", methods=['GET', 'POST'])
+def view_donor():
+    hey = ""
+    tbl = to_htmltable(Sel_data_all2("Donors"))
+
+    if request.method == 'POST':
+        D_id = request.form['donorId']
+        entity_data = select_entity("Donors", "Donor_ID", D_id)
+
+        if entity_data is None:
+            hey = "The selected donor does not exist."
+        else:
+            hey = "The selected donor information:"
+
+    return render_template("Frontend/ViewDonor.html", tbl=tbl, hey=hey, entity_data=entity_data)
+
+# Authorities
+@app.route("/View_Authority", methods=['GET', 'POST'])
+def view_authority():
+    hey = ""
+    tbl = to_htmltable(Sel_data_all2("Authorities"))
+
+    if request.method == 'POST':
+        A_id = request.form['authorityId']
+        entity_data = select_entity("Authorities", "Authority_ID", A_id)
+
+        if entity_data is None:
+            hey = "The selected authority does not exist."
+        else:
+            hey = "The selected authority information:"
+
+    return render_template("Frontend/ViewAuthority.html", tbl=tbl, hey=hey, entity_data=entity_data)
+
+
+
+
+########################################
+################################################
 
 @app.route('/Gestion')
 def profile():
