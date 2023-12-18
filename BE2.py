@@ -628,13 +628,13 @@ def Del_Authority():
 @app.route("/View_Admin", methods=['POST', 'GET'])
 def view_admin():
         hey = ""     
-        tbl = to_htmltable(Sel_data_all2("Donors"))
+        tbl = to_htmltable(Sel_data_all2("Admin"))
     if request.method == 'POST':
         admin_id = request.form['adminId']
-        entity_data = select_entity("Admin", "Admin_ID", admin_id)
+        
 
         if entity_data:
-          entity_data = select_entity("Donors", "Donor_ID", D_id) 
+          entity_data = select_entity("Admin", "Admin_ID", admin_id)
         else:
             hey= f"No admin found with ID {admin_id}."
             
@@ -644,13 +644,13 @@ def view_admin():
 @app.route("/View_Announcement", methods=['POST', 'GET'])
 def view_announcement():
         hey = ""     
-        tbl = to_htmltable(Sel_data_all2("Donors"))
+        tbl = to_htmltable(Sel_data_all2("Announcement"))
     if request.method == 'POST':
         announcement_id = request.form['announcementId']
-        entity_data = select_entity("Announcement", "Announcement_ID", announcement_id)
+       
 
         if entity_data:
-             entity_data = select_entity("Donors", "Donor_ID", D_id) 
+             entity_data = select_entity("Announcement", "Announcement_ID", announcement_id)
         else:
             hey = f"No announcement found with ID {announcement_id}."
             return render_template("Frontend/ViewCamp.html, message=message)
@@ -661,12 +661,12 @@ def view_announcement():
 def view_campaign():
     if request.method == 'POST':
             hey = ""     
-            tbl = to_htmltable(Sel_data_all2("Donors"))
+            tbl = to_htmltable(Sel_data_all2("Campaign"))
         campaign_id = request.form['campaignId']
-        entity_data = select_entity("Campaign", "Campaign_ID", campaign_id)
+        
 
         if entity_data:
-            entity_data = select_entity("Donors", "Donor_ID", D_id) 
+            entity_data = select_entity("Campaign", "Campaign_ID", campaign_id) 
         else:
             hey = f"No campaign found with ID {campaign_id}."
              
@@ -676,13 +676,13 @@ def view_campaign():
 @app.route("/View_Other_Donation", methods=['POST', 'GET'])
 def view_other_donation():
         hey = ""     
-        tbl = to_htmltable(Sel_data_all2("Donors"))
+        tbl = to_htmltable(Sel_data_all2("Other_Donation"))
     if request.method == 'POST':
         other_donation_id = request.form['otherDonationId']
-        entity_data = select_entity("Other_Donation", "Donation_ID", other_donation_id)
-
+       
         if entity_data:
-             entity_data = select_entity("Donors", "Donor_ID", D_id) 
+            entity_data = select_entity("Other_Donation", "Donation_ID", other_donation_id)
+ 
         else:
            hey= f"No other donation found with ID {other_donation_id}."
            
