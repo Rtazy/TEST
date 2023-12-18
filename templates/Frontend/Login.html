@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <title>Login </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+         #message {
+    background-color: #f2f2f2;
+    color: #333;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+        header {
+            background-color:white;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        header img {
+            height: 170px; 
+            margin-right: 10px;
+        
+        }
+        h1 {
+            text-align: center;
+        }
+        nav {
+            background-color: #13472E;
+            color: white;
+            padding: 3px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        button[type="text"], input[type="tel"], select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button[type="file"] {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: #864d25;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+        <div id="message">
+        {% if hey %}
+            {{ hey }}
+        {% endif %}
+    </div>
+
+    <header>
+    <img src="nourlg.png" alt="Foundation Logo">
+  
+    </header>
+    <nav>
+        <ul>
+            <li>Login</li>
+        </ul>
+    </nav>
+
+    
+<div lang="en">
+<form action="/login" method="POST">
+    <label for="email">البريد الإلكتروني:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+    <label for="password">كلمة المرور:</label><br>
+    <input type="password" id="password" name="password" required><br><br>
+    <input type="submit" value="تسجيل الدخول">
+  </form>
+</div>
+<div lang="ar">
+<h2>تسجيل الدخول</h2>
+<form action="/login" method="POST">
+    <label for="email">Email:</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+    <label for="password">Password:</label><br>
+    <input type="password" id="password" name="password" required><br><br>
+    <input type="submit" value="Log In">
+  </form>
+</div>
+
+ <!-- Initialize jQuery UI Datepicker -->
+    <script>
+             function toggleLanguage() {
+            var element = document.querySelector('div');
+            if (element.lang === 'en') {
+                element.lang = 'ar';
+            } else {
+                element.lang = 'en';
+            }
+        }
+        $(document).ready(function () {
+            $("#Join_Date").datepicker({
+                dateFormat: 'dd/mm/yy', // Set the desired date format
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>
+</body>
+</html>
