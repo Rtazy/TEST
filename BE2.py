@@ -111,18 +111,18 @@ def login():
     hey=""
     if request.method=='POST':
         email=request.form['email']
-        passw=request.form['pass']
+        passw=request.form['password']
         cursor=connect_db().cursor()
         cursor.execute('SELECT * FROM "Admin" WHERE "Email"=%s AND  "Password"=%s', email,passw)
         u=cursor.fetchone()
        
         if u != None:
             session['is_admin'] = True
-            return render_template('admin_dashboard.html')
+            return render_template('admin_dashboard.html',hey)
         else:
             session['is_admin'] = False
             hey="Vos information sont incorrectes, veuillez reessayer ou cree un compte"
-            return render_template('login.html',hey=hey)
+            return render_template('Frontend/login.html',hey=hey)
 
    
 #################################################################
@@ -549,7 +549,7 @@ def add_Don_M():
       insert_data_mobin('Monetary_Donation',cols,vals)
 
 
-   return render_template("Donation_mon.html") 
+   return render_template("Frontend/Donation_mon.html") 
 ########################################
 ################################################
 @app.route("/Ajouter_Donation_autre",methods=['GET','POST'])
@@ -563,7 +563,7 @@ def add_Don_o():
       vals=[Don_owner,Desc,is_a]
       insert_data_mobin('Other_Donation',cols,vals)
 
-   return render_template("Donation_oth.html") 
+   return render_template("Frontend/Donation_oth.html") 
 
 ########################################
 ################################################
@@ -622,7 +622,8 @@ def Del_Authority():
          Del_data("Authorities","Authority_ID", A_id) 
 
       return render_template("Frontend/DeleteAuthority.html",tbl=tbl,hey=hey)
-
+########################################
+################################################
 
 @app.route('/Gestion')
 def profile():
