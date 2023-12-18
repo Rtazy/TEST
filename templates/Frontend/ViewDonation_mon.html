@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remove Sponsor</title>
+    <style>
+        #message {
+            background-color: #f2f2f2;
+            color: #333;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: white;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        header img {
+            height: 170px;
+            margin-right: 10px;
+        }
+
+        nav {
+            background-color: #13472E;
+            color: white;
+            padding: 3px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        button[type="text"],
+        input[type="tel"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button[type="file"] {
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: #864d25;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: blue;
+        }
+
+        .form-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="lang-en">
+        <header>
+            <img src="nourlg.png" alt="Foundation Logo">
+        </header>
+
+        <nav>
+            <ul>
+                <li>Remove Sponsor</li>
+            </ul>
+        </nav>
+
+        <div id="message">
+            {% if hey %}
+                {{ hey }}
+            {% endif %}
+        </div>
+     
+
+    <h1>View Monetary Donation</h1>
+    <p>{{ hey }}</p>
+
+    <!-- Display the table if it exists -->
+    {% if tbl %}
+        {{ tbl | safe }}
+    {% endif %}
+
+    <!-- Display entity data if it exists -->
+    {% if entity_data %}
+       {{ entity_data | safe }}
+    {% endif %}
+
+      <div class="form-container" lang="en">
+        <form action="/View_Monetary_Donation" method="post">
+            <label for="monetaryDonationId">Monetary Donation ID:</label>
+            <input type="text" id="monetaryDonationId" name="monetaryDonationId" required>
+            <button type="submit">View Monetary Donation</button>
+        </form>
+    </div>
+
+    <!-- Arabic Form -->
+    <div class="form-container" lang="ar">
+        <form action="/View_Monetary_Donation" method="post">
+            <label for="monetaryDonationId">رقم التبرع المالي:</label>
+            <input type="text" id="monetaryDonationId" name="monetaryDonationId" required>
+            <button type="submit">عرض التبرع المالي</button>
+        </form>
+    </div>
+  
+
+    <script>
+        $(document).ready(function () {
+            $("#date, #e_date").datepicker({
+                dateFormat: 'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+
+        function toggleLanguage() {
+            var element = document.querySelector('body');
+            if (element.lang === 'en') {
+                element.lang = 'ar';
+            } else {
+                element.lang = 'en';
+            }
+        }
+    </script>
+</body>
+
+</html>
+
