@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Announcement Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <title>Add Announcement</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
         #message {
             background-color: #f2f2f2;
             color: #333;
@@ -15,21 +23,15 @@
             border-radius: 4px;
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
         header {
-            background-color: white;
+            background-color:white;
             color: white;
             text-align: center;
             padding: 10px;
         }
 
         header img {
-            height: 170px;
+            height: 170px; 
             margin-right: 10px;
         }
 
@@ -66,9 +68,7 @@
             margin-top: 10px;
         }
 
-        button[type="text"],
-        input[type="tel"],
-        select {
+        button[type="text"], input[type="tel"], select {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
@@ -93,62 +93,76 @@
         button[type="submit"]:hover {
             background-color: blue;
         }
-
-        .form-container {
-            margin-top: 20px;
-        }
     </style>
 </head>
-
 <body>
-    <header>
-        <img src="nourlg.png" alt="Foundation Logo">
-    </header>
-
-    <nav>
-        <ul>
-            <li>Delete Announcement</li>
-        </ul>
-    </nav>
-
     <div id="message">
         {% if hey %}
             {{ hey }}
         {% endif %}
     </div>
 
-    <div id="html-placeholder">
-        {% if tbl %}
-            {{ tbl | safe }}
-        {% endif %}
-    </div>
+    <header>
+        <img src="nourlg.png" alt="Foundation Logo">
+    </header>
+    
+    <nav>
+        <ul>
+            <li>Add Announcement</li>
+        </ul>
+    </nav>
 
-    <div class="form-container" lang="en">
-        <form action="/Retirer_Annonce" method="post">
-            <label for="announcementId">Announcement ID:</label>
-            <input type="text" id="announcementId" name="announcementId" required>
-            <button type="submit">Delete Announcement</button>
+    <div lang="en">
+        <form action="/Ajouter_annonce" method="post" enctype="multipart/form-data">
+                <label for="title">Announcement Title:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="text">Announcement Text:</label>
+            <textarea id="text" name="text" rows="4" required></textarea>
+
+            <label for="date">Announcement Date:</label>
+            <input type="text" id="date" name="date" required>
+
+        
+
+            <!-- Other form elements -->
+
+            <button type="submit">Submit</button>
         </form>
     </div>
 
-    <div class="form-container" lang="ar">
-        <form action="/Retirer_Annonce" method="post">
-            <label for="announcementId">رقم الإعلان:</label>
-            <input type="text" id="announcementId" name="announcementId" required>
-            <button type="submit">حذف الإعلان</button>
+    <div lang="ar">
+        <form action="/Ajouter_annonce" method="post" enctype="multipart/form-data">
+            <label for="title">عنوان الحملة:</label>
+            <input type="text" id="title" name="title" required>
+
+            <label for="text">نص الحملة:</label>
+            <textarea id="text" name="text" rows="4" required></textarea>
+
+             <label for="date">تاريخ الإعلان:</label>
+            <input type="text" id="date" name="date" required>
+
+            <button type="submit">إرسال</button>
         </form>
     </div>
 
+    <!-- Initialize jQuery UI Datepicker -->
     <script>
         function toggleLanguage() {
-            var element = document.querySelector('.form-container');
+            var element = document.querySelector('div');
             if (element.lang === 'en') {
                 element.lang = 'ar';
             } else {
                 element.lang = 'en';
             }
         }
+        $(document).ready(function () {
+            $("#date, #e_date").datepicker({
+                dateFormat: 'dd/mm/yy', // Set the desired date format
+                changeMonth: true,
+                changeYear: true
+            });
+        });
     </script>
 </body>
-
 </html>
