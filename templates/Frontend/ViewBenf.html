@@ -77,70 +77,38 @@
 
     <button onclick="toggleLanguage()">تبديل اللغة</button>
 
-    <table>
-        <tr>
-            <th>
-                <div lang="en">Beneficiary ID</div>
-                <div lang="ar">رقم المستفيد</div>
-            </th>
-            <th>
-                <div lang="en">Full Name</div>
-                <div lang="ar">الاسم الكامل</div>
-            </th>
-            <th>
-                <div lang="en">Birth Place</div>
-                <div lang="ar">مكان الميلاد</div>
-            </th>
-            <th>
-                <div lang="en">Birth Date</div>
-                <div lang="ar">تاريخ الميلاد</div>
-            </th>
-            <th>
-                <div lang="en">Disability Starting Date</div>
-                <div lang="ar">تاريخ بدء الإعاقة</div>
-            </th>
-            <th>
-                <div lang="en">Disability Type</div>
-                <div lang="ar">نوع الإعاقة</div>
-            </th>
-            <th>
-                <div lang="en">Gender</div>
-                <div lang="ar">الجنس</div>
-            </th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>
-                <div lang="en">John Doe</div>
-                <div lang="ar">جون دو</div>
-            </td>
-            <td>
-                <div lang="en">City, Country</div>
-                <div lang="ar">المدينة، البلد</div>
-            </td>
-            <td>01/01/1990</td>
-            <td>01/01/2020</td>
-            <td>
-                <div lang="en">Physical Disability</div>
-                <div lang="ar">إعاقة جسدية</div>
-            </td>
-            <td>
-                <div lang="en">Male</div>
-                <div lang="ar">ذكر</div>
-            </td>
-        </tr>
-        <!-- Add more beneficiary records as needed -->
-    </table>
+<!-- BenefForm View -->
+<div class="form-container" lang="en">
+    <form action="/View_BenefForm" method="post">
+        <label for="benefFormId">Beneficiary Form ID:</label>
+        <input type="text" id="benefFormId" name="benefFormId" required>
+        <button type="submit">View Beneficiary Form</button>
+    </form>
+</div>
 
-    <script>
-        function toggleLanguage() {
-            var element = document.querySelector('body');
+<div class="form-container" lang="ar">
+    <form action="/View_BenefForm" method="post">
+        <label for="benefFormId">رقم استمارة المستفيد:</label>
+        <input type="text" id="benefFormId" name="benefFormId" required>
+        <button type="submit">عرض استمارة المستفيد</button>
+    </form>
+</div>
+
+<script>
+    function toggleLanguage() {
+        var elements = document.querySelectorAll('.form-container');
+        elements.forEach(function(element) {
             if (element.lang === 'en') {
                 element.lang = 'ar';
             } else {
                 element.lang = 'en';
             }
-        }
-    </script>
+        });
+    }
+</script>
+
 </body>
 </html>
+
+
+    
