@@ -104,7 +104,48 @@ def to_htmltable(data):
     
     res += '</table>'
     return res
+#################################################################
+#################################################################
+@app.route('/login', methods=['POST'])
+def login():
+    hey=""
+    if request.method=='POST':
+        email=request.form['email']
+        passw=request.form['pass']
+        cursor=connect_db().cursor()
+        cursor.execute('SELECT * FROM "Admin" WHERE "Email"=%s AND  "Password"=%s', email,passw)
+        u=cursor.fetchone()
+       
+        if u != None:
+            session['is_admin'] = True
+            return render_template('admin_dashboard.html')
+        else:
+            session['is_admin'] = False
+            hey="Vos information sont incorrectes, veuillez reessayer ou cree un compte"
+            return render_template('login.html',hey=hey)
 
+   
+#################################################################
+#################################################################
+@app.route('/dashboard')
+def dashboard():
+    # Check if the user is an admin before rendering the dashboard
+    is_admin = session.get('is_admin', False)
+
+    if is_admin:
+        return render_template('admin_dashboard.html')
+    else:
+        return redirect(url_for('index'))
+#################################################################
+#################################################################
+
+@app.route('/logout')
+def logout():
+    # Clear the session on logout
+    session.clear()
+    return redirect(url_for('index'))
+#################################################################
+#################################################################
 
 @app.route('/Formulair',methods=['GET','POST'])
 def Send_Form():
