@@ -77,59 +77,35 @@
 
     <button onclick="toggleLanguage()">تبديل اللغة</button>
 
-    <table>
-        <tr>
-            <th>
-                <div lang="en">Authority ID</div>
-                <div lang="ar">رقم السلطة</div>
-            </th>
-            <th>
-                <div lang="en">Full Name</div>
-                <div lang="ar">الاسم الكامل</div>
-            </th>
-            <th>
-                <div lang="en">Phone Number</div>
-                <div lang="ar">رقم الهاتف</div>
-            </th>
-            <th>
-                <div lang="en">Fax Number</div>
-                <div lang="ar">رقم الفاكس</div>
-            </th>
-            <th>
-                <div lang="en">Email</div>
-                <div lang="ar">البريد الإلكتروني</div>
-            </th>
-            <th>
-                <div lang="en">Address</div>
-                <div lang="ar">العنوان</div>
-            </th>
-        </tr>
-        <tr>
-            <td>1</td>
-            <td>
-                <div lang="en">John Doe</div>
-                <div lang="ar">جون دو</div>
-            </td>
-            <td>123456789</td>
-            <td>987654321</td>
-            <td>john.doe@example.com</td>
-            <td>
-                <div lang="en">City, Country</div>
-                <div lang="ar">المدينة، البلد</div>
-            </td>
-        </tr>
-        <!-- Add more authority records as needed -->
-    </table>
+<!-- Authorities View -->
+<div class="form-container" lang="en">
+    <form action="/View_Authority" method="post">
+        <label for="authorityId">Authority ID:</label>
+        <input type="text" id="authorityId" name="authorityId" required>
+        <button type="submit">View Authority</button>
+    </form>
+</div>
 
-    <script>
-        function toggleLanguage() {
-            var element = document.querySelector('body');
+<div class="form-container" lang="ar">
+    <form action="/View_Authority" method="post">
+        <label for="authorityId">رقم السلطة:</label>
+        <input type="text" id="authorityId" name="authorityId" required>
+        <button type="submit">عرض السلطة</button>
+    </form>
+</div>
+
+<script>
+    function toggleLanguage() {
+        var elements = document.querySelectorAll('.form-container');
+        elements.forEach(function(element) {
             if (element.lang === 'en') {
                 element.lang = 'ar';
             } else {
                 element.lang = 'en';
             }
-        }
-    </script>
+        });
+    }
+</script>
+
 </body>
 </html>
