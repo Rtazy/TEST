@@ -162,6 +162,14 @@
                 changeYear: true
             });
         });
+        function toggleLanguage() {
+            var element = document.querySelector('div');
+            if (element.lang === 'en') {
+                element.lang = 'ar';
+            } else {
+                element.lang = 'en';
+            }
+        }
     </script>
 </body>
 </html>
