@@ -106,6 +106,16 @@
                 <li>Add a new Beneficiary</li>
             </ul>
         </nav>
+        
+        {% if hey %}     
+    {{ hey | safe }} 
+    {% endif %}   
+    {% if tbl %}     
+    {{ tbl | safe }} 
+    {% endif %}   
+    {% if entity_data %}   
+  {{ entity_data | safe }}     
+    {% endif %}
 
         <form action="/nouveau_beneficiere" method="POST">
 
