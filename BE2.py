@@ -468,7 +468,7 @@ def add_admin():
          hey="L'administrateur a ete ajoute avec succes"
          insert_data_mobin('Admin',[ 'Admin_Name','Admin_PhoneNumber', 'Address','Email','Password'],[use_name,use_phoneN,use_address,use_email,use_pw])
 
-   return render_template("Frontend/add_us.html") 
+   return render_template("Frontend/add_us.html",hey=hey) 
 
 ########################################
 ########################################
