@@ -75,6 +75,17 @@
         </ul>
     </nav>
 
+        {% if hey %}     
+    {{ hey | safe }} 
+    {% endif %}   
+    {% if tbl %}     
+    {{ tbl | safe }} 
+    {% endif %}   
+    {% if entity_data %}   
+  {{ entity_data | safe }}     
+    {% endif %}
+
+
     <button onclick="toggleLanguage()">تبديل اللغة</button>
 
  <h1>Enter Admin ID</h1>
