@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Database Record</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: white;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        header img {
+            height: 150px; 
+            margin-right: 10px;
+        }
+
+        nav {
+            background-color: #13472E;
+            color: white;
+            padding: 3px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+        }
+
+        table {
+            width: 95%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="nourlg.png" alt="Foundation Logo">
+    </header>
+    <nav>
+        <ul>
+            <li>Beneficiaries Records</li>
+        </ul>
+    </nav>
+
+    <button onclick="toggleLanguage()">تبديل اللغة</button>
+
+<!-- BenefForm View -->
+<div class="form-container" lang="en">
+    <form action="/View_BenefForm" method="post">
+        <label for="benefFormId">Beneficiary Form ID:</label>
+        <input type="text" id="benefFormId" name="benefFormId" required>
+        <button type="submit">View Beneficiary Form</button>
+    </form>
+</div>
+
+<div class="form-container" lang="ar">
+    <form action="/View_BenefForm" method="post">
+        <label for="benefFormId">رقم استمارة المستفيد:</label>
+        <input type="text" id="benefFormId" name="benefFormId" required>
+        <button type="submit">عرض استمارة المستفيد</button>
+    </form>
+</div>
+
+<script>
+    function toggleLanguage() {
+        var elements = document.querySelectorAll('.form-container');
+        elements.forEach(function(element) {
+            if (element.lang === 'en') {
+                element.lang = 'ar';
+            } else {
+                element.lang = 'en';
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
+
+
+    
