@@ -587,7 +587,273 @@ def Del_Don():
 
 
    return render_template("del_donation.html") 
+###########################################################
+@app.route('/update_beneficiary', methods=['GET', 'POST'])
+def update_beneficiary_input_id():
+    if request.method == 'POST':
+        beneficiary_id = request.form.get('beneficiary_id')
+        return redirect(url_for('update_beneficiary_route', beneficiary_id=beneficiary_id))
+    else:
+        return render_template('input_beneficiary_id.html')
+   ##
+@app.route('/update_beneficiary/<int:beneficiary_id>', methods=['GET', 'POST'])
+def update_beneficiary_route(beneficiary_id):
+    hey = ""
+    if request.method == 'POST':
+        update_data = {
+            'Full_Name': request.form.get('Full_Name', ''),
+            'Birthdate': request.form.get('Birthdate', ''),
+            'Birth_Place': request.form.get('Birth_Place', ''),
+            'Disability_category': request.form.get('Disability_category', ''),
+            'Disability_Start_Date': request.form.get('Disability_Start_Date', ''),
+            'Gender': request.form.get('Gender', ''),
+            'Join_Date': request.form.get('Join_Date', '')
+        }
 
+        # Remove empty values from the update_data dictionary
+        update_data = {k: v for k, v in update_data.items() if v}
+
+        # Update the Beneficiary
+        try:
+            update_beneficiary(beneficiary_id, update_data)
+            hey = "Update successful!"
+        except Exception as e:
+            hey = f"Update failed: {str(e)}"
+
+    beneficiary = Select_entity("Beneficiaries", "Beneficiary_ID", beneficiary_id)
+    return render_template('update_beneficiary.html', beneficiary=beneficiary, hey=hey)
+
+###########################################################
+@app.route('/update_authority', methods=['GET', 'POST'])
+def update_authority_input_id():
+    if request.method == 'POST':
+        authority_id = request.form.get('authority_id')
+        return redirect(url_for('update_authority_route', authority_id=authority_id))
+    else:
+        return render_template('input_authority_id.html')
+
+@app.route('/update_authority/<int:authority_id>', methods=['GET', 'POST'])
+def update_authority_route(authority_id):
+    hey = ""
+    if request.method == 'POST':
+        update_data = {
+            'Name': request.form.get('Name', ''),
+            'Address': request.form.get('Address', ''),
+            'Email': request.form.get('Email', ''),
+            'Phone_Number': request.form.get('Phone_Number', ''),
+            'Join_Date': request.form.get('Join_Date', '')
+        }
+
+        # Remove empty values from the update_data dictionary
+        update_data = {k: v for k, v in update_data.items() if v}
+
+        # Update the Authority
+        try:
+            update_authority(authority_id, update_data)
+            hey = "Update successful!"
+        except Exception as e:
+            hey = f"Update failed: {str(e)}"
+
+    authority = Select_entity("Authorities", "Authority_ID", authority_id)
+    return render_template('update_authority.html', authority=authority, hey=hey)
+###########################################################
+@app.route('/update_campaign', methods=['GET', 'POST'])
+def update_campaign_input_id():
+    if request.method == 'POST':
+        campaign_id = request.form.get('campaign_id')
+        return redirect(url_for('update_campaign_route', campaign_id=campaign_id))
+    else:
+        return render_template('input_campaign_id.html')
+
+@app.route('/update_campaign/<int:campaign_id>', methods=['GET', 'POST'])
+def update_campaign_route(campaign_id):
+    hey = ""
+    if request.method == 'POST':
+        update_data = {
+            'Title': request.form.get('Title', ''),
+            'Text': request.form.get('Text', ''),
+            'start_date': request.form.get('start_date', ''),
+            'End_date': request.form.get('End_date', ''),
+            # Add more attributes as needed
+        }
+
+        # Remove empty values from the update_data dictionary
+        update_data = {k: v for k, v in update_data.items() if v}
+
+        # Update the Campaign
+        try:
+            update_campaign(campaign_id, update_data)
+            hey = "Update successful!"
+        except Exception as e:
+            hey = f"Update failed: {str(e)}"
+
+    campaign = Select_entity("Campaign", "Campaign_ID", campaign_id)
+    return render_template('update_campaign.html', campaign=campaign, hey=hey)
+###########################################################
+def update_announcement_input_id():
+    if request.method == 'POST':
+        announcement_id = request.form.get('announcement_id')
+        return redirect(url_for('update_announcement_route', announcement_id=announcement_id))
+    else:
+        return render_template('input_announcement_id.html')
+
+@app.route('/update_announcement/<int:announcement_id>', methods=['GET', 'POST'])
+def update_announcement_route(announcement_id):
+    hey = ""
+    if request.method == 'POST':
+        update_data = {
+            'title': request.form.get('title', ''),
+            'txt': request.form.get('txt', ''),
+            # Add more attributes as needed
+        }
+
+        # Remove empty values from the update_data dictionary
+        update_data = {k: v for k, v in update_data.items() if v}
+
+        # Update the Announcement
+        try:
+            update_announcement(announcement_id, update_data)
+            hey = "Update successful!"
+        except Exception as e:
+            hey = f"Update failed: {str(e)}"
+
+    announcement = Select_entity("Announcement", "Announcement_ID", announcement_id)
+    return render_template('update_announcement.html', announcement=announcement, hey=hey)
+
+###########################################################
+@app.route('/update_monetary_donation', methods=['GET', 'POST'])
+def update_monetary_donation_input_id():
+    if request.method == 'POST':
+        donation_id = request.form.get('donation_id')
+        return redirect(url_for('update_monetary_donation_route', donation_id=donation_id))
+    else:
+        return render_template('input_monetary_donation_id.html')
+
+@app.route('/update_monetary_donation/<int:donation_id>', methods=['GET', 'POST'])
+def update_monetary_donation_route(donation_id):
+    hey = ""
+    if request.method == 'POST':
+        update_data = {
+            'owner_ID': request.form.get('owner_ID', ''),
+            'Amount': request.form.get('Amount', ''),
+            'Payment_method': request.form.get('Payment_method', ''),
+            'is_association': request.form.get('is_association', ''),
+            # Add more attributes as needed
+        }
+
+        # Remove empty values from the update_data dictionary
+        update_data = {k: v for k, v in update_data.items() if v}
+
+        # Update the Monetary Donation
+        try:
+            update_monetary_donation(donation_id, update_data)
+            hey = "Update successful!"
+        except Exception as e:
+            hey = f"Update failed: {str(e)}"
+
+    donation = Select_entity("Monetary_Donation", "Donation_ID", donation_id)
+    return render_template('update_monetary_donation.html', donation=donation, hey=hey)
+###########################################################
+@app.route('/update_other_donation', methods=['GET', 'POST'])
+def update_other_donation_input_id():
+    if request.method == 'POST':
+        donation_id = request.form.get('donation_id')
+        return redirect(url_for('update_other_donation_route', donation_id=donation_id))
+    else:
+        return render_template('input_other_donation_id.html')
+
+@app.route('/update_other_donation/<int:donation_id>', methods=['GET', 'POST'])
+def update_other_donation_route(donation_id):
+    hey = ""
+    if request.method == 'POST':
+        update_data = {
+            'owner_ID': request.form.get('owner_ID', ''),
+            'Description': request.form.get('Description', ''),
+            'is_association': request.form.get('is_association', ''),
+            # Add more attributes as needed
+        }
+
+        # Remove empty values from the update_data dictionary
+        update_data = {k: v for k, v in update_data.items() if v}
+
+        # Update the Other Donation
+        try:
+            update_other_donation(donation_id, update_data)
+            hey = "Update successful!"
+        except Exception as e:
+            hey = f"Update failed: {str(e)}"
+
+    donation = Select_entity("Other_Donation", "Donation_ID", donation_id)
+    return render_template('update_other_donation.html', donation=donation, hey=hey)
+###########################################################
+@app.route('/update_donor', methods=['GET', 'POST'])
+def update_donor_input_id():
+    if request.method == 'POST':
+        donor_id = request.form.get('donor_id')
+        return redirect(url_for('update_donor_route', donor_id=donor_id))
+    else:
+        return render_template('input_donor_id.html')
+
+@app.route('/update_donor/<int:donor_id>', methods=['GET', 'POST'])
+def update_donor_route(donor_id):
+    hey = ""
+    if request.method == 'POST':
+        update_data = {
+            'Full_Name': request.form.get('Full_Name', ''),
+            'Phone_Number': request.form.get('Phone_Number', ''),
+            'Email': request.form.get('Email', ''),
+            'Join_Date': request.form.get('Join_Date', ''),
+            'Birthdate': request.form.get('Birthdate', ''),
+            'Address': request.form.get('Address', ''),
+            # Add more attributes as needed
+        }
+
+        # Remove empty values from the update_data dictionary
+        update_data = {k: v for k, v in update_data.items() if v}
+
+        # Update the Donor
+        try:
+            update_donor(donor_id, update_data)
+            hey = "Update successful!"
+        except Exception as e:
+            hey = f"Update failed: {str(e)}"
+
+    donor = Select_entity("Donors", "Donor_ID", donor_id)
+    return render_template('update_donor.html', donor=donor, hey=hey)
+###########################################################
+@app.route('/update_admin', methods=['GET', 'POST'])
+def update_admin_input_id():
+    if request.method == 'POST':
+        admin_id = request.form.get('admin_id')
+        return redirect(url_for('update_admin_route', admin_id=admin_id))
+    else:
+        return render_template('input_admin_id.html')
+
+@app.route('/update_admin/<int:admin_id>', methods=['GET', 'POST'])
+def update_admin_route(admin_id):
+    hey = ""
+    if request.method == 'POST':
+        update_data = {
+            'Admin_Name': request.form.get('Admin_Name', ''),
+            'Admin_PhoneNumber': request.form.get('Admin_PhoneNumber', ''),
+            'Address': request.form.get('Address', ''),
+            'Email': request.form.get('Email', ''),
+            'Password': request.form.get('Password', ''),
+            # Add more attributes as needed
+        }
+
+        # Remove empty values from the update_data dictionary
+        update_data = {k: v for k, v in update_data.items() if v}
+
+        # Update the Admin
+        try:
+            update_admin(admin_id, update_data)
+            hey = "Update successful!"
+        except Exception as e:
+            hey = f"Update failed: {str(e)}"
+
+    admin = Select_entity("Admin", "Admin_ID", admin_id)
+    return render_template('update_admin.html', admin=admin, hey=hey)
 ###########################################################
 
 @app.route("/Retirer_Formulaire",methods=['GET','POST'])
